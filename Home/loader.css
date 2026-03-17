@@ -1,0 +1,92 @@
+/* ===== FULL SCREEN LOADER ===== */
+.loading-screen {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at center, #0d0d0d, #000);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+/* ===== SOLAR CORE ===== */
+.solar {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  background: radial-gradient(circle, #ffcc00, orange);
+  border-radius: 50%;
+  box-shadow: 0 0 30px orange, 0 0 60px rgba(255,165,0,0.4);
+  animation: glow 2s infinite ease-in-out;
+}
+
+/* ===== ORBITS ===== */
+.solar i {
+  position: absolute;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform-origin: center;
+}
+
+/* ===== PLANETS ===== */
+.solar i::before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 50%;
+}
+
+/* Mercury */
+.mercury { width: 80px; height: 80px; margin: -40px; animation: orbit 1s linear infinite; }
+.mercury::before { width: 6px; height: 6px; background: #aaa; }
+
+/* Venus */
+.venus { width: 110px; height: 110px; margin: -55px; animation: orbit 1.5s linear infinite; }
+.venus::before { width: 8px; height: 8px; background: #e7a71f; }
+
+/* Earth */
+.earth { width: 150px; height: 150px; margin: -75px; animation: orbit 2s linear infinite; }
+.earth::before { width: 9px; height: 9px; background: #4fc3f7; }
+
+/* Mars */
+.mars { width: 190px; height: 190px; margin: -95px; animation: orbit 2.5s linear infinite; }
+.mars::before { width: 8px; height: 8px; background: #ff4d4d; }
+
+/* Jupiter */
+.jupiter { width: 250px; height: 250px; margin: -125px; animation: orbit 3s linear infinite; }
+.jupiter::before { width: 18px; height: 18px; background: #d4a017; }
+
+/* Saturn */
+.saturn { width: 300px; height: 300px; margin: -150px; animation: orbit 3.5s linear infinite; }
+.saturn::before { width: 14px; height: 14px; background: #c97a2b; }
+
+/* Uranus */
+.uranus { width: 340px; height: 340px; margin: -170px; animation: orbit 4s linear infinite; }
+.uranus::before { width: 12px; height: 12px; background: #00e5a8; }
+
+/* Neptune */
+.neptune { width: 380px; height: 380px; margin: -190px; animation: orbit 4.5s linear infinite; }
+.neptune::before { width: 12px; height: 12px; background: #2979ff; }
+
+/* ===== ANIMATION ===== */
+@keyframes orbit {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
+}
+
+@keyframes glow {
+  0%,100% { box-shadow: 0 0 20px orange; }
+  50% { box-shadow: 0 0 60px #ffea00, 0 0 100px orange; }
+}
+
+/* ===== FADE OUT ===== */
+.loading-screen.hide {
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.6s ease;
+}
