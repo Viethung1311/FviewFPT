@@ -57,21 +57,12 @@ $(document).ready(function() {
 
     // Kiểm tra spin từ cóc
     if (typeof toadState !== 'undefined') {
-      if (toadState.pendingLevelUp) {
-        showToadToast('⬆ Hãy nâng cấp cóc trước khi quay!');
-        return;
-      }
       if (toadState.spinReadyToClaim) {
-        showToadToast('🐸 Cóc đã đẻ spin! Bấm nút "Nhận Spin" trên HUD để nhận nhé.');
+        showToadToast('🐸 Nhận spin trước đã! Bấm nút Nhận Spin ở góc trên phải.');
         return;
       }
       if (toadState.spinsLeft <= 0) {
-        var msLeft = (typeof msUntilNextSpawn === 'function') ? msUntilNextSpawn() : 0;
-        var timeStr = (typeof formatMs === 'function') ? formatMs(msLeft) : '';
-        var msg = msLeft > 0
-          ? '⏳ Chưa có spin! Cóc hồi sau: ' + timeStr
-          : '❌ Chưa có spin! Chờ cóc đẻ rồi nhận nhé.';
-        showToadToast(msg);
+        showToadToast('❌ Chưa có spin! Chờ cóc đẻ rồi nhận nhé.');
         return;
       }
     }

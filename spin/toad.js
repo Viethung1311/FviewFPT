@@ -86,22 +86,12 @@ function todayStr() {
 /**
  * Kiểm tra xem cooldown đã hết chưa.
  * Nếu hết → đặt spinReadyToClaim = true (KHÔNG tự cộng spin).
- * Nếu lastSpawnTime = null (lần đầu) → bắt đầu cooldown ngay.
  * Trả về true nếu vừa chuyển sang ready.
  */
 function trySpawnSpins() {
   if (toadState.spinReadyToClaim) return false; // đã ready rồi
-
-  // Lần đầu tiên chưa có lastSpawnTime → bắt đầu cooldown ngay bây giờ
-  if (!toadState.lastSpawnTime) {
-    toadState.lastSpawnTime = Date.now();
-    saveState();
-    return false; // cooldown vừa bắt đầu, chưa hết
-  }
-
-  if (msUntilNextSpawn() > 0) return false; // chưa hết cooldown
-
-  // Hết cooldown → đánh dấu sẵn sàng
+  if (msUntilNextSpawn() > 0)     return false; // chưa hết cooldown
+  // Lần đầu hoặc hết cooldown → đánh dấu sẵn sàng
   toadState.spinReadyToClaim = true;
   saveState();
   return true;
@@ -109,14 +99,14 @@ function trySpawnSpins() {
 
 /**
  * Người dùng bấm nhận spin.
- * Cộng spin, tắt ready, bắt đầu cooldown mới.
+ * Cộng thêm spin (không override), tắt ready, bắt đầu cooldown mới.
  */
 function claimSpins() {
   if (!toadState.spinReadyToClaim) return false;
   var cfg = getLevelCfg(toadState.level);
-  toadState.spinsLeft        += cfg.spins;  // cộng thêm (không ghi đè) để tránh mất spin còn thừa
+  toadState.spinsLeft        += cfg.spins;  // FIX: cộng thêm, không override
   toadState.spinReadyToClaim = false;
-  toadState.lastSpawnTime    = Date.now();  // cooldown mới bắt đầu từ lúc nhận
+  toadState.lastSpawnTime    = Date.now();
   toadState.lastClaimTime    = Date.now();
   saveState();
   return true;
@@ -130,6 +120,14 @@ function checkDailySpinReset() {
     toadState.lastResetDate = today;
     // Không reset spinReadyToClaim — nếu cóc đang sẵn sàng thì vẫn giữ
     saveState();
+  }
+  // FIX: Re-validate pendingLevelUp — nếu không đủ coin thì bỏ cờ để spin không bị khóa oan
+  if (toadState.pendingLevelUp && toadState.level < 5) {
+    var cfg = getLevelCfg(toadState.level);
+    if (toadState.coins < cfg.coinsToNext) {
+      toadState.pendingLevelUp = false;
+      saveState();
+    }
   }
 }
 
@@ -145,17 +143,27 @@ function useOneSpin() {
  * Kiểm tra xem có đủ coin để lên cấp không.
  * Nếu đủ → đặt pendingLevelUp = true, KHÔNG tự lên cấp.
  * Người dùng phải xác nhận qua popup.
+ * FIX: Nếu không đủ coin nhưng đang pending → reset pending (tránh spin bị khóa oan)
  */
 function checkLevelUp() {
-  if (toadState.level >= 5) return false;
-  if (toadState.pendingLevelUp) return false; // đã đang chờ rồi
+  if (toadState.level >= 5) {
+    toadState.pendingLevelUp = false;
+    return false;
+  }
   var cfg = getLevelCfg(toadState.level);
   if (toadState.coins >= cfg.coinsToNext) {
+    if (toadState.pendingLevelUp) return false; // đã đang chờ rồi
     toadState.pendingLevelUp = true;
     saveState();
     return true; // báo cho caller biết để show popup
+  } else {
+    // FIX: Nếu coin bị giảm xuống dưới ngưỡng (ví dụ admin reset) → bỏ pending
+    if (toadState.pendingLevelUp) {
+      toadState.pendingLevelUp = false;
+      saveState();
+    }
+    return false;
   }
-  return false;
 }
 
 /** Thực sự lên cấp — chỉ gọi khi người dùng xác nhận. */
@@ -165,9 +173,13 @@ function doLevelUp() {
   var cfg = getLevelCfg(toadState.level);
   toadState.coins         -= cfg.coinsToNext;
   toadState.level++;
-  toadState.pendingLevelUp    = false;
-  toadState.lastSpawnTime     = null;
-  toadState.spinReadyToClaim  = true;
+  toadState.pendingLevelUp   = false;
+  // FIX: Bắt đầu cooldown mới thay vì set sẵn sàng ngay (tránh double-claim)
+  // Tặng ngay 1 lần spin khi lên cấp để thưởng người dùng
+  var newCfg = getLevelCfg(toadState.level);
+  toadState.spinsLeft        += newCfg.spins;
+  toadState.lastSpawnTime    = Date.now();
+  toadState.spinReadyToClaim = false;
   saveState();
   return true;
 }
@@ -579,38 +591,26 @@ function initToad() {
   loadState();
   checkDailySpinReset();   // reset spin nếu qua ngày mới
 
-  // Nếu là lần đầu tiên (chưa từng chạy), bắt đầu cooldown thay vì cho nhận ngay
-  if (!toadState.lastSpawnTime && !toadState.spinReadyToClaim && toadState.spinsLeft === 0) {
-    toadState.lastSpawnTime = Date.now();
+  // --- FIX: Nếu lần đầu vào (chưa có lastSpawnTime) hoặc cooldown đã hết
+  //     → coi như sẵn sàng nhận spin ngay, KHÔNG cần bấm claim lần đầu
+  if (!toadState.lastSpawnTime && !toadState.spinReadyToClaim && toadState.spinsLeft <= 0) {
+    // Lần đầu tiên ever → tự cấp spin luôn thay vì bắt chờ
+    var _initCfg = getLevelCfg(toadState.level);
+    toadState.spinsLeft       = _initCfg.spins;
+    toadState.lastSpawnTime   = Date.now();
+    toadState.lastClaimTime   = Date.now();
+    toadState.spinReadyToClaim = false;
     saveState();
   } else {
-    trySpawnSpins();        // đánh dấu sẵn sàng nếu cooldown đã hết
+    trySpawnSpins();  // đánh dấu sẵn sàng nếu cooldown đã hết
   }
 
-  // Render HUD trước, rồi badge (không qua renderSpinCounter để tránh loop)
-  renderHUD();
+  // Cập nhật toàn bộ UI (đảm bảo spin button đúng trạng thái ngay từ đầu)
+  _updateAllUI();
+
   // Nếu đang chờ nâng cấp từ session trước → show popup sau 500ms
   if (toadState.pendingLevelUp && toadState.level < 5) {
     setTimeout(function(){ showLevelUpPopup(); }, 500);
-  }
-  var _el = document.getElementById('spin-counter');
-  if (_el) {
-    var _s = toadState.spinsLeft, _r = toadState.spinReadyToClaim;
-    _el.textContent = _r ? '!' : _s;
-    _el.className = 'spin-count ' + (_s > 0 ? 'has-spin' : (_r ? 'ready-spin' : 'no-spin'));
-  }
-  var _spinBtn = document.getElementById('spin');
-  if (_spinBtn) {
-    if (toadState.pendingLevelUp) {
-      _spinBtn.classList.add('spin-disabled');
-      _spinBtn.classList.add('spin-levellock');
-    } else if (toadState.spinsLeft <= 0) {
-      _spinBtn.classList.add('spin-disabled');
-      _spinBtn.classList.remove('spin-levellock');
-    } else {
-      _spinBtn.classList.remove('spin-disabled');
-      _spinBtn.classList.remove('spin-levellock');
-    }
   }
 
   var btn = document.getElementById('toad-toggle-btn');
