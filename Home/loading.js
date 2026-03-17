@@ -23,3 +23,25 @@
         window.addEventListener('load', hideLoader);
     }
 })();
+(function () {
+    const screen = document.getElementById('loading-screen');
+    if (!screen) return;
+
+    function hideLoader() {
+        setTimeout(() => {
+            screen.classList.add('hide');
+
+            // fallback chắc chắn remove
+            setTimeout(() => {
+                if (screen) screen.remove();
+            }, 700);
+
+        }, 1200);
+    }
+
+    if (document.readyState === 'complete') {
+        hideLoader();
+    } else {
+        window.addEventListener('load', hideLoader);
+    }
+})();
