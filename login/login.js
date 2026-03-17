@@ -1,4 +1,4 @@
-// ===== UI toggle (giữ logic bạn có, nhưng viết chắc hơn) =====
+// ===== UI toggle =====
 const container = document.querySelector(".container");
 const signup = document.querySelector(".signup");
 const signin = document.querySelector(".signin");
@@ -6,49 +6,31 @@ const signin = document.querySelector(".signin");
 const loginLink = document.querySelector(".login");
 const createLink = document.querySelector(".create");
 
-// Mặc định hiển thị Sign Up
 signup.style.display = "flex";
 signin.style.display = "none";
-container.classList.remove("active");
 
 loginLink.addEventListener("click", (e) => {
   e.preventDefault();
   signup.style.display = "none";
   signin.style.display = "flex";
-  container.classList.add("active");
 });
 
 createLink.addEventListener("click", (e) => {
   e.preventDefault();
   signin.style.display = "none";
   signup.style.display = "flex";
-  container.classList.remove("active");
 });
 
-// ===== API config =====
-// Nếu bạn bị lỗi localhost, đổi thành: http://127.0.0.1:3000/api
-const API = "http://localhost:3000/api";
-
+// ===== Helpers =====
 function setMsg(el, text, type) {
   el.style.display = "block";
-  el.classList.remove("ok", "err");
-  if (type) el.classList.add(type);
+  el.className = "msg " + type;
   el.textContent = text;
 }
 
 function clearMsg(el) {
   el.style.display = "none";
-  el.classList.remove("ok", "err");
   el.textContent = "";
-}
-
-async function safeJson(res) {
-  const text = await res.text();
-  try { return JSON.parse(text); } catch { return { raw: text }; }
-}
-
-function getToken() {
-  return localStorage.getItem("token");
 }
 
 // ===== Elements =====
@@ -66,11 +48,8 @@ const su_confirm = document.getElementById("su_confirm");
 const si_user = document.getElementById("si_user");
 const si_pass = document.getElementById("si_pass");
 
-const btnMe = document.getElementById("btnMe");
-const btnLogout = document.getElementById("btnLogout");
-
-// ===== Register =====
-signupForm.addEventListener("submit", async (e) => {
+// ===== SIGN UP =====
+signupForm.addEventListener("submit", (e) => {
   e.preventDefault();
   clearMsg(signupMsg);
 
@@ -80,124 +59,68 @@ signupForm.addEventListener("submit", async (e) => {
   const confirm = su_confirm.value;
 
   if (password !== confirm) {
-    return setMsg(signupMsg, "Confirm password không khớp.", "err");
+    return setMsg(signupMsg, "Mật khẩu không khớp", "err");
   }
 
-  const res = await fetch(API + "/register", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ username, email, password }),
-  });
+  // check user tồn tại chưa
+  const users = JSON.parse(localStorage.getItem("users")) || [];
 
-  const data = await safeJson(res);
+  const exist = users.find(
+    (u) => u.username === username || u.email === email
+  );
 
-  if (!res.ok) {
-    return setMsg(signupMsg, `(${res.status}) ${data.message || "Register failed"}`, "err");
+  if (exist) {
+    return setMsg(signupMsg, "User đã tồn tại", "err");
   }
 
-  setMsg(signupMsg, "Đăng ký thành công! Chuyển sang Login...", "ok");
+  // lưu user
+  users.push({ username, email, password });
+  localStorage.setItem("users", JSON.stringify(users));
 
-  // auto chuyển sang sign in
+  setMsg(signupMsg, "Đăng ký thành công!", "ok");
+
+  // chuyển sang login
   setTimeout(() => {
     signup.style.display = "none";
     signin.style.display = "flex";
-    container.classList.add("active");
-
-    // điền sẵn user/email cho tiện login
-    si_user.value = username || email;
-    si_pass.value = "";
-    clearMsg(signinMsg);
+    si_user.value = username;
   }, 500);
-
-  // reset form
-  su_password.value = "";
-  su_confirm.value = "";
 });
 
-// ===== Login =====
-// ===== Login =====
-signinForm.addEventListener("submit", async (e) => {
+// ===== LOGIN =====
+signinForm.addEventListener("submit", (e) => {
   e.preventDefault();
   clearMsg(signinMsg);
 
   const usernameOrEmail = si_user.value.trim();
   const password = si_pass.value;
 
-  const res = await fetch(API + "/login", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ usernameOrEmail, password }),
-  });
+  const users = JSON.parse(localStorage.getItem("users")) || [];
 
-  const data = await safeJson(res);
+  const user = users.find(
+    (u) =>
+      (u.username === usernameOrEmail || u.email === usernameOrEmail) &&
+      u.password === password
+  );
 
-  if (!res.ok) {
-    return setMsg(signinMsg, `(${res.status}) ${data.message || "Login failed"}`, "err");
+  if (!user) {
+    return setMsg(signinMsg, "Sai tài khoản hoặc mật khẩu", "err");
   }
 
-  // Lưu token
-  if (data.token) {
-    localStorage.setItem("token", data.token);
-  }
+  // lưu trạng thái login
+  localStorage.setItem("currentUser", JSON.stringify(user));
 
-  // Lưu thông tin user
-  if (data.user) {
-    // Bạn có thể đổi sang sessionStorage nếu muốn
-    localStorage.setItem("user", JSON.stringify(data.user));
-  }
+  setMsg(signinMsg, "Đăng nhập thành công!", "ok");
 
-  setMsg(signinMsg, `Đăng nhập thành công! Xin chào ${data.user?.username || ""}`, "ok");
-
-  // Chờ 600ms cho user thấy message rồi chuyển trang
   setTimeout(() => {
-    window.location.href = "../Home/index.html";
+    window.location.href = "../index.html";
   }, 600);
 });
 
-
-// ===== Me (test token) =====
-btnMe.addEventListener("click", async () => {
-  clearMsg(signinMsg);
-
-  const token = getToken();
-  if (!token) return setMsg(signinMsg, "Chưa có token. Hãy login trước.", "err");
-
-  const res = await fetch(API + "/me", {
-    headers: { Authorization: "Bearer " + token },
-  });
-
-  const data = await safeJson(res);
-  if (!res.ok) {
-    return setMsg(signinMsg, `(${res.status}) ${data.message || "Token invalid"}`, "err");
-  }
-
-  setMsg(signinMsg, `Token OK. User: ${data.user.username} (${data.user.email})`, "ok");
-});
-
-// ===== Logout =====
-btnLogout.addEventListener("click", () => {
-  localStorage.removeItem("token");
-  setMsg(signinMsg, "Đã logout (đã xoá token).", "ok");
-});
-
-// ===== Auto state (nếu đã có token) =====
-(async function autoCheck() {
-  const token = getToken();
-  if (!token) return;
-
-  // auto chuyển sang Sign In để user thấy trạng thái
-  signup.style.display = "none";
-  signin.style.display = "flex";
-  container.classList.add("active");
-
-  const res = await fetch(API + "/me", {
-    headers: { Authorization: "Bearer " + token },
-  });
-
-  const data = await safeJson(res);
-  if (res.ok && data.user) {
-    setMsg(signinMsg, `Đang đăng nhập: ${data.user.username}`, "ok");
-  } else {
-    localStorage.removeItem("token");
+// ===== AUTO LOGIN =====
+(function () {
+  const user = localStorage.getItem("currentUser");
+  if (user) {
+    console.log("Đã đăng nhập:", JSON.parse(user));
   }
 })();
