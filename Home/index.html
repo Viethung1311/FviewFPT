@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="icon.css">
+    <link rel="stylesheet" href="Background.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="auth-nav.css">
+    <link rel="stylesheet" href="Hieu_ung.css">
+    <link rel="stylesheet" href="navbar.css">
+    <title>FView</title>
+    <link rel="stylesheet" href="scroll-reveal.css">
+    <link rel="stylesheet" href="loading.css">
+    <link rel="stylesheet" href="footer.css">
+</head>
+<body>
+
+    <!-- ===== LOADING SCREEN ===== -->
+    <div id="loading-screen">
+        <div class="solar">
+            <i class="mercury"></i>
+            <i class="venus"></i>
+            <i class="earth"></i>
+            <i class="mars"></i>
+            <i class="belt"></i>
+            <i class="jupiter"></i>
+            <i class="saturn"></i>
+            <i class="uranus"></i>
+            <i class="neptune"></i>
+        </div>
+        <p class="loading-text">Đang tải...</p>
+    </div>
+
+    <!-- Floating background icons -->
+    <i class="fa-solid fa-graduation-cap bg-icon i1"></i>
+    <i class="fa-solid fa-laptop-code bg-icon i2"></i>
+    <i class="fa-solid fa-book bg-icon i3"></i>
+    <i class="fa-solid fa-code bg-icon i4"></i>
+    <i class="fa-solid fa-university bg-icon i5"></i>
+    <i class="fa-solid fa-lightbulb bg-icon i6"></i>
+    <i class="fa-solid fa-pen-nib bg-icon i7"></i>
+    <i class="fa-solid fa-user-graduate bg-icon i8"></i>
+
+    <!-- Header navbar -->
+    <header>
+        <nav class="navbar section-content">
+            <img src="../images/7bits.png" alt="nav-logo" class="nav-logo">
+
+            <ul class="nav-menu">
+                <button id="menu-close-button" class="fas fa-times"></button>
+
+                <li class="nav-item">
+                    <a href="#home" class="nav-btn">
+                        <span class="fold"></span>
+                        <div class="points_wrapper">
+                            <i class="point"></i><i class="point"></i><i class="point"></i>
+                            <i class="point"></i><i class="point"></i><i class="point"></i>
+                            <i class="point"></i><i class="point"></i><i class="point"></i>
+                            <i class="point"></i>
+                        </div>
+                        <span class="inner">
+                            <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5">
+                                <path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"></path>
+                                <polyline points="9 21 9 12 15 12 15 21"></polyline>
+                            </svg>
+                            Home
+                        </span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#app" class="nav-btn">
+                        <span class="fold"></span>
+                        <div class="points_wrapper">
+                            <i class="point"></i><i class="point"></i><i class="point"></i>
+                            <i class="point"></i><i class="point"></i><i class="point"></i>
+                            <i class="point"></i><i class="point"></i><i class="point"></i>
+                            <i class="point"></i>
+                        </div>
+                        <span class="inner">
+                            <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5">
+                                <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+                                <line x1="12" y1="18" x2="12" y2="18"></line>
+                            </svg>
+                            App
+                        </span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="../spin/spinv1.html" class="nav-btn">
+                        <span class="fold"></span>
+                        <div class="points_wrapper">
+                            <i class="point"></i><i class="point"></i><i class="point"></i>
+                            <i class="point"></i><i class="point"></i><i class="point"></i>
+                            <i class="point"></i><i class="point"></i><i class="point"></i>
+                            <i class="point"></i>
+                        </div>
+                        <span class="inner">
+                            <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5">
+                                <polyline points="13.18 1.37 13.18 9.64 21.45 9.64 10.82 22.63 10.82 14.36 2.55 14.36 13.18 1.37"></polyline>
+                            </svg>
+                            Play
+                        </span>
+                    </a>
+                </li>
+
+                <li class="nav-item" id="nav-auth">
+                    <a href="../login/login.html" class="nav-link" id="nav-login-btn">Login</a>
+
+                    <div class="nav-avatar-wrap" id="nav-avatar-wrap" style="display:none">
+                        <img src="" alt="avatar" class="nav-avatar" id="nav-avatar-img">
+                        <div class="nav-dropdown" id="nav-dropdown">
+                            <div class="nav-dropdown-header">
+                                <span id="nav-dropdown-name">username</span>
+                            </div>
+                            <a href="#" class="nav-dropdown-item" id="nav-change-avatar-btn"><i class="fa-solid fa-image"></i> Đổi avatar</a>
+                            <a href="#" class="nav-dropdown-item"><i class="fa-solid fa-user"></i> Profile</a>
+                            <a href="#" class="nav-dropdown-item" id="nav-logout-btn"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+            <button id="menu-open-button" class="fas fa-bars"></button>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero section -->
+        <section class="hero-section" id="home">
+            <div class="section-content">
+                <div class="hero-details reveal">
+                    <h2 class="title">Review Web App</h2>
+                    <h3 class="subtitle">Đại Học FPT</h3>
+                    <p class="text">
+                        <span>Nền tảng chia sẻ cách sử dụng và những điều cần lưu ý</span>
+                        <span>khi sử dụng Web, App tại Đại học FPT</span>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- App Section — 6 flip cards -->
+        <section class="app-section" id="app">
+            <div class="section-content">
+                <div class="cards-grid reveal-stagger">
+
+                    <!-- Card 1 -->
+                    <div class="card reveal-scale" onclick="window.location.href='../App/app.html'">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/>
+                        </svg>
+                        <div class="card__content">
+                            <p class="card__title">FLM</p>
+                            <p class="card__description">Hệ thống quản lý học tập trực tuyến của FPT University.</p>
+                        </div>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="card reveal-scale" onclick="window.location.href='../App/app.html'">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/>
+                        </svg>
+                        <div class="card__content">
+                            <p class="card__title">FAP WEB</p>
+                            <p class="card__description">Cổng thông tin sinh viên trên nền web — xem điểm, lịch học, đăng ký môn.</p>
+                        </div>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="card reveal-scale" onclick="window.location.href='../App/app.html'">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/>
+                        </svg>
+                        <div class="card__content">
+                            <p class="card__title">FAP APP</p>
+                            <p class="card__description">Ứng dụng di động FAP — tra cứu thông tin học vụ mọi lúc mọi nơi.</p>
+                        </div>
+                    </div>
+
+                    <!-- Card 4 -->
+                    <div class="card reveal-scale" onclick="window.location.href='../App/app.html'">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/>
+                        </svg>
+                        <div class="card__content">
+                            <p class="card__title">EOS</p>
+                            <p class="card__description">Hệ thống thi trực tuyến — làm bài kiểm tra và thi cuối kỳ trên nền tảng EOS.</p>
+                        </div>
+                    </div>
+
+                    <!-- Card 5 -->
+                    <div class="card reveal-scale" onclick="window.location.href='../App/app.html'">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                        </svg>
+                        <div class="card__content">
+                            <p class="card__title">SEB</p>
+                            <p class="card__description">Trình duyệt thi an toàn — khoá màn hình và giám sát trong suốt kỳ thi.</p>
+                        </div>
+                    </div>
+
+                    <!-- Card 6 -->
+                    <div class="card reveal-scale" onclick="window.location.href='../App/app.html'">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M20 5H4V19L13.2923 9.70649C13.6828 9.31595 14.3159 9.31591 14.7065 9.70641L20 15.0104V5ZM2 3.9934C2 3.44476 2.45531 3 2.9918 3H21.0082C21.556 3 22 3.44495 22 3.9934V20.0066C22 20.5552 21.5447 21 21.0082 21H2.9918C2.44405 21 2 20.5551 2 20.0066V3.9934ZM8 11C6.89543 11 6 10.1046 6 9C6 7.89543 6.89543 7 8 7C9.10457 7 10 7.89543 10 9C10 10.1046 9.10457 11 8 11Z"/>
+                        </svg>
+                        <div class="card__content">
+                            <p class="card__title">EDUNEXT</p>
+                            <p class="card__description">Nền tảng quản lý đào tạo — lịch thi, kết quả học tập và thông báo từ nhà trường.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Marquee APP FPT Section -->
+    <section class="marquee-section reveal">
+        <p class="marquee-label reveal">Tất cả ứng dụng</p>
+
+        <!-- Row 1 → LEFT -->
+        <div class="marquee-row mrow-left">
+            <div class="marquee-track" id="mr1a"></div>
+            <div class="marquee-track" id="mr1b"></div>
+        </div>
+
+        <!-- Row 2 → RIGHT -->
+        <div class="marquee-row mrow-right">
+            <div class="marquee-track" id="mr2a"></div>
+            <div class="marquee-track" id="mr2b"></div>
+        </div>
+
+        <!-- Row 3 → LEFT -->
+        <div class="marquee-row mrow-left">
+            <div class="marquee-track" id="mr3a"></div>
+            <div class="marquee-track" id="mr3b"></div>
+        </div>
+    </section>
+
+    <!-- Popup chọn avatar -->
+    <div class="avatar-popup-overlay" id="avatar-popup-overlay">
+        <div class="avatar-popup">
+            <div class="avatar-popup-header">
+                <h3>Chọn Avatar</h3>
+                <button class="avatar-popup-close" id="avatar-popup-close"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="avatar-grid" id="avatar-grid"></div>
+        </div>
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <footer id="footer" class="footer">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="brand-logo">
+            <div class="logo-badge">7bits</div>
+            <div><div class="brand-name">FVIEW<span class="dot">.</span></div></div>
+          </div>
+          <p class="brand-desc">Khởi đầu hoàn hảo dành riêng cho sinh viên Đại học FPT. Chúng mình xây dựng website dựa trên chính trải nghiệm của bọn mình, kèm các thông tin được chọn lọc từ các trang web chính thức.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Khám phá</h4>
+          <ul>
+            <li><a href="#home">Trang chủ</a></li>
+            <li><a href="../spin/spinv1.html">Vòng quay may mắn</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Pháp lý &amp; Hỗ trợ</h4>
+          <ul>
+            <li><a href="terms.html">Điều khoản sử dụng</a></li>
+            <li><a href="privacy.html">Chính sách bảo mật</a></li>
+          </ul>
+          <p class="support-label">Liên hệ hỗ trợ, đóng góp thông tin:</p>
+          <a href="mailto:7bits8386@gmail.com" class="support-email"><svg viewBox="0 0 15 15" fill="none"><rect x="1" y="3" width="13" height="9" rx="1.5" stroke="#F26D21" stroke-width="1.2"/><path d="M1.5 3.5L7.5 9L13.5 3.5" stroke="#F26D21" stroke-width="1.2" stroke-linejoin="round"/></svg>7bits8386@gmail.com</a>
+        </div>
+        <div class="footer-col">
+          <h4>Cơ sở FPTU</h4>
+          <div class="campus-grid">
+            <div class="campus-item"><span class="campus-dot"></span>Hà Nội</div>
+            <div class="campus-item"><span class="campus-dot"></span>TP. HCM</div>
+            <div class="campus-item"><span class="campus-dot"></span>Đà Nẵng</div>
+            <div class="campus-item"><span class="campus-dot"></span>Cần Thơ</div>
+            <div class="campus-item"><span class="campus-dot"></span>Quy Nhơn</div>
+          </div>
+          <div class="community-box">
+            <div class="label">Cộng đồng sinh viên</div>
+            <div class="tagline">"For Students, By Students"</div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="copy">© 2026 7bits Team. Build with <span class="heart">♥</span> for FPTU.</p>
+        <p class="disclaimer">Đây là dự án cộng đồng phi lợi nhuận, được xây dựng bởi sinh viên FPT University. Không trực thuộc hoặc đại diện cho Tổ chức Giáo dục FPT.</p>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="auth-nav.js"></script>
+    <script src="hieu_ung.js"></script>
+    <script src="navbar.js"></script>
+    <script src="scroll-reveal.js"></script>
+    <script src="loading.js"></script>
+</body>
+</html>

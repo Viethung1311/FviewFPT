@@ -1,0 +1,743 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  background: #eaeaea url("bgtet.png") center/cover no-repeat fixed;
+  color: #fff;
+  font-size: 18px;
+  font-family: "Exo 2", sans-serif;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+#wrapper {
+  margin: 40px auto 0;
+  width: 540px;
+  position: relative;
+}
+#txt {
+  color: #2c3e50;
+  text-align: center;
+  margin-top: 30px;
+  font-size: 24px;
+  font-weight: bold;
+  display: none;
+}
+
+/* =============================================
+   POPUP - CHAMPAGNE LUXURY + LIGHT WAVE EFFECT
+   ============================================= */
+
+/* Overlay: tối mờ với ripple sáng từ trung tâm */
+#popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(15, 10, 5, 0.82);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 100000;
+  overflow: hidden;
+}
+
+#popup-overlay.show {
+  display: flex;
+  animation: overlayReveal 0.5s ease forwards;
+}
+
+/* Sóng ánh sáng lan tỏa từ trung tâm – pseudo element */
+#popup-overlay::before,
+#popup-overlay::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0;
+}
+
+/* Sóng 1 – vàng ấm */
+#popup-overlay::before {
+  width: 0;
+  height: 0;
+  background: radial-gradient(circle, rgba(212,175,55,0.18) 0%, transparent 70%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: none;
+}
+
+#popup-overlay.show::before {
+  animation: lightWave1 1.6s cubic-bezier(0.2, 0.8, 0.4, 1) 0.1s forwards;
+}
+
+/* Sóng 2 – trắng champagne */
+#popup-overlay::after {
+  width: 0;
+  height: 0;
+  background: radial-gradient(circle, rgba(245,230,180,0.12) 0%, transparent 65%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#popup-overlay.show::after {
+  animation: lightWave2 2s cubic-bezier(0.2, 0.8, 0.4, 1) 0.35s forwards;
+}
+
+/* Popup box – nền tối sang trọng */
+#popup {
+  position: relative;
+  background: linear-gradient(160deg, #1C1508 0%, #2A1D0A 40%, #1A120A 100%);
+  border-radius: 24px;
+  padding: 44px 40px 36px;
+  text-align: center;
+  min-width: 320px;
+  max-width: 400px;
+  overflow: hidden;
+
+  /* Viền vàng mỏng tinh tế */
+  border: 1px solid rgba(212, 175, 55, 0.45);
+  box-shadow:
+    0 0 0 1px rgba(245, 215, 120, 0.12),
+    0 30px 80px rgba(0, 0, 0, 0.7),
+    inset 0 1px 0 rgba(255, 235, 150, 0.15),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.4);
+
+  animation: popupEntrance 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  transform-origin: center bottom;
+}
+
+/* Highlight ánh sáng mờ ở góc trên trái popup */
+#popup::before {
+  content: '';
+  position: absolute;
+  top: -60px;
+  left: -60px;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(255, 235, 150, 0.07) 0%, transparent 70%);
+  pointer-events: none;
+  border-radius: 50%;
+}
+
+/* Shimmer quét ngang popup sau khi xuất hiện */
+#popup::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    105deg,
+    transparent 20%,
+    rgba(255, 235, 150, 0.06) 45%,
+    rgba(255, 245, 200, 0.12) 50%,
+    rgba(255, 235, 150, 0.06) 55%,
+    transparent 80%
+  );
+  pointer-events: none;
+  animation: shimmerSweep 2.4s ease 0.7s forwards;
+}
+
+/* --- Nội dung popup --- */
+
+/* Nhãn nhỏ phía trên số */
+.popup-content .result-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 3.5px;
+  text-transform: uppercase;
+  color: rgba(212, 175, 55, 0.6);
+  margin-bottom: 10px;
+  animation: fadeUp 0.5s ease 0.4s both;
+}
+
+/* Số kết quả lớn */
+.popup-content .result-number {
+  font-size: 80px;
+  font-weight: 900;
+  line-height: 1;
+  margin-bottom: 6px;
+  letter-spacing: -2px;
+
+  /* Gradient vàng champagne */
+  background: linear-gradient(
+    175deg,
+    #FFF8DC 0%,
+    #F5D060 25%,
+    #D4A820 50%,
+    #F5D060 75%,
+    #FFF8DC 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 2px 12px rgba(212, 175, 55, 0.5));
+
+  animation: numberPop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s both;
+}
+
+/* Tên phần thưởng */
+.popup-content .result-icon {
+  font-size: 15px;
+  color: rgba(245, 230, 180, 0.55);
+  margin-bottom: 28px;
+  font-weight: 400;
+  letter-spacing: 1.5px;
+  animation: fadeUp 0.5s ease 0.5s both;
+}
+
+/* Đường kẻ trang trí */
+.popup-divider {
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(212,175,55,0.5), transparent);
+  margin: 0 auto 24px;
+  animation: fadeUp 0.5s ease 0.55s both;
+}
+
+/* Nút đóng */
+#close-popup {
+  position: relative;
+  background: linear-gradient(135deg, #C8960C 0%, #F5D060 40%, #D4A820 60%, #C8960C 100%);
+  color: #1A1000;
+  border: none;
+  padding: 13px 44px;
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  overflow: hidden;
+
+  box-shadow:
+    0 4px 20px rgba(200, 150, 12, 0.5),
+    inset 0 1px 0 rgba(255, 255, 220, 0.4),
+    inset 0 -1px 0 rgba(0,0,0,0.15);
+
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  animation: fadeUp 0.5s ease 0.65s both;
+}
+
+#close-popup::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(105deg, transparent 30%, rgba(255,255,200,0.35) 50%, transparent 70%);
+  transition: left 0.4s ease;
+}
+
+#close-popup:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 8px 30px rgba(200, 150, 12, 0.65),
+    inset 0 1px 0 rgba(255, 255, 220, 0.5);
+}
+
+#close-popup:hover::after {
+  left: 150%;
+}
+
+#close-popup:active {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 12px rgba(200, 150, 12, 0.4);
+}
+
+/* =============================================
+   KEYFRAME ANIMATIONS
+   ============================================= */
+
+@keyframes overlayReveal {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes lightWave1 {
+  0%   { width: 0;      height: 0;      opacity: 0.9; }
+  100% { width: 180vmax; height: 180vmax; opacity: 0; }
+}
+
+@keyframes lightWave2 {
+  0%   { width: 0;      height: 0;      opacity: 0.7; }
+  100% { width: 140vmax; height: 140vmax; opacity: 0; }
+}
+
+@keyframes popupEntrance {
+  0%   { opacity: 0; transform: scale(0.7) translateY(30px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes numberPop {
+  0%   { opacity: 0; transform: scale(0.5); filter: drop-shadow(0 0 30px rgba(212,175,55,0.9)); }
+  60%  { transform: scale(1.08); }
+  100% { opacity: 1; transform: scale(1); filter: drop-shadow(0 2px 12px rgba(212,175,55,0.5)); }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes rippleExpand {
+  0%   { width: 0;       height: 0;       opacity: 1; }
+  100% { width: 160vmax; height: 160vmax; opacity: 0; }
+}
+
+@keyframes shimmerSweep {
+  0%   { left: -100%; opacity: 1; }
+  100% { left: 200%;  opacity: 1; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+#wheel-border-wrap {
+  position: relative;
+  width: 540px;
+  height: 540px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+/* Animated conic gradient ring */
+#wheel-border-wrap::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: conic-gradient(
+    #c8960c 0deg,
+    #ffd700 20deg,
+    #fff8dc 40deg,
+    #c8960c 60deg,
+    #8b5e0a 80deg,
+    #ffd700 100deg,
+    #ffe87c 120deg,
+    #c8960c 140deg,
+    #ffd700 160deg,
+    #fff8dc 180deg,
+    #c8960c 200deg,
+    #8b5e0a 220deg,
+    #ffd700 240deg,
+    #ffe87c 260deg,
+    #c8960c 280deg,
+    #ffd700 300deg,
+    #fff8dc 320deg,
+    #c8960c 340deg,
+    #ffd700 360deg
+  );
+  animation: spinBorder 4s linear infinite;
+  z-index: -1;
+}
+
+/* SVG lotus/traditional pattern overlay on the border */
+#wheel-border-wrap::after {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(255,215,0,0.6) 0%, transparent 30%),
+    radial-gradient(circle at 100% 50%, rgba(255,215,0,0.6) 0%, transparent 30%),
+    radial-gradient(circle at 50% 100%, rgba(255,215,0,0.6) 0%, transparent 30%),
+    radial-gradient(circle at 0% 50%, rgba(255,215,0,0.6) 0%, transparent 30%),
+    radial-gradient(circle at 85% 15%, rgba(255,200,0,0.4) 0%, transparent 20%),
+    radial-gradient(circle at 15% 85%, rgba(255,200,0,0.4) 0%, transparent 20%),
+    radial-gradient(circle at 85% 85%, rgba(255,200,0,0.4) 0%, transparent 20%),
+    radial-gradient(circle at 15% 15%, rgba(255,200,0,0.4) 0%, transparent 20%);
+  pointer-events: none;
+  z-index: 9999;
+}
+
+@keyframes spinBorder {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Decorative dots around the border */
+.border-dot {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: radial-gradient(circle, #fff8dc, #c8960c);
+  border-radius: 50%;
+  box-shadow: 0 0 6px rgba(200, 150, 12, 0.8);
+  z-index: 10001;
+}
+
+#wheel {
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  border: none;
+  box-shadow:
+    0 0 0 3px #c8960c,
+    0 0 0 5px #ffd700,
+    0 0 20px rgba(200, 150, 12, 0.6),
+    rgba(0, 0, 0, 0.3) 0px 8px 20px;
+  transform: rotate(0deg);
+  flex-shrink: 0;
+}
+
+#wheel:before {
+  content: '';
+  position: absolute;
+  border: 3px solid rgba(255, 215, 0, 0.4);
+  width: 488px;
+  height: 488px;
+  border-radius: 50%;
+  z-index: 1000;
+  top: 3px;
+  left: 3px;
+  box-shadow: inset 0 0 15px rgba(255, 215, 0, 0.2);
+}
+#inner-wheel {
+  width: 100%;
+  height: 100%;
+  transition: all 6s cubic-bezier(0, .99, .44, .99);
+}
+#wheel .sec {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 255px 108px 0;
+  border-color: #19c transparent;
+  transform-origin: 108px 254px;
+  left: 142px;
+  top: -4px;
+  opacity: 1;
+}
+#wheel .sec:nth-child(1) {
+  transform: rotate(45deg);
+  border-color: #16a085 transparent;
+}
+#wheel .sec:nth-child(2) {
+  transform: rotate(90deg);
+  border-color: #2980b9 transparent;
+}
+#wheel .sec:nth-child(3) {
+  transform: rotate(135deg);
+  border-color: #34495e transparent;
+}
+#wheel .sec:nth-child(4) {
+  transform: rotate(180deg);
+  border-color: #f39c12 transparent;
+}
+#wheel .sec:nth-child(5) {
+  transform: rotate(225deg);
+  border-color: #d35400 transparent;
+}
+#wheel .sec:nth-child(6) {
+  transform: rotate(270deg);
+  border-color: #c0392b transparent;
+}
+#wheel .sec:nth-child(7) {
+  transform: rotate(315deg);
+  border-color: #8e44ad transparent;
+}
+#wheel .sec:nth-child(8) {
+  transform: rotate(360deg);
+  border-color: #27ae60 transparent;
+}
+#wheel .sec .number {
+  position: absolute;
+  top: -140px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 28px;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  z-index: 1000001;
+  white-space: nowrap;
+  letter-spacing: -1px;
+}
+#spin {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -50px 0 0 -50px;
+  border-radius: 50%;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 3px 0px;
+  z-index: 1000;
+  background: #fff;
+  cursor: pointer;
+  font-family: "Exo 2", sans-serif;
+  user-select: none;
+}
+#spin:after {
+  content: 'SPIN';
+  text-align: center;
+  line-height: 100px;
+  color: #ccc;
+  text-shadow: 0 2px 0 #fff, 0 -2px 0 rgba(0, 0, 0, 0.3);
+  position: relative;
+  z-index: 100000;
+  width: 100px;
+  height: 100px;
+  display: block;
+  font-size: 20px;
+  font-weight: bold;
+}
+#spin:before {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 25px 35px 25px;
+  border-color: transparent transparent #fff transparent;
+  top: -18px;
+  left: 25px;
+  z-index: 100002;
+}
+#pointer {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 30px 20px 0 20px;
+  border-color: #e74c3c transparent transparent transparent;
+  top: -12px;
+  left: 50%;
+  margin-left: -20px;
+  z-index: 10000;
+  filter: drop-shadow(0 3px 5px rgba(0,0,0,0.3));
+}
+#inner-spin {
+  width: 80px;
+  height: 80px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -40px 0 0 -40px;
+  border-radius: 50%;
+  z-index: 999;
+  box-shadow: rgba(255, 255, 255, 1) 0px -2px 0px inset, rgba(255, 255, 255, 1) 0px 2px 0px inset, rgba(0, 0, 0, 0.4) 0px 0px 5px;
+  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 1) 0%, rgba(234, 234, 234, 1) 100%);
+}
+#spin:active #inner-spin {
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 0px 5px inset;
+}
+#spin:active:after {
+  font-size: 18px;
+}
+#shine {
+  width: 500px;
+  height: 500px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.99) 1%, rgba(255, 255, 255, 0.91) 9%, rgba(255, 255, 255, 0) 100%);
+  opacity: 0.1;
+}
+@keyframes hh {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(7deg);
+  }
+}
+.spin {
+  animation: hh 0.1s;
+}
+
+/* ===========================
+   ✅ RESPONSIVE FIX (MOBILE)
+   Paste at END of your CSS
+=========================== */
+
+:root {
+  --wheel-base: 500;                 /* wheel gốc 500px */
+  --wheel-size: min(90vw, 420px);    /* wheel sẽ co theo màn hình */
+  --wheel-scale: calc(var(--wheel-size) / (var(--wheel-base) * 1px));
+}
+
+@media (max-width: 600px) {
+  body {
+    height: 100vh;                 /* ✅ luôn theo chiều cao màn hình */
+    display: flex;
+    justify-content: center;       /* ✅ căn giữa theo chiều dọc */
+    align-items: center;           /* ✅ căn giữa theo chiều ngang */
+    padding: 16px;
+    padding-top: calc(16px + env(safe-area-inset-top));
+    padding-bottom: calc(16px + env(safe-area-inset-bottom));
+    box-sizing: border-box;
+  }
+
+  /* wrapper không cố định 532px nữa + bỏ margin-top */
+  #wrapper {
+    width: 100% !important;
+    max-width: 480px;
+    margin: 0 auto; /* ✅ bỏ 12px auto 0 để không dính lên trên */
+    height: calc(var(--wheel-size) + 40px);
+    position: relative;
+
+    /* ✅ hạ xuống một chút cho dễ bấm (tùy chỉnh 20px/30px/40px) */
+    transform: translateY(40px);
+  }
+
+  /* Scale cả bánh xe để giữ nguyên hình tam giác .sec */
+  #wheel,
+  #shine {
+    width: 500px;
+    height: 500px;
+    transform-origin: top left;
+    transform: scale(var(--wheel-scale));
+  }
+
+  /* Pointer đi theo tâm wheel */
+  #pointer {
+    left: calc(var(--wheel-size) / 2);
+    margin-left: -20px;
+    top: -10px;
+  }
+
+  /* Popup fit màn hình */
+  #popup {
+    width: calc(100vw - 32px);
+    max-width: 360px;
+    min-width: auto;
+    padding: 32px 24px 28px;
+    border-radius: 20px;
+  }
+
+  .popup-content .result-number {
+    font-size: 60px;
+  }
+
+  .popup-content .result-icon {
+    font-size: 13px;
+    margin-bottom: 20px;
+  }
+
+  #close-popup {
+    width: 100%;
+    padding: 13px 16px;
+    font-size: 13px;
+  }
+
+  #txt {
+    font-size: 18px;
+    margin-top: 16px;
+  }
+}
+/* background merged into main body rule above */
+body::-webkit-scrollbar {
+    display: none;
+}
+/* Ẩn mũi tên pointer */
+#pointer {
+  display: none;
+}
+/* ===== NÚT SPIN - Bạc metallic nâng cấp ===== */
+#spin {
+  background: radial-gradient(ellipse at 35% 35%, #ffffff 0%, #d8dde6 40%, #b0b8c8 100%);
+  box-shadow:
+    0 4px 15px rgba(0,0,0,0.25),
+    inset 0 2px 4px rgba(255,255,255,0.9),
+    inset 0 -2px 4px rgba(0,0,0,0.15),
+    0 0 0 3px rgba(180,190,210,0.5);
+  border: 1.5px solid rgba(150,160,180,0.4);
+}
+
+#spin:after {
+  color: #5a6070;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.8), 0 -1px 0 rgba(0,0,0,0.15);
+  font-size: 16px;
+  letter-spacing: 2px;
+}
+
+#inner-spin {
+  background: radial-gradient(ellipse at 40% 30%, #ffffff 0%, #c8cdd8 60%, #a8b0c0 100%);
+  box-shadow:
+    inset 0 2px 4px rgba(255,255,255,0.8),
+    inset 0 -2px 3px rgba(0,0,0,0.2),
+    0 0 8px rgba(0,0,0,0.15);
+}
+
+/* ===== MŨI TÊN → NGỌN LỬA CSS ===== */
+#spin:before {
+  /* Xóa tam giác cũ */
+  border: none;
+  width: 0;
+  height: 0;
+
+  /* Reset về 0 trước */
+  background: none;
+}
+
+/* Ngọn lửa dùng pseudo element riêng — thêm vào wrapper */
+#spin {
+  overflow: visible;
+}
+
+/* Tạo ngọn lửa bằng box-shadow + border-radius trick */
+#spin:before {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 2px;
+
+  width: 20px;
+  height: 20px;
+
+  background: conic-gradient(
+    #ff0000, #ff7700, #ffff00, #00cc00, #0099ff, #8800ff, #ff0000
+  );
+
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+
+  border-radius: 0;
+  box-shadow: 0 0 8px rgba(255,255,255,0.4);
+  animation: rainbowSpin 2s linear infinite;
+  z-index: 100002;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
+@keyframes rainbowSpin {
+  from { filter: hue-rotate(0deg) drop-shadow(0 2px 4px rgba(0,0,0,0.3)); }
+  to   { filter: hue-rotate(360deg) drop-shadow(0 2px 4px rgba(0,0,0,0.3)); }
+}
+
+@keyframes flameDance {
+  0% {
+    transform: translateX(-50%) scaleX(1) scaleY(1) rotate(-2deg);
+    opacity: 0.95;
+  }
+  50% {
+    transform: translateX(-50%) scaleX(0.88) scaleY(1.08) rotate(1deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-50%) scaleX(1.08) scaleY(0.95) rotate(2deg);
+    opacity: 0.9;
+  }
+}

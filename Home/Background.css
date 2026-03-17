@@ -1,0 +1,55 @@
+body{
+    background: linear-gradient(
+        135deg,
+        #ffffff 0%,
+        #fffaf6 35%,
+        #fff1e8 65%,
+        #ffffff 100%
+    );
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+
+/* ===== BACKGROUND ICONS ===== */
+.bg-icon{
+    position: fixed;
+    color: rgba(243,112,33,0.13); /* chỉnh độ đậm */
+    z-index: 0;
+    pointer-events: none;
+
+    animation: floatSoft 12s ease-in-out infinite;
+}
+
+/* Chuyển động rất nhẹ */
+@keyframes floatSoft{
+    0%{
+        transform: translateY(0);
+    }
+    50%{
+        transform: translateY(-16px);
+    }
+    100%{
+        transform: translateY(0);
+    }
+}
+
+/* ===== POSITIONS ===== */
+.i1{ top: 17%; left: 8%; font-size: 60px; animation-delay: 0s; }
+.i2{ top: 20%; right: 12%; font-size: 72px; animation-delay: 1s; }
+.i3{ top: 45%; left: 5%; font-size: 55px; animation-delay: 2s; }
+.i4{ bottom: 18%; right: 8%; font-size: 65px; animation-delay: 3s; }
+.i5{ bottom: 10%; left: 20%; font-size: 58px; animation-delay: 4s; }
+.i6{ top: 60%; right: 18%; font-size: 50px; animation-delay: 5s; }
+.i7{ top: 35%; left: 25%; font-size: 45px; animation-delay: 6s; }
+.i8{ bottom: 50%; right: 30%; font-size: 48px; animation-delay: 7s; }
+
+@media (max-width: 900px){
+    .i7, .i8{
+        display: none; /* ẩn bớt cho thoáng */
+    }
+
+    .bg-icon{
+        font-size: 42px !important;
+    }
+}

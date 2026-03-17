@@ -1,0 +1,1288 @@
+[
+  {
+    "id": "eos",
+    "name": "EOS",
+    "emoji": "📁",
+    "color": "#F9A825",
+    "bg": "linear-gradient(135deg,#fffde3,#fff5a0)",
+    "sub": "Phần mềm thi trực tuyến EOS Client",
+    "sections": [
+      {
+        "icon": "📋",
+        "title": "Khái quát",
+        "preview": "EOS Client — phần mềm thi FPT",
+        "autoOpen": true,
+        "blocks": [
+          {
+            "label": "Mô tả",
+            "type": "text",
+            "content": "EOS Client là phần mềm thi trực tuyến chính thức của FPT University. Sinh viên sử dụng EOS để làm các bài thi: Reading, Writing, Vocabulary và Listening ngay trên máy tính trong phòng thi."
+          },
+          {
+            "label": "Link tải phần mềm",
+            "type": "links",
+            "content": [
+              "https://lmsdn.fpt.edu.vn/hd/eos/"
+            ]
+          },
+          {
+            "label": "Yêu cầu hệ thống",
+            "type": "badges",
+            "content": [
+              "Windows 7/8/10/11",
+              ".NET Framework 3.5",
+              "Mạng EXAM trong phòng thi",
+              "Tai nghe (bài thi Nghe)"
+            ]
+          }
+        ]
+      },
+      {
+        "icon": "⬇️",
+        "title": "Tải & Cài đặt",
+        "preview": "4 bước cài đặt, lưu ý .NET Framework",
+        "blocks": [
+          {
+            "label": "Các bước cài đặt",
+            "type": "steps",
+            "content": [
+              "Click link tải: https://lmsdn.fpt.edu.vn/hd/eos/",
+              "Chuột phải vào file vừa tải → chọn Extract File để giải nén",
+              "Click vào thư mục vừa giải nén (để file ngoài màn hình Desktop)",
+              "Chuột phải vào EOSclient.exe → chọn Run as Administrator"
+            ]
+          },
+          {
+            "label": "Minh hoạ Bước 3 & 4",
+            "type": "html",
+            "content": "<div style=\"display:flex;align-items:flex-start;gap:14px\"><div style=\"flex:1;font-size:13.5px;color:#333;line-height:1.7\"></div><div style=\"flex-shrink:0;width:240px\"><img src=\"assets/images/img_d0400e6549ed.jpg\" style=\"width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Bước 3: Giải nén file</p></div></div><div style=\"margin:8px 0;text-align:center\"><img src=\"assets/images/img_a8b37c2bd2db.jpg\" style=\"max-width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Bước 4: Run as Administrator</p></div>"
+          },
+          {
+            "label": "Lưu ý .NET Framework 3.5",
+            "type": "html",
+            "content": "<div style=\"background:#fffbe6;border:1.5px solid #ffe082;border-radius:9px;padding:10px 14px;font-size:13px;color:#6d4c00;line-height:1.7;display:flex;gap:8px;margin:8px 0\"><span>⚠️</span><span>Máy chưa cài .NET Framework 3.5 cần cài ở nhà trước (cần mạng + bật Windows Update).<br>Nhấn <b>\"Download and install this feature\"</b> → đợi vài phút → nhấn Close → thực hiện lại Bước 4.</span></div><div style=\"margin:8px 0;text-align:center\"><img src=\"assets/images/img_1f6cac6de3ff.jpg\" style=\"max-width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Cài .NET Framework 3.5</p></div>"
+          },
+          {
+            "label": "Màn hình đăng nhập",
+            "type": "html",
+            "content": "<div style=\"display:flex;align-items:flex-start;gap:14px\"><div style=\"flex:1;font-size:13.5px;color:#333;line-height:1.7\">Sau khi mở phần mềm, nhập:<br>• <b>Exam code</b><br>• <b>Username</b><br>• <b>Password</b><br>do giảng viên cung cấp → nhấn <b>Login</b>.<br><br><span style=\"color:#c62828\">⚠️ Chỉ nhấn Login <b>1 lần duy nhất!</b></span></div><div style=\"flex-shrink:0;width:240px\"><img src=\"assets/images/img_2172a2e87238.jpg\" style=\"width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Màn hình Login EOS</p></div></div>"
+          }
+        ]
+      },
+      {
+        "icon": "📝",
+        "title": "Làm bài thi Reading",
+        "preview": "Chọn đáp án, chuyển câu, chuyển bài",
+        "blocks": [
+          {
+            "label": "Hướng dẫn làm bài",
+            "type": "steps",
+            "content": [
+              "Click vào ô có đáp án đúng để chọn",
+              "Chuyển câu: nhấn nút Next Question",
+              "Chuyển bài: nhấn Next Passage hoặc Next Reading",
+              "Làm xong → nhấn Finish → báo giám thị xác nhận"
+            ]
+          },
+          {
+            "label": "Lưu ý quan trọng & Giao diện",
+            "type": "html",
+            "content": "<div style=\"background:#e3f2fd;border:1.5px solid #90caf9;border-radius:9px;padding:10px 14px;font-size:13px;color:#0d47a1;line-height:1.7;display:flex;gap:8px;margin:8px 0\"><span>ℹ️</span><span>Nếu màn hình ghi <b>Passage 1/2</b> → có 2 bài → nhớ nhấn <b>Next Passage</b> để chuyển sang bài thứ 2 sau khi hoàn thành bài 1.</span></div><div style=\"margin:8px 0;text-align:center\"><img src=\"assets/images/img_8bd60bc25ed9.jpg\" style=\"max-width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Giao diện thi Reading</p></div>"
+          }
+        ]
+      },
+      {
+        "icon": "✍️",
+        "title": "Làm bài thi Writing",
+        "preview": "Tắt bộ gõ tiếng Việt trước khi vào thi",
+        "blocks": [
+          {
+            "label": "Lưu ý & Giao diện",
+            "type": "html",
+            "content": "<div style=\"background:#fffbe6;border:1.5px solid #ffe082;border-radius:9px;padding:10px 14px;font-size:13px;color:#6d4c00;line-height:1.7;display:flex;gap:8px;margin:8px 0\"><span>⚠️</span><span>Bắt buộc phải <b>TẮT bộ gõ tiếng Việt</b> (Unikey, EVKey...) trước khi đăng nhập bài Writing.</span></div><div style=\"display:flex;align-items:flex-start;gap:14px\"><div style=\"flex:1;font-size:13.5px;color:#333;line-height:1.7\">Màn hình thi chia 2 phần:<br>• <b>Nửa trái</b>: Đề thi<br>• <b>Nửa phải</b>: Ô viết câu trả lời<br><br>Làm xong → nhấn <b>Finish</b> → báo giám thị xác nhận và chuyển phần tiếp theo.</div><div style=\"flex-shrink:0;width:240px\"><img src=\"assets/images/img_363d2f13ef6c.jpg\" style=\"width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Giao diện thi Writing</p></div></div>"
+          }
+        ]
+      },
+      {
+        "icon": "🔤",
+        "title": "Làm bài thi Vocabulary",
+        "preview": "Tương tự Reading, ô xanh = đã trả lời",
+        "blocks": [
+          {
+            "label": "Hướng dẫn làm bài",
+            "type": "steps",
+            "content": [
+              "Click vào ô đáp án đúng (tương tự Reading)",
+              "Chuyển câu: nhấn nút Next",
+              "Câu đã trả lời → ô chuyển sang màu xanh",
+              "Hoàn thành → nhấn Finish → báo giám thị chuyển phần tiếp theo"
+            ]
+          },
+          {
+            "label": "Giao diện thi",
+            "type": "html",
+            "content": "<div style=\"margin:8px 0;text-align:center\"><img src=\"assets/images/img_655ef40c30d5.jpg\" style=\"max-width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Giao diện thi Vocabulary</p></div>"
+          }
+        ]
+      },
+      {
+        "icon": "🎧",
+        "title": "Làm bài thi Nghe (Listening)",
+        "preview": "Cắm tai nghe trước, check sound, nhập Open Code",
+        "blocks": [
+          {
+            "label": "Chuẩn bị & Các bước làm bài",
+            "type": "html",
+            "content": "<div style=\"background:#fffbe6;border:1.5px solid #ffe082;border-radius:9px;padding:10px 14px;font-size:13px;color:#6d4c00;line-height:1.7;display:flex;gap:8px;margin:8px 0\"><span>⚠️</span><span>Cắm tai nghe vào máy TRƯỚC → nhấn <b>Check Sound</b> kiểm tra (có nhạc = OK) → chỉnh âm lượng <b>50–60%</b> → sau đó mới nhấn <b>Login</b>.</span></div><div style=\"display:flex;align-items:flex-start;gap:14px\"><div style=\"flex:1;font-size:13.5px;color:#333;line-height:1.7\"><b>Các bước:</b><br>1. Đăng nhập → màn hình chờ<br>2. Đọc kỹ ghi chú: số phần thi và thứ tự<br>3. Nhập <b>Open Code</b> do giám thị cấp trong phòng thi<br>4. Nhấn <b>Show Question</b> để bắt đầu</div><div style=\"flex-shrink:0;width:240px\"><img src=\"assets/images/img_28bed9e33a17.jpg\" style=\"width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Giao diện thi Listening</p></div></div>"
+          }
+        ]
+      },
+      {
+        "icon": "📤",
+        "title": "Nộp bài thi",
+        "preview": "2 cách nộp bài, kiểm tra thông báo thành công",
+        "blocks": [
+          {
+            "label": "2 cách nộp bài",
+            "type": "bullets",
+            "content": [
+              "Cách 1: Để đồng hồ đếm ngược về 00:00 → bài tự động được nộp",
+              "Cách 2: Tích vào ô \"I want to finish the exam\" → nhấn nút \"Finish\""
+            ]
+          },
+          {
+            "label": "Minh hoạ & Xác nhận thành công",
+            "type": "html",
+            "content": "<div style=\"margin:8px 0;text-align:center\"><img src=\"assets/images/img_c6b224a59dd1.jpg\" style=\"max-width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Tích ô và nhấn Finish</p></div><div style=\"margin:8px 0;text-align:center\"><img src=\"assets/images/img_f22cab7e0c3a.jpg\" style=\"max-width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Màn hình xác nhận nộp bài</p></div><div style=\"background:#e3f2fd;border:1.5px solid #90caf9;border-radius:9px;padding:10px 14px;font-size:13px;color:#0d47a1;line-height:1.7;display:flex;gap:8px;margin:8px 0\"><span>ℹ️</span><span>Nộp thành công khi xuất hiện thông báo: <b>\"Exam finished successfully\"</b> ✅</span></div>"
+          }
+        ]
+      },
+      {
+        "icon": "⚠️",
+        "title": "Lỗi thường gặp & Cách xử lý",
+        "preview": "7 lỗi phổ biến khi dùng EOS Client",
+        "blocks": [
+          {
+            "label": "1. Không kết nối được mạng",
+            "type": "html",
+            "content": "<div style=\"display:flex;align-items:flex-start;gap:14px\"><div style=\"flex:1\"><div style=\"background:#fffbe6;border:1.5px solid #ffe082;border-radius:9px;padding:10px 14px;font-size:13px;color:#6d4c00;line-height:1.7;display:flex;gap:8px;margin:8px 0\"><span>⚠️</span><span>Yêu cầu kết nối đúng mạng <b>EXAM</b> trong phòng thi. Không dùng wifi cá nhân.</span></div></div><div style=\"flex-shrink:0;width:240px\"><img src=\"assets/images/img_4879d8e9f37a.jpg\" style=\"width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Lỗi không kết nối mạng EXAM</p></div></div>"
+          },
+          {
+            "label": "2. Sai Exam Code",
+            "type": "html",
+            "content": "<div style=\"display:flex;align-items:flex-start;gap:14px\"><div style=\"flex:1\"><div style=\"background:#fffbe6;border:1.5px solid #ffe082;border-radius:9px;padding:10px 14px;font-size:13px;color:#6d4c00;line-height:1.7;display:flex;gap:8px;margin:8px 0\"><span>⚠️</span><span>Exam Code phải viết <b>HOA</b> toàn bộ. Kiểm tra kỹ trước khi nhấn Login.</span></div></div><div style=\"flex-shrink:0;width:240px\"><img src=\"assets/images/img_9c32df8a0590.jpg\" style=\"width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Lỗi sai Exam Code</p></div></div>"
+          },
+          {
+            "label": "3. Sai tài khoản đăng nhập",
+            "type": "html",
+            "content": "<div style=\"display:flex;align-items:flex-start;gap:14px\"><div style=\"flex:1\"><div style=\"background:#fffbe6;border:1.5px solid #ffe082;border-radius:9px;padding:10px 14px;font-size:13px;color:#6d4c00;line-height:1.7;display:flex;gap:8px;margin:8px 0\"><span>⚠️</span><span>Nhập đúng account nhà trường cấp. <b>KHÔNG</b> nhập thêm đuôi @fpt.edu.vn.</span></div></div><div style=\"flex-shrink:0;width:240px\"><img src=\"assets/images/img_f44fa09a8fa9.jpg\" style=\"width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Lỗi sai tài khoản</p></div></div>"
+          },
+          {
+            "label": "4. Login quá nhiều lần",
+            "type": "html",
+            "content": "<div style=\"display:flex;align-items:flex-start;gap:14px\"><div style=\"flex:1\"><div style=\"background:#fffbe6;border:1.5px solid #ffe082;border-radius:9px;padding:10px 14px;font-size:13px;color:#6d4c00;line-height:1.7;display:flex;gap:8px;margin:8px 0\"><span>⚠️</span><span>Chỉ được login <b>1 lần duy nhất</b>. Nếu đã nhấn nhiều lần → báo giám thị ngay.</span></div></div><div style=\"flex-shrink:0;width:240px\"><img src=\"assets/images/img_da5500719809.jpg\" style=\"width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Lỗi login quá nhiều lần</p></div></div>"
+          },
+          {
+            "label": "5. Không tích được đáp án / thiếu hình ảnh",
+            "type": "html",
+            "content": "<div style=\"display:flex;align-items:flex-start;gap:14px\"><div style=\"flex:1\"><div style=\"background:#fffbe6;border:1.5px solid #ffe082;border-radius:9px;padding:10px 14px;font-size:13px;color:#6d4c00;line-height:1.7;display:flex;gap:8px;margin:8px 0\"><span>⚠️</span><span>Nhấn nút <b>Shutdown</b> trên phần mềm → khởi động lại máy → đăng nhập lại.</span></div></div><div style=\"flex-shrink:0;width:240px\"><img src=\"assets/images/img_dc16530cfc08.jpg\" style=\"width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Lỗi không tích đáp án</p></div></div>"
+          },
+          {
+            "label": "6. Tràn màn hình, không thấy đủ câu hỏi",
+            "type": "html",
+            "content": "<div style=\"background:#fffbe6;border:1.5px solid #ffe082;border-radius:9px;padding:10px 14px;font-size:13px;color:#6d4c00;line-height:1.7;display:flex;gap:8px;margin:8px 0\"><span>⚠️</span><span>Mở <b>Control Panel</b> → Display → chọn <b>Smaller 100% (default)</b> → đăng nhập lại và tiếp tục thi.</span></div>"
+          },
+          {
+            "label": "7. Nộp bài báo Failed",
+            "type": "html",
+            "content": "<div style=\"display:flex;align-items:flex-start;gap:14px\"><div style=\"flex:1\"><div style=\"background:#fffbe6;border:1.5px solid #ffe082;border-radius:9px;padding:10px 14px;font-size:13px;color:#6d4c00;line-height:1.7;display:flex;gap:8px;margin:8px 0\"><span>⚠️</span><span>Kết nối lại mạng EXAM → nhấn <b>Finish lần 2</b>. Vẫn không được → liên hệ giảng viên coi thi để hỗ trợ nộp thủ công.</span></div></div><div style=\"flex-shrink:0;width:240px\"><img src=\"assets/images/img_0a722be51477.jpg\" style=\"width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Lỗi nộp bài Failed</p></div></div>"
+          }
+        ]
+      },
+      {
+        "icon": "🆘",
+        "title": "Hỗ trợ & Liên hệ",
+        "preview": "Liên hệ giám thị hoặc phòng CNTT",
+        "autoOpen": true,
+        "blocks": [
+          {
+            "label": "Trong phòng thi",
+            "type": "text",
+            "content": "Báo ngay giảng viên / giám thị coi thi nếu gặp bất kỳ sự cố nào trong khi làm bài thi."
+          },
+          {
+            "label": "Ngoài giờ thi",
+            "type": "text",
+            "content": "Liên hệ phòng CNTT FPT hoặc giảng viên phụ trách môn để được hỗ trợ kỹ thuật."
+          },
+          {
+            "label": "Link hướng dẫn chính thức",
+            "type": "links",
+            "content": [
+              "https://lmsdn.fpt.edu.vn/hd/eos/"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "seb",
+    "name": "Safe Exam Browser",
+    "icon_img": "assets/images/img_7b25acf0647a.png",
+    "color": "#1565C0",
+    "bg": "linear-gradient(135deg,#e3f0ff,#b8d8ff)",
+    "sub": "Trình duyệt thi trực tuyến bảo mật FPT",
+    "sections": [
+      {
+        "icon": "📋",
+        "title": "Khái quát",
+        "preview": "SEB — trình duyệt thi bảo mật FPT",
+        "autoOpen": true,
+        "blocks": [
+          {
+            "label": "Mô tả",
+            "type": "text",
+            "content": "Safe Exam Browser (SEB) là phần mềm bắt buộc khi làm bài kiểm tra trực tuyến tại FPT University. SEB khóa toàn bộ màn hình, ngăn truy cập internet và các ứng dụng khác trong suốt quá trình thi."
+          },
+          {
+            "label": "Link tải phần mềm",
+            "type": "links",
+            "content": [
+              "https://drive.google.com/drive/folders/1RmjeKAvef6BXg_qlAl6JnZx2ZkY3qj_3"
+            ]
+          },
+          {
+            "label": "Hỗ trợ hệ điều hành",
+            "type": "badges",
+            "content": [
+              "Windows 10/11",
+              "macOS"
+            ]
+          }
+        ]
+      },
+      {
+        "icon": "🪟",
+        "title": "Cài đặt trên Windows",
+        "preview": "4 bước cài đặt SEB trên Windows",
+        "blocks": [
+          {
+            "label": "Bước 1 — Tải file cài đặt",
+            "type": "html",
+            "content": "<div style=\"display:flex;align-items:flex-start;gap:14px\"><div style=\"flex:1;font-size:13.5px;color:#333;line-height:1.7\">Tải file <b>SEB_3.10.0.794_AutoSettings.zip</b> trong thư mục <b>\"Hệ điều hành Windows\"</b> từ link Google Drive.</div><div style=\"flex-shrink:0;width:240px\"><img src=\"assets/images/img_d413a92b1ac8.jpg\" style=\"width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Chọn file SEB zip</p></div></div><div style=\"background:#fffbe6;border:1.5px solid #ffe082;border-radius:9px;padding:10px 14px;font-size:13px;color:#6d4c00;line-height:1.7;display:flex;gap:8px;margin:8px 0\"><span>⚠️</span><span>Nếu trình duyệt chặn tải → click <b>\"…\"</b> bên cạnh file → chọn <b>Keep</b></span></div><div style=\"margin:8px 0;text-align:center\"><img src=\"assets/images/img_fe7e07060ffc.jpg\" style=\"max-width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Chọn Keep khi trình duyệt chặn</p></div>"
+          },
+          {
+            "label": "Bước 2 — Mở file tải về",
+            "type": "html",
+            "content": "<div style=\"display:flex;align-items:flex-start;gap:14px\"><div style=\"flex:1;font-size:13.5px;color:#333;line-height:1.7\">Mở file <b>.zip</b> vừa tải về. <b>Không cần giải nén</b>, click thẳng vào file.</div><div style=\"flex-shrink:0;width:240px\"><img src=\"assets/images/img_cc8771b2e4ac.jpg\" style=\"width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Mở file zip</p></div></div>"
+          },
+          {
+            "label": "Bước 3 — Chạy file .msi",
+            "type": "html",
+            "content": "<div style=\"display:flex;align-items:flex-start;gap:14px\"><div style=\"flex:1;font-size:13.5px;color:#333;line-height:1.7\">Chạy file <b>.msi</b> bên trong để bắt đầu cài đặt.</div><div style=\"flex-shrink:0;width:240px\"><img src=\"assets/images/img_d0888a8cd335.jpg\" style=\"width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Chạy file .msi</p></div></div><div style=\"background:#fffbe6;border:1.5px solid #ffe082;border-radius:9px;padding:10px 14px;font-size:13px;color:#6d4c00;line-height:1.7;display:flex;gap:8px;margin:8px 0\"><span>⚠️</span><span>Windows Protect hiện ra → chọn <b>More info</b> → chọn <b>Run Anyway</b></span></div><div style=\"margin:8px 0;text-align:center\"><img src=\"assets/images/img_421a625b2454.jpg\" style=\"max-width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">More info</p></div><div style=\"margin:8px 0;text-align:center\"><img src=\"assets/images/img_b83ddd34e10e.jpg\" style=\"max-width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Run Anyway</p></div>"
+          },
+          {
+            "label": "Bước 4 — Mở phần mềm SEB",
+            "type": "html",
+            "content": "<div style=\"display:flex;align-items:flex-start;gap:14px\"><div style=\"flex:1;font-size:13.5px;color:#333;line-height:1.7\">Sau cài đặt (5–10 phút), máy tự khởi chạy SEB. Không thấy shortcut → bấm phím <b>Windows</b>, gõ <b>Safe Exam Browser</b>.</div><div style=\"flex-shrink:0;width:240px\"><img src=\"assets/images/img_bf9b80eb87bb.jpg\" style=\"width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Tìm SEB trong Start menu</p></div></div><div style=\"background:#fffbe6;border:1.5px solid #ffe082;border-radius:9px;padding:10px 14px;font-size:13px;color:#6d4c00;line-height:1.7;display:flex;gap:8px;margin:8px 0\"><span>⚠️</span><span>Tạo Shortcut Desktop: Chuột phải → Send to → Desktop (Win10) / Show more options → Send to Desktop (Win11)</span></div><div style=\"margin:8px 0;text-align:center\"><img src=\"assets/images/img_8f1e77104f5b.jpg\" style=\"max-width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Tạo Shortcut</p></div><div style=\"margin:8px 0;text-align:center\"><img src=\"assets/images/img_82f29c1a6f95.jpg\" style=\"max-width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Send to Desktop Win10</p></div>"
+          }
+        ]
+      },
+      {
+        "icon": "🍎",
+        "title": "Cài đặt trên macOS",
+        "preview": "5 bước cài đặt SEB trên MacBook",
+        "blocks": [
+          {
+            "label": "Bước 1 — Tải file cài đặt Mac",
+            "type": "html",
+            "content": "<div style=\"display:flex;align-items:flex-start;gap:14px\"><div style=\"flex:1;font-size:13.5px;color:#333;line-height:1.7\">Tải file <b>SEB3.5_AutoInstall.pkg</b> trong thư mục <b>\"Hệ điều hành MacBook\"</b>.</div><div style=\"flex-shrink:0;width:240px\"><img src=\"assets/images/img_c99933b00cf2.jpg\" style=\"width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">File pkg macOS</p></div></div>"
+          },
+          {
+            "label": "Bước 2 & 3 — Mở file & Cài đặt",
+            "type": "html",
+            "content": "<div style=\"display:flex;align-items:flex-start;gap:14px\"><div style=\"flex:1;font-size:13.5px;color:#333;line-height:1.7\">Mở file <b>.pkg</b> vừa tải.</div><div style=\"flex-shrink:0;width:240px\"><img src=\"assets/images/img_489d06b3b685.jpg\" style=\"width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Mở file pkg</p></div></div><div style=\"margin:8px 0;text-align:center\"><img src=\"assets/images/img_507eaa3b5856.jpg\" style=\"max-width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Nhấn Continue</p></div><div style=\"margin:8px 0;text-align:center\"><img src=\"assets/images/img_d0d5bc56d77e.jpg\" style=\"max-width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Nhấn Install để cài</p></div>"
+          },
+          {
+            "label": "Bước 4 & 5 — Xác thực & Mở SEB",
+            "type": "html",
+            "content": "<div style=\"display:flex;align-items:flex-start;gap:14px\"><div style=\"flex:1;font-size:13.5px;color:#333;line-height:1.7\">Nhập <b>mật khẩu Mac</b> hoặc xác thực <b>vân tay</b> để cho phép cài đặt.</div><div style=\"flex-shrink:0;width:240px\"><img src=\"assets/images/img_350e0d4676a3.jpg\" style=\"width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Xác thực mật khẩu / vân tay</p></div></div><div style=\"display:flex;align-items:flex-start;gap:14px\"><div style=\"flex:1;font-size:13.5px;color:#333;line-height:1.7\">Sau cài xong → vào <b>LaunchPad</b> hoặc <b>Applications</b>, tìm <b>Safe Exam Browser</b>.</div><div style=\"flex-shrink:0;width:240px\"><img src=\"assets/images/img_2c42497c12ab.jpg\" style=\"width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Mở SEB từ LaunchPad</p></div></div>"
+          }
+        ]
+      },
+      {
+        "icon": "🔑",
+        "title": "Đăng nhập & Vào phòng thi",
+        "preview": "4 bước đăng nhập và nhập mã bài thi",
+        "blocks": [
+          {
+            "label": "Bước 1 — Chọn Campus",
+            "type": "html",
+            "content": "<div style=\"display:flex;align-items:flex-start;gap:14px\"><div style=\"flex:1;font-size:13.5px;color:#333;line-height:1.7\">Mở SEB → màn hình đăng nhập hiện ra → chọn <b>Campus</b> của bạn.</div><div style=\"flex-shrink:0;width:240px\"><img src=\"assets/images/img_9d3709c71c7f.jpg\" style=\"width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Màn hình chọn Campus</p></div></div><div style=\"margin:8px 0;text-align:center\"><img src=\"assets/images/img_c6ac8ae15b42.jpg\" style=\"max-width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Màn hình Campus chi tiết</p></div>"
+          },
+          {
+            "label": "Bước 2 — Đăng nhập Google",
+            "type": "html",
+            "content": "<div style=\"display:flex;align-items:flex-start;gap:14px\"><div style=\"flex:1;font-size:13.5px;color:#333;line-height:1.7\">Đăng nhập bằng tài khoản <b>Google</b> mà bạn đã đăng ký với trường từ trước.</div><div style=\"flex-shrink:0;width:240px\"><img src=\"assets/images/img_f37454ecc789.jpg\" style=\"width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Đăng nhập Google</p></div></div>"
+          },
+          {
+            "label": "Bước 3 & 4 — Nội quy & Mã bài thi",
+            "type": "html",
+            "content": "<div style=\"display:flex;align-items:flex-start;gap:14px\"><div style=\"flex:1;font-size:13.5px;color:#333;line-height:1.7\">Đọc kỹ <b>nội quy phòng thi</b> và xác nhận.</div><div style=\"flex-shrink:0;width:240px\"><img src=\"assets/images/img_67326b4b6ed0.jpg\" style=\"width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Đọc và xác nhận nội quy</p></div></div><div style=\"display:flex;align-items:flex-start;gap:14px\"><div style=\"flex:1;font-size:13.5px;color:#333;line-height:1.7\">Nhập <b>mã bài thi + mật khẩu</b> do giảng viên cung cấp trong phòng thi → bắt đầu làm bài.</div><div style=\"flex-shrink:0;width:240px\"><img src=\"assets/images/img_56820ed4dc6c.jpg\" style=\"width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Nhập mã bài thi</p></div></div>"
+          }
+        ]
+      },
+      {
+        "icon": "🛡️",
+        "title": "Tính năng bảo mật",
+        "preview": "Các tính năng chống gian lận của SEB",
+        "blocks": [
+          {
+            "label": "Danh sách tính năng",
+            "type": "bullets",
+            "content": [
+              "Khóa toàn bộ màn hình desktop trong khi thi",
+              "Chặn copy/paste và chụp màn hình",
+              "Ngăn mở ứng dụng khác trong khi thi",
+              "Chặn truy cập internet ngoài trang thi",
+              "Chặn phím tắt hệ thống (Alt+Tab, Ctrl+Alt+Del...)",
+              "Ghi log toàn bộ hoạt động người dùng"
+            ]
+          }
+        ]
+      },
+      {
+        "icon": "⚠️",
+        "title": "Lỗi thường gặp & Cách xử lý",
+        "preview": "Các sự cố phổ biến khi dùng SEB",
+        "blocks": [
+          {
+            "label": "Không mở được SEB",
+            "type": "html",
+            "content": "<div style=\"background:#fffbe6;border:1.5px solid #ffe082;border-radius:9px;padding:10px 14px;font-size:13px;color:#6d4c00;line-height:1.7;display:flex;gap:8px;margin:8px 0\"><span>⚠️</span><span>Chuột phải vào file SEB hoặc shortcut → chọn <b>Run as administrator</b>.</span></div>"
+          },
+          {
+            "label": "Windows Protect chặn cài đặt",
+            "type": "html",
+            "content": "<div style=\"background:#fffbe6;border:1.5px solid #ffe082;border-radius:9px;padding:10px 14px;font-size:13px;color:#6d4c00;line-height:1.7;display:flex;gap:8px;margin:8px 0\"><span>⚠️</span><span>Chọn <b>More info</b> → chọn <b>Run Anyway</b> để tiếp tục cài đặt.</span></div>"
+          },
+          {
+            "label": "Trình duyệt chặn tải file",
+            "type": "html",
+            "content": "<div style=\"background:#fffbe6;border:1.5px solid #ffe082;border-radius:9px;padding:10px 14px;font-size:13px;color:#6d4c00;line-height:1.7;display:flex;gap:8px;margin:8px 0\"><span>⚠️</span><span>Click <b>\"…\"</b> bên cạnh file đang tải → chọn <b>Keep</b>.</span></div>"
+          },
+          {
+            "label": "SEB bị treo / crash giữa chừng",
+            "type": "html",
+            "content": "<div style=\"background:#fffbe6;border:1.5px solid #ffe082;border-radius:9px;padding:10px 14px;font-size:13px;color:#6d4c00;line-height:1.7;display:flex;gap:8px;margin:8px 0\"><span>⚠️</span><span>Khởi động lại máy và thử lại. Báo giảng viên nếu vẫn lỗi.</span></div>"
+          },
+          {
+            "label": "Không tạo được Shortcut Desktop",
+            "type": "html",
+            "content": "<div style=\"background:#fffbe6;border:1.5px solid #ffe082;border-radius:9px;padding:10px 14px;font-size:13px;color:#6d4c00;line-height:1.7;display:flex;gap:8px;margin:8px 0\"><span>⚠️</span><span>Win 10: Chuột phải → Send to → Desktop.<br>Win 11: Chuột phải → Show more options → Send to → Desktop.</span></div>"
+          }
+        ]
+      },
+      {
+        "icon": "🆘",
+        "title": "Hỗ trợ & Liên hệ",
+        "preview": "Liên hệ giảng viên / giám thị",
+        "autoOpen": true,
+        "blocks": [
+          {
+            "label": "Trong phòng thi",
+            "type": "text",
+            "content": "Báo ngay giảng viên / giám thị nếu gặp sự cố trong khi làm bài thi."
+          },
+          {
+            "label": "Link tải SEB chính thức",
+            "type": "links",
+            "content": [
+              "https://drive.google.com/drive/folders/1RmjeKAvef6BXg_qlAl6JnZx2ZkY3qj_3"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fapweb",
+    "name": "FAP Web",
+    "icon_img": "assets/images/img_92a3193097ee.png",
+    "color": "#E65100",
+    "bg": "linear-gradient(135deg,#fff3e0,#ffcc80)",
+    "sub": "Cổng thông tin học vụ chính thức FPT",
+    "sections": [
+      {
+        "icon": "📋",
+        "title": "Khái quát",
+        "preview": "Cổng học thuật chính thức FPT",
+        "autoOpen": true,
+        "blocks": [
+          {
+            "label": "Mô tả",
+            "type": "text",
+            "content": "FAP (FPT Academic Portal) là cổng thông tin học vụ chính thức, dùng để xem lịch học, lịch thi, điểm số và thực hiện các thủ tục học vụ trực tuyến."
+          },
+          {
+            "label": "Link truy cập",
+            "type": "links",
+            "content": [
+              "https://fap.fpt.edu.vn/"
+            ]
+          },
+          {
+            "label": "Đăng nhập 3 bước",
+            "type": "html",
+            "content": "<div style=\"display:flex;align-items:flex-start;gap:14px\"><div style=\"flex:1;font-size:13px;color:#333;line-height:1.7\"><b>Bước 1</b>: Truy cập https://fap.fpt.edu.vn/<br><b>Bước 2</b>: Chọn cơ sở <b>FU Đà Nẵng</b><br><b>Bước 3</b>: Đăng nhập bằng email sinh viên do trường cấp</div><div style=\"flex-shrink:0;width:220px\"><img src=\"assets/images/img_08c3d00c7da0.jpg\" style=\"width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Bước 1: Truy cập fap.fpt.edu.vn</p></div></div>"
+          }
+        ]
+      },
+      {
+        "icon": "🔔",
+        "title": "Trang chủ — News & Thông báo",
+        "preview": "Thông báo, đơn từ, thông tin học tập",
+        "blocks": [
+          {
+            "label": "3 mục chính trang chủ",
+            "type": "bullets",
+            "content": [
+              "News: Thông báo từ các phòng ban của Trường",
+              "Important Notice: Thời hạn nộp các loại đơn từ / thủ tục",
+              "Academic Information: Thông tin liên quan đến quá trình học tập"
+            ]
+          },
+          {
+            "label": "News — Thông báo",
+            "type": "html",
+            "content": "<div style=\"display:flex;align-items:flex-start;gap:14px\"><div style=\"flex:1;font-size:13px;color:#333;line-height:1.7\">Theo dõi News thường xuyên để nắm thông tin điểm, lịch thi, lịch học điều chỉnh. Chọn <b>More</b> để xem tất cả thông báo cũ.</div><div style=\"flex-shrink:0;width:220px\"><img src=\"assets/images/img_1b2cc1f75f8a.jpg\" style=\"width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Bảng thông báo News</p></div></div>"
+          },
+          {
+            "label": "Important Notice — Thời hạn đơn từ",
+            "type": "html",
+            "content": "<div style=\"display:flex;align-items:flex-start;gap:14px\"><div style=\"flex:1;font-size:13px;color:#333;line-height:1.7\">Hạn nộp đơn theo kỳ:<br>&#8226; SP (Spring): Tháng 01–04<br>&#8226; SU (Summer): Tháng 05–08<br>&#8226; FA (Fall): Tháng 09–12<br><br>Ví dụ: FA20 bắt đầu 09/2020 → đơn chuyển ngành nộp chậm nhất trước 3 tuần.</div><div style=\"flex-shrink:0;width:220px\"><img src=\"assets/images/img_b3a6538051e4.jpg\" style=\"width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Important Notice</p></div></div><div style=\"background:#fffbe6;border:1.5px solid #ffe082;border-radius:9px;padding:10px 14px;font-size:13px;color:#6d4c00;line-height:1.7;display:flex;gap:8px;margin:8px 0\"><span>&#9888;</span><span>Khi chưa đến hoặc đã hết hạn nhận đơn, hệ thống sẽ hiển thị thông báo quá hạn.</span></div>"
+          },
+          {
+            "label": "Academic Information — Đơn từ có phí",
+            "type": "html",
+            "content": "<div style=\"display:flex;align-items:flex-start;gap:14px\"><div style=\"flex:1;font-size:13px;color:#333;line-height:1.7\">Để gửi đơn từ có phí, sinh viên cần có <b>số dư tương ứng</b> trên hệ thống FAP trước khi nộp.</div><div style=\"flex-shrink:0;width:220px\"><img src=\"assets/images/img_d48d770c32a9.jpg\" style=\"width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Academic Information</p></div></div>"
+          }
+        ]
+      },
+      {
+        "icon": "🔍",
+        "title": "Information Access — Tra cứu",
+        "preview": "Lịch học, TKB tuần, lịch thi, đề cương",
+        "blocks": [
+          {
+            "label": "University Timetable — Lịch học lớp",
+            "type": "html",
+            "content": "<div style=\"display:flex;align-items:flex-start;gap:14px\"><div style=\"flex:1;font-size:13px;color:#333;line-height:1.7\">Xem lịch học được chia theo lớp. Tìm lớp theo Term/Department để xem danh sách sinh viên học chung.</div><div style=\"flex-shrink:0;width:220px\"><img src=\"assets/images/img_387c1a19e889.jpg\" style=\"width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Lịch học theo lớp</p></div></div>"
+          },
+          {
+            "label": "Weekly Timetable — TKB tuần",
+            "type": "html",
+            "content": "<div style=\"display:flex;align-items:flex-start;gap:14px\"><div style=\"flex:1;font-size:13px;color:#333;line-height:1.7\">Nhấp vào tuần cần xem. TKB gồm: slot, ngày, môn, phòng, trạng thái attended/absent.<br><br>Bảng slot:<br>Slot 1: 7:00–8:30 &nbsp; Slot 4: 12:45–14:15<br>Slot 2: 8:45–10:15 &nbsp; Slot 5: 14:30–16:00<br>Slot 3: 10:30–12:00 &nbsp; Slot 6: 16:15–17:45</div><div style=\"flex-shrink:0;width:220px\"><img src=\"assets/images/img_297ff56b8916.jpg\" style=\"width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Thời khóa biểu tuần</p></div></div><div style=\"margin:8px 0;text-align:center\"><img src=\"assets/images/img_990e308607a1.jpg\" style=\"max-width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Chi tiết TKB tuần</p></div>"
+          },
+          {
+            "label": "Tuition Fee — Biểu học phí",
+            "type": "html",
+            "content": "<div style=\"display:flex;align-items:flex-start;gap:14px\"><div style=\"flex:1;font-size:13px;color:#333;line-height:1.7\">Xem phí học lại các môn tại mục <b>Tuition fee per course</b>.</div><div style=\"flex-shrink:0;width:220px\"><img src=\"assets/images/img_d48d770c32a9.jpg\" style=\"width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Biểu học phí</p></div></div>"
+          },
+          {
+            "label": "Exam Schedule — Lịch thi",
+            "type": "html",
+            "content": "<div style=\"display:flex;align-items:flex-start;gap:14px\"><div style=\"flex:1;font-size:13px;color:#333;line-height:1.7\">Theo dõi tại <b>View exam schedule</b>. Biểu tượng \"New\" khi có lịch thi mới.<br><br>Thông tin lịch thi gồm: Subject Code, Subject Name, Date, Room, Time, Exam Form, loại thi (Midterm/Final/Resit), ngày dự kiến công bố điểm.</div><div style=\"flex-shrink:0;width:220px\"><img src=\"assets/images/img_3bf70098da1b.jpg\" style=\"width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Lịch thi</p></div></div><div style=\"background:#fffbe6;border:1.5px solid #ffe082;border-radius:9px;padding:10px 14px;font-size:13px;color:#6d4c00;line-height:1.7;display:flex;gap:8px;margin:8px 0\"><span>&#9888;</span><span>Ngày công bố điểm là ngày <b>dự kiến</b>, không phải ngày thi.</span></div>"
+          },
+          {
+            "label": "Syllabuses & Curriculum — Đề cương",
+            "type": "html",
+            "content": "<div style=\"display:flex;align-items:flex-start;gap:14px\"><div style=\"flex:1;font-size:13px;color:#333;line-height:1.7\">&#8226; <b>View Curriculums & Syllabuses</b>: Khung chương trình các ngành.<br>&#8226; <b>Show Learning Path</b>: Môn tiên quyết của từng môn.<br>&#8226; Đăng nhập bằng mail trường để xem syllabus chi tiết.</div><div style=\"flex-shrink:0;width:220px\"><img src=\"assets/images/img_26279d6d63fb.jpg\" style=\"width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Xem đề cương môn học</p></div></div>"
+          },
+          {
+            "label": "Feedback — Đánh giá giảng dạy",
+            "type": "html",
+            "content": "<div style=\"display:flex;align-items:flex-start;gap:14px\"><div style=\"flex:1;font-size:13px;color:#333;line-height:1.7\">Sau khoảng 2/3 thời gian môn học, Trường mở Feedback để SV đánh giá giảng viên. Sinh viên chưa hoàn tất sẽ thấy thông báo nhắc nhở khi đăng nhập FAP.</div><div style=\"flex-shrink:0;width:220px\"><img src=\"assets/images/img_ec9cfbfa321f.jpg\" style=\"width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Feedback</p></div></div>"
+          }
+        ]
+      },
+      {
+        "icon": "📊",
+        "title": "Report — Báo cáo & Điểm số",
+        "preview": "Điểm danh, điểm, bảng điểm, học phí",
+        "blocks": [
+          {
+            "label": "Attendance Report — Điểm danh",
+            "type": "html",
+            "content": "<div style=\"display:flex;align-items:flex-start;gap:14px\"><div style=\"flex:1;font-size:13px;color:#333;line-height:1.7\">Theo dõi điểm danh từng môn. Cuối mỗi môn có thống kê % vắng.</div><div style=\"flex-shrink:0;width:220px\"><img src=\"assets/images/img_129569512b63.jpg\" style=\"width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Báo cáo điểm danh</p></div></div><div style=\"margin:8px 0;text-align:center\"><img src=\"assets/images/img_0588a9f91c65.jpg\" style=\"max-width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Chi tiết điểm danh từng buổi</p></div><div style=\"background:#fffbe6;border:1.5px solid #ffe082;border-radius:9px;padding:10px 14px;font-size:13px;color:#6d4c00;line-height:1.7;display:flex;gap:8px;margin:8px 0\"><span>&#9888;</span><span>Vắng VƯỢT quá số buổi cho phép → có thể bị cấm thi hoặc Fail môn.</span></div>"
+          },
+          {
+            "label": "Mark Report — Điểm thành phần",
+            "type": "html",
+            "content": "<div style=\"display:flex;align-items:flex-start;gap:14px\"><div style=\"flex:1;font-size:13px;color:#333;line-height:1.7\">Xem điểm quá trình (điểm thành phần) chi tiết từng môn: Assignment, Midterm, Final...</div><div style=\"flex-shrink:0;width:220px\"><img src=\"assets/images/img_f7da052fc16e.jpg\" style=\"width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Mark Report</p></div></div>"
+          },
+          {
+            "label": "Academic Transcript — Bảng điểm",
+            "type": "html",
+            "content": "<div style=\"display:flex;align-items:flex-start;gap:14px\"><div style=\"flex:1;font-size:13px;color:#333;line-height:1.7\">Xem tổng quát kết quả học tập theo từng kỳ. Các cột chính:<br>&#8226; <b>Grade</b>: Điểm trung bình môn<br>&#8226; <b>Status</b>: Passed / Not passed / Not started / Studying<br>&#8226; <b>Prerequisite</b>: Môn tiên quyết (cần Pass hoặc ≥4.0)<br>&#8226; <b>Credit</b>: Số tín chỉ</div><div style=\"flex-shrink:0;width:220px\"><img src=\"assets/images/img_96e94f77588c.jpg\" style=\"width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Bảng điểm toàn khóa</p></div></div>"
+          },
+          {
+            "label": "Curriculum — Khung chương trình",
+            "type": "html",
+            "content": "<div style=\"display:flex;align-items:flex-start;gap:14px\"><div style=\"flex:1;font-size:13px;color:#333;line-height:1.7\">Xem tất cả môn học theo từng kỳ trong toàn bộ chương trình đào tạo.</div><div style=\"flex-shrink:0;width:220px\"><img src=\"assets/images/img_466b91b97b66.jpg\" style=\"width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Curriculum</p></div></div>"
+          },
+          {
+            "label": "Student Fee — Học phí",
+            "type": "html",
+            "content": "<div style=\"display:flex;align-items:flex-start;gap:14px\"><div style=\"flex:1;font-size:13px;color:#333;line-height:1.7\">Xem lại học phí đã nộp theo từng kỳ học.</div><div style=\"flex-shrink:0;width:220px\"><img src=\"assets/images/img_90512f578f47.jpg\" style=\"width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Student Fee</p></div></div>"
+          }
+        ]
+      },
+      {
+        "icon": "👤",
+        "title": "Others — Tiện ích khác",
+        "preview": "Hồ sơ, điểm phong trào, quy định, Coursera",
+        "blocks": [
+          {
+            "label": "Student Profile & Semester/Room",
+            "type": "html",
+            "content": "<div style=\"display:flex;align-items:flex-start;gap:14px\"><div style=\"flex:1;font-size:13px;color:#333;line-height:1.7\">Xem đầy đủ thông tin cá nhân, trạng thái học, chuyên ngành, quyết định liên quan.</div><div style=\"flex-shrink:0;width:220px\"><img src=\"assets/images/img_7faa66ca9d40.jpg\" style=\"width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Student Profile</p></div></div><div style=\"display:flex;align-items:flex-start;gap:14px\"><div style=\"flex:1;font-size:13px;color:#333;line-height:1.7\">Xem ngày bắt đầu/kết thúc các kỳ học và thông tin phòng ban.</div><div style=\"flex-shrink:0;width:220px\"><img src=\"assets/images/img_f7da052fc16e.jpg\" style=\"width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">View Semester & Room</p></div></div>"
+          },
+          {
+            "label": "Report Điểm Phong Trào",
+            "type": "html",
+            "content": "<div style=\"display:flex;align-items:flex-start;gap:14px\"><div style=\"flex:1;font-size:13px;color:#333;line-height:1.7\">Xuất file điểm phong trào:<br>1. Chọn học kỳ cần xuất<br>2. Nhấn <b>Export</b><br>3. Nhấn <b>Download</b> để tải file</div><div style=\"flex-shrink:0;width:220px\"><img src=\"assets/images/img_1b3c758a7d5b.jpg\" style=\"width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Xuất điểm phong trào</p></div></div>"
+          },
+          {
+            "label": "Submit Certificates — Nộp chứng chỉ Coursera",
+            "type": "html",
+            "content": "<div style=\"display:flex;align-items:flex-start;gap:14px\"><div style=\"flex:1;font-size:13px;color:#333;line-height:1.7\">Nộp link chứng chỉ Mooc sau khi hoàn thành trên Coursera:<br>1. Vào FAP → <b>Submit certificates</b><br>2. Đăng nhập mail trường<br>3. Chọn <b>Certificates</b><br>4. Copy link chứng chỉ vào Mooc tương ứng<br>5. Nhấn <b>Save</b> → kiểm tra lại bằng biểu tượng mắt</div><div style=\"flex-shrink:0;width:220px\"><img src=\"assets/images/img_26279d6d63fb.jpg\" style=\"width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Nộp chứng chỉ Mooc</p></div></div>"
+          }
+        ]
+      },
+      {
+        "icon": "⚠️",
+        "title": "Lưu ý quan trọng",
+        "preview": "Điểm danh, hạn đơn, điểm số",
+        "autoOpen": true,
+        "blocks": [
+          {
+            "type": "warn",
+            "content": "Điểm danh chưa hiện Present sau 24h → email phòng đào tạo ngay."
+          },
+          {
+            "type": "warn",
+            "content": "Bất kỳ cột điểm thành phần = 0 → FAIL dù điểm trung bình ≥ 5."
+          },
+          {
+            "type": "warn",
+            "content": "Hạn nộp đơn: SP tháng 1–4, SU tháng 5–8, FA tháng 9–12. Nộp muộn → hệ thống tự đóng."
+          },
+          {
+            "type": "warn",
+            "content": "Đơn từ có phí cần có số dư trên FAP trước khi gửi."
+          },
+          {
+            "type": "info",
+            "content": "Theo dõi thông báo News đầu mỗi kỳ để nắm kế hoạch học tập mới nhất từ Phòng Đào Tạo."
+          }
+        ]
+      },
+      {
+        "icon": "🆘",
+        "title": "Hỗ trợ",
+        "preview": "VP trường, phòng đào tạo",
+        "autoOpen": true,
+        "blocks": [
+          {
+            "label": "Liên hệ",
+            "type": "text",
+            "content": "Lên trực tiếp văn phòng trường hoặc gửi email phòng đào tạo để được hỗ trợ các vấn đề đăng ký môn, đơn từ, học phí."
+          },
+          {
+            "label": "Link truy cập",
+            "type": "links",
+            "content": [
+              "https://fap.fpt.edu.vn/",
+              "https://dng.fpt.edu.vn/Invoice"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fapapp",
+    "name": "FAP App",
+    "icon_img": "assets/images/img_8dd0cab44c3e.png",
+    "color": "#F47920",
+    "bg": "linear-gradient(135deg,#fff3e8,#ffdcb8)",
+    "sub": "Ứng dụng di động myFap cho sinh viên FPT",
+    "sections": [
+      {
+        "icon": "📋",
+        "title": "Khái quát",
+        "preview": "myFAP — app di động học vụ FPT",
+        "autoOpen": true,
+        "blocks": [
+          {
+            "label": "Mô tả",
+            "type": "text",
+            "content": "myFAP là ứng dụng di động chính thức của FPT University. Cung cấp đầy đủ thông tin học vụ: lịch học, lịch thi, điểm số, thông báo và điểm danh."
+          },
+          {
+            "label": "Tải ứng dụng",
+            "type": "bullets",
+            "content": [
+              "iOS: Tìm myFAP trên App Store",
+              "Android: Tìm myFAP trên CH Play"
+            ]
+          },
+          {
+            "label": "Giao diện & 3 tab chính",
+            "type": "html",
+            "content": "<div style=\"display:flex;align-items:flex-start;gap:14px\"><div style=\"flex:1;font-size:13px;color:#333;line-height:1.7\">3 tab chính:<br><br>&#127968; <b>Home</b> - Trang chủ<br>&#128172; <b>Messages</b> - Tin nhắn<br>&#128100; <b>Profile</b> - Thông tin cá nhân</div><div style=\"flex-shrink:0;width:210px\"><img src=\"assets/images/img_5a71eaf14388.jpg\" style=\"width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Giao diện myFAP</p></div></div>}"
+          }
+        ]
+      },
+      {
+        "icon": "🏠",
+        "title": "Home — Trang chủ",
+        "preview": "Thông báo, lịch học, lịch thi",
+        "blocks": [
+          {
+            "label": "Notification & Application Status",
+            "type": "bullets",
+            "content": [
+              "Notification: Thông báo từ nhà trường",
+              "Application Status: Theo dõi trạng thái đơn đã nộp"
+            ]
+          },
+          {
+            "label": "Weekly Timetable — TKB tuần",
+            "type": "html",
+            "content": "<div style=\"display:flex;align-items:flex-start;gap:14px\"><div style=\"flex:1;font-size:13px;color:#333;line-height:1.7\">Xem TKB theo từng tuần:<br><b>Phòng học</b>, <b>Giờ học</b>, <b>Subject Code</b>, <b>Group class</b>, <b>Lecturer</b></div><div style=\"flex-shrink:0;width:210px\"><img src=\"assets/images/img_eed3ac842243.jpg\" style=\"width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">TKB tuần</p></div></div>}"
+          },
+          {
+            "label": "Exam Schedule — Lịch thi",
+            "type": "html",
+            "content": "<div style=\"display:flex;align-items:flex-start;gap:14px\"><div style=\"flex:1;font-size:13px;color:#333;line-height:1.7\">FE: Final Exam. Ví dụ Fall 2025: 26/10 | ENT503 | Gamma 315 | 7h30-9h15</div><div style=\"flex-shrink:0;width:210px\"><img src=\"assets/images/img_74d82a6672cf.jpg\" style=\"width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Lịch thi FE</p></div></div><div style=\"display:flex;align-items:flex-start;gap:14px\"><div style=\"flex:1;font-size:13px;color:#333;line-height:1.7\">2ND_FE: Retake Final Exam</div><div style=\"flex-shrink:0;width:210px\"><img src=\"assets/images/img_18dcdcc9fb68.jpg\" style=\"width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Lịch thi Retake</p></div></div><div style=\"background:#fffbe6;border:1.5px solid #ffe082;border-radius:9px;padding:10px 14px;font-size:13px;color:#6d4c00;line-height:1.7;display:flex;gap:8px;margin:8px 0\"><span>&#9888;</span><span>Bắt buộc thi lại nếu điểm Final dưới 4.0.</span></div>}"
+          },
+          {
+            "label": "Semester Schedule",
+            "type": "html",
+            "content": "<div style=\"display:flex;align-items:flex-start;gap:14px\"><div style=\"flex:1;font-size:13px;color:#333;line-height:1.7\">Dạng lịch tháng. Dấu màu dưới ngày = có tiết học.</div><div style=\"flex-shrink:0;width:210px\"><img src=\"assets/images/img_2e3dd9b089eb.jpg\" style=\"width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Lịch học cả kỳ</p></div></div>}"
+          }
+        ]
+      },
+      {
+        "icon": "📊",
+        "title": "Reports — Báo cáo",
+        "preview": "Điểm danh, điểm số, học phí, GPA",
+        "blocks": [
+          {
+            "label": "Các mục báo cáo",
+            "type": "bullets",
+            "content": [
+              "Attendance: Số buổi đi học, vắng, trễ",
+              "Mark Report: Điểm thành phần từng môn",
+              "Academic Transcript: Bảng điểm + GPA toàn khóa",
+              "Student Fee: Học phí từng kỳ, trạng thái nợ",
+              "Extra Activities: Hoạt động ngoại khóa + điểm rèn luyện"
+            ]
+          },
+          {
+            "type": "warn",
+            "content": "Điểm danh chưa hiện Present sau 24h → email phòng đào tạo."
+          }
+        ]
+      },
+      {
+        "icon": "💬",
+        "title": "Messages — Tin nhắn",
+        "preview": "Thông báo học phí, sự kiện, BHYT",
+        "blocks": [
+          {
+            "label": "Tính năng",
+            "type": "bullets",
+            "content": [
+              "Search: Tìm nhanh theo từ khóa",
+              "Thông báo học phí, lịch học, BHYT, sự kiện"
+            ]
+          }
+        ]
+      },
+      {
+        "icon": "👤",
+        "title": "Profile — Thông tin cá nhân",
+        "preview": "QR code, thông tin SV, link FAP",
+        "blocks": [
+          {
+            "label": "Thông tin & QR Code",
+            "type": "bullets",
+            "content": [
+              "Họ tên, MSSV, email trường, trạng thái học",
+              "QR Code: điểm danh, check-in sự kiện, xác nhận SV"
+            ]
+          },
+          {
+            "label": "Others & Contact",
+            "type": "html",
+            "content": "<div style=\"display:flex;align-items:flex-start;gap:14px\"><div style=\"flex:1;font-size:13px;color:#333;line-height:1.7\">Others, Contact (liên hệ phòng ban), Service review</div><div style=\"flex-shrink:0;width:210px\"><img src=\"assets/images/img_6a10c31c72b2.jpg\" style=\"width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Liên hệ phòng ban</p></div></div><div style=\"margin:8px 0;text-align:center\"><img src=\"assets/images/img_cb1562bb5989.jpg\" style=\"max-width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Danh sách liên hệ</p></div>}"
+          }
+        ]
+      },
+      {
+        "icon": "⚠️",
+        "title": "Lỗi thường gặp",
+        "preview": "Đăng nhập, dữ liệu, app crash",
+        "blocks": [
+          {
+            "type": "warn",
+            "content": "Không đăng nhập được: kiểm tra email + mật khẩu. Đổi qua FAP → Change password FEID."
+          },
+          {
+            "type": "warn",
+            "content": "Không thấy dữ liệu: kéo refresh. Vẫn không → đăng xuất rồi đăng nhập lại."
+          },
+          {
+            "type": "warn",
+            "content": "App crash: xóa cache hoặc gỡ cài lại phiên bản mới nhất."
+          }
+        ]
+      },
+      {
+        "icon": "🆘",
+        "title": "Hỗ trợ",
+        "preview": "Liên hệ phòng CNTT FPT",
+        "autoOpen": true,
+        "blocks": [
+          {
+            "label": "Liên hệ",
+            "type": "text",
+            "content": "Liên hệ phòng CNTT FPT hoặc lên văn phòng trường nếu gặp lỗi nghiêm trọng."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "flm",
+    "name": "FLM",
+    "icon_img": "assets/images/img_750ad09e8019.png",
+    "color": "#2E7D32",
+    "bg": "linear-gradient(135deg,#e8f5e9,#a5d6a7)",
+    "sub": "Tra cứu đề cương & học liệu môn học FPT",
+    "sections": [
+      {
+        "icon": "📋",
+        "title": "Khái quát",
+        "preview": "FLM — tra cứu đề cương & syllabus",
+        "autoOpen": true,
+        "blocks": [
+          {
+            "label": "Mô tả",
+            "type": "text",
+            "content": "FLM (FPT Learning Management) là hệ thống tra cứu đề cương và nội dung môn học chính thức của FPT University. Dùng để xem syllabus chi tiết, cấu trúc điểm, yêu cầu môn học và tài liệu học tập theo mã môn."
+          },
+          {
+            "label": "Link truy cập",
+            "type": "links",
+            "content": [
+              "https://flm.fpt.edu.vn/Login"
+            ]
+          },
+          {
+            "label": "Đăng nhập",
+            "type": "text",
+            "content": "Đăng nhập bằng tài khoản email FPT (@fpt.edu.vn)."
+          }
+        ]
+      },
+      {
+        "icon": "🔍",
+        "title": "Cách tra cứu môn học",
+        "preview": "Lấy mã môn từ FAP, tìm syllabus trên FLM",
+        "blocks": [
+          {
+            "label": "Bước 1 — Lấy Subject code từ FAP",
+            "type": "text",
+            "content": "Vào FAP Web → mục Academic Transcript → xem cột Subject code. Dùng mã code này để tra cứu trên FLM."
+          },
+          {
+            "label": "Bước 2 — Tra cứu trên FLM",
+            "type": "steps",
+            "content": [
+              "Đăng nhập FLM tại https://flm.fpt.edu.vn/Login",
+              "Nhập Subject code vào ô tìm kiếm",
+              "Click vào môn học để xem chi tiết Syllabus",
+              "Đọc nội dung, yêu cầu và cách tính điểm của môn"
+            ]
+          },
+          {
+            "label": "Thông tin có trong Syllabus",
+            "type": "bullets",
+            "content": [
+              "Mô tả môn học và mục tiêu",
+              "Cấu trúc điểm: process / midterm / final và tỷ trọng",
+              "Danh sách bài học theo từng buổi",
+              "Tài liệu tham khảo và learning materials",
+              "Yêu cầu Pass/Fail của môn học"
+            ]
+          }
+        ]
+      },
+      {
+        "icon": "⭐",
+        "title": "Tính năng nổi bật",
+        "preview": "Syllabus, cấu trúc điểm, tài liệu học",
+        "blocks": [
+          {
+            "label": "Ưu điểm",
+            "type": "bullets",
+            "content": [
+              "Tra cứu syllabus chi tiết theo Subject code",
+              "Xem cấu trúc điểm và tỷ trọng từng đầu điểm",
+              "Tải tài liệu học tập giảng viên cung cấp",
+              "Tra cứu đề cương theo từng học kỳ",
+              "Tích hợp link trực tiếp từ FAP Web"
+            ]
+          }
+        ]
+      },
+      {
+        "icon": "⚠️",
+        "title": "Lưu ý quan trọng",
+        "preview": "Cách lấy mã môn đúng, cập nhật theo kỳ",
+        "autoOpen": true,
+        "blocks": [
+          {
+            "type": "warn",
+            "content": "Subject code phải lấy từ FAP Web → Academic Transcript → cột Subject code. Dùng mã này mới tra được chính xác trên FLM."
+          },
+          {
+            "type": "info",
+            "content": "Đề cương được cập nhật theo từng học kỳ. Nên kiểm tra FLM vào đầu mỗi kỳ học để nắm yêu cầu mới nhất."
+          },
+          {
+            "type": "warn",
+            "content": "Nếu không tìm thấy môn trên FLM → hỏi trực tiếp giảng viên hoặc liên hệ phòng đào tạo."
+          }
+        ]
+      },
+      {
+        "icon": "🆘",
+        "title": "Hỗ trợ",
+        "preview": "Liên hệ khi không tìm được môn",
+        "autoOpen": true,
+        "blocks": [
+          {
+            "label": "Liên hệ",
+            "type": "text",
+            "content": "Liên hệ giảng viên phụ trách môn học hoặc phòng đào tạo nếu không tìm thấy môn học trên FLM."
+          },
+          {
+            "label": "Link truy cập",
+            "type": "links",
+            "content": [
+              "https://flm.fpt.edu.vn/Login"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "edunext",
+    "name": "Edunext",
+    "icon_img": "assets/images/img_68a2af2cab35.png",
+    "color": "#6A1B9A",
+    "bg": "linear-gradient(135deg,#f3e5f5,#ce93d8)",
+    "sub": "Nền tảng học kiến tạo-xã hội FPT University",
+    "sections": [
+      {
+        "icon": "📋",
+        "title": "Khái quát",
+        "preview": "EduNext — nền tảng học kiến tạo-xã hội",
+        "autoOpen": true,
+        "blocks": [
+          {
+            "label": "Mô tả",
+            "type": "text",
+            "content": "EduNext 1.0 là nền tảng hỗ trợ dạy và học theo phương pháp kiến tạo-xã hội của FPT University.\n\n• Kiến tạo: Tích cực học tập để tự xây dựng kiến thức và kỹ năng cho bản thân.\n• Xã hội: Học nhóm, học qua cộng đồng và các nguồn thông tin khác."
+          },
+          {
+            "label": "Link truy cập",
+            "type": "links",
+            "content": [
+              "https://fu.edunext.vn/"
+            ]
+          },
+          {
+            "label": "Đăng nhập",
+            "type": "text",
+            "content": "Single Sign-On (SSO) bằng tài khoản email @fpt.edu.vn."
+          },
+          {
+            "label": "Giao diện EduNext",
+            "type": "html",
+            "content": "<div style=\"margin:8px 0;text-align:center\"><img src=\"assets/images/img_e75e8b50618a.jpg\" style=\"max-width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">EduNext Homepage</p></div>"
+          }
+        ]
+      },
+      {
+        "icon": "📚",
+        "title": "Nhiệm vụ của sinh viên",
+        "preview": "Trước, trong và sau buổi học kiến tạo",
+        "blocks": [
+          {
+            "label": "Trước khi môn học bắt đầu",
+            "type": "bullets",
+            "content": [
+              "Nắm được các yêu cầu của môn học",
+              "Lưu ý trước các buổi học theo phương pháp kiến tạo-xã hội"
+            ]
+          },
+          {
+            "label": "Trước buổi học kiến tạo — Chuẩn bị",
+            "type": "bullets",
+            "content": [
+              "Chủ động tìm hiểu chủ đề liên quan tới câu hỏi kiến tạo của buổi học",
+              "Thảo luận, trao đổi trong nhóm để cùng chuẩn bị bài trình bày",
+              "Lựa chọn người trình bày và người trả lời / phản biện"
+            ]
+          },
+          {
+            "label": "Trong buổi học",
+            "type": "bullets",
+            "content": [
+              "Làm việc theo nhóm dưới sự điều hành của giảng viên",
+              "Trình bày, lắng nghe trình bày của nhóm khác",
+              "Trao đổi và đặt câu hỏi phản biện cho nhóm khác",
+              "Chấm điểm bài trình bày của nhóm khác theo tiêu chí quy định",
+              "Nắm các ý chính mà giảng viên đã kết nối"
+            ]
+          },
+          {
+            "label": "Cuối buổi học — Tổng hợp",
+            "type": "bullets",
+            "content": [
+              "Ghi nhận những vấn đề giảng viên đã hệ thống hóa và bổ sung",
+              "Chấm điểm các thành viên khác trong nhóm theo tiêu chí quy định",
+              "Tiếp nhận nhiệm vụ mới cho buổi học tiếp theo"
+            ]
+          }
+        ]
+      },
+      {
+        "icon": "🔗",
+        "title": "Vào lớp học từ FAP",
+        "preview": "Truy cập EduNext qua link trên FAP",
+        "blocks": [
+          {
+            "label": "Bước 1 — Đăng nhập FAP",
+            "type": "html",
+            "content": "<div style=\"display:flex;align-items:flex-start;gap:14px\"><div style=\"flex:1;font-size:13.5px;color:#333;line-height:1.7\">Đăng nhập vào FAP tại <a href=\"https://fap.fpt.edu.vn/\" style=\"color:#F47920\">https://fap.fpt.edu.vn/</a></div><div style=\"flex-shrink:0;width:240px\"><img src=\"assets/images/img_4c8d85b65ff5.jpg\" style=\"width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">FAP Homepage</p></div></div>"
+          },
+          {
+            "label": "Bước 2 — Mở thời khóa biểu tuần",
+            "type": "html",
+            "content": "<div style=\"display:flex;align-items:flex-start;gap:14px\"><div style=\"flex:1;font-size:13.5px;color:#333;line-height:1.7\">Mở mục <b>Weekly timetable (Thời khóa biểu từng tuần)</b>, tìm slot học có link <b>EduNext</b> bên cạnh → click để vào lớp.</div><div style=\"flex-shrink:0;width:240px\"><img src=\"assets/images/img_f72898e6aaa8.jpg\" style=\"width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">TKB tuần có link EduNext</p></div></div>"
+          },
+          {
+            "type": "info",
+            "content": "Click vào link <b>EduNext</b> bên cạnh slot → FAP tự chuyển sang trang EduNext của buổi học đó, không cần đăng nhập lại."
+          }
+        ]
+      },
+      {
+        "icon": "🔑",
+        "title": "Đăng nhập EduNext",
+        "preview": "Đăng nhập bằng SSO @fpt.edu.vn",
+        "blocks": [
+          {
+            "label": "Bước 1 — Click Login",
+            "type": "html",
+            "content": "<div style=\"display:flex;align-items:flex-start;gap:14px\"><div style=\"flex:1;font-size:13.5px;color:#333;line-height:1.7\">Vào trang EduNext → click <b>Login</b> ở góc trên bên trái màn hình.</div><div style=\"flex-shrink:0;width:240px\"><img src=\"assets/images/img_e7d2cc359a25.jpg\" style=\"width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Nút Login góc trên trái</p></div></div>"
+          },
+          {
+            "label": "Bước 2 — Đăng nhập SSO",
+            "type": "html",
+            "content": "<div style=\"display:flex;align-items:flex-start;gap:14px\"><div style=\"flex:1;font-size:13.5px;color:#333;line-height:1.7\">Click <b>\"Sign in with @fpt.edu.vn\"</b> để đăng nhập bằng tài khoản email FPT.</div><div style=\"flex-shrink:0;width:240px\"><img src=\"assets/images/img_551f5d3e3ae0.jpg\" style=\"width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Sign in with @fpt.edu.vn</p></div></div>"
+          },
+          {
+            "label": "Sau khi đăng nhập thành công",
+            "type": "html",
+            "content": "<div style=\"margin:8px 0;text-align:center\"><img src=\"assets/images/img_3b1a0aa28c85.jpg\" style=\"max-width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Homepage của sinh viên trên EduNext</p></div>"
+          }
+        ]
+      },
+      {
+        "icon": "💬",
+        "title": "Học & Thảo luận nhóm",
+        "preview": "Vào học, thảo luận, vote comment",
+        "blocks": [
+          {
+            "label": "Vào học",
+            "type": "html",
+            "content": "<div style=\"display:flex;align-items:flex-start;gap:14px\"><div style=\"flex:1;font-size:13.5px;color:#333;line-height:1.7\">Click <b>\"Go to course\"</b> để vào lớp. Sau đó click vào <b>câu hỏi kiến tạo</b> của slot học để bắt đầu.</div><div style=\"flex-shrink:0;width:240px\"><img src=\"assets/images/img_449d7078456b.jpg\" style=\"width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Trang nội dung môn học</p></div></div>"
+          },
+          {
+            "label": "Không gian thảo luận nhóm",
+            "type": "html",
+            "content": "<div style=\"display:flex;align-items:flex-start;gap:14px\"><div style=\"flex:1;font-size:13.5px;color:#333;line-height:1.7\">Lớp học được tổ chức theo nhóm. Sinh viên xem nội dung câu hỏi và trao đổi với bạn cùng nhóm trực tiếp trên EduNext. Có thể vote comment của thành viên khác.</div><div style=\"flex-shrink:0;width:240px\"><img src=\"assets/images/img_e6c5c9c943cf.jpg\" style=\"width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Không gian trao đổi trong nhóm</p></div></div>"
+          },
+          {
+            "label": "Các loại thẻ vote & Quyền vote",
+            "type": "html",
+            "content": "<div style=\"margin:8px 0;text-align:center\"><img src=\"assets/images/img_e419fad054cf.jpg\" style=\"max-width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Các loại thẻ dùng để vote</p></div><div style=\"display:flex;align-items:flex-start;gap:14px\"><div style=\"flex:1;font-size:13.5px;color:#333;line-height:1.7\">Với mỗi câu hỏi, sinh viên được cấp một số quyền vote nhất định để đánh giá chất lượng comment của các thành viên khác.</div><div style=\"flex-shrink:0;width:240px\"><img src=\"assets/images/img_91f595620e09.jpg\" style=\"width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Quyền vote của sinh viên</p></div></div>"
+          }
+        ]
+      },
+      {
+        "icon": "✅",
+        "title": "Pass Criteria & Điều kiện hoàn thành",
+        "preview": "Điều kiện cần để hoàn thành câu hỏi kiến tạo",
+        "blocks": [
+          {
+            "label": "Các điều kiện Pass Criteria",
+            "type": "bullets",
+            "content": [
+              "Phải xem câu hỏi (View question)",
+              "Số comment tối thiểu phải post (No. of comments posted)",
+              "Số star tối thiểu được bạn khác vote (No. of stars rated by others)",
+              "Số lần vote cho comment của bạn khác (No. of votes)"
+            ]
+          },
+          {
+            "type": "warn",
+            "content": "Sinh viên cần đáp ứng đủ TẤT CẢ Pass Criteria mới được tính là hoàn thành câu hỏi kiến tạo."
+          }
+        ]
+      },
+      {
+        "icon": "🏆",
+        "title": "Đánh giá & Tính điểm",
+        "preview": "3 đầu điểm: cá nhân, trình bày, phản biện",
+        "blocks": [
+          {
+            "label": "Điểm cá nhân",
+            "type": "text",
+            "content": "Do các thành viên trong nhóm chấm qua hình thức vote và các hình thức khác do giảng viên yêu cầu. Dựa trên mức độ tham gia thảo luận và chất lượng comment."
+          },
+          {
+            "label": "Báo cáo thống kê activities",
+            "type": "html",
+            "content": "<div style=\"margin:8px 0;text-align:center\"><img src=\"assets/images/img_d124c499dfa7.jpg\" style=\"max-width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Báo cáo thống kê activities của sinh viên theo câu hỏi</p></div>"
+          },
+          {
+            "label": "Điểm trình bày nhóm (tối đa 4 điểm)",
+            "type": "bullets",
+            "content": [
+              "Đúng giờ",
+              "Đúng chủ đề yêu cầu",
+              "Cách trình bày hấp dẫn, thu hút",
+              "Nhiều thông tin mới và hữu ích"
+            ]
+          },
+          {
+            "label": "Điểm phản biện nhóm (tối đa 3 điểm)",
+            "type": "bullets",
+            "content": [
+              "Câu hỏi hay của nhóm đặt ra: cộng tối đa 1 điểm",
+              "Câu trả lời hay của nhóm: cộng tối đa 1 điểm",
+              "Nhóm không chấm điểm bài trình bày của nhóm khác: trừ 1 điểm",
+              "Điểm tích lũy nhưng tối đa là 3 điểm"
+            ]
+          },
+          {
+            "type": "warn",
+            "content": "Điểm số câu hỏi kiến tạo là điểm quá trình — giảng viên sẽ quy đổi sang các đầu điểm ghi trong syllabus."
+          }
+        ]
+      },
+      {
+        "icon": "🆘",
+        "title": "Hỗ trợ",
+        "preview": "Liên hệ giảng viên khi gặp khó khăn",
+        "autoOpen": true,
+        "blocks": [
+          {
+            "label": "Liên hệ",
+            "type": "text",
+            "content": "Liên hệ với giảng viên của bạn khi gặp khó khăn trong quá trình sử dụng EduNext hoặc thực hiện nhiệm vụ kiến tạo."
+          },
+          {
+            "label": "Link truy cập",
+            "type": "links",
+            "content": [
+              "https://fu.edunext.vn/"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "thutuc",
+    "name": "Thu Tuc",
+    "emoji": "📝",
+    "color": "#00796B",
+    "bg": "linear-gradient(135deg,#e0f2f1,#80cbc4)",
+    "sub": "Huong dan thu tuc hoc vu thuong gap",
+    "sections": [
+      {
+        "icon": "📋",
+        "title": "Tong quan",
+        "preview": "Don tu, hoc lai, bao luu, reset mat khau",
+        "autoOpen": true,
+        "blocks": [
+          {
+            "label": "Cac nhom thu tuc",
+            "type": "bullets",
+            "content": [
+              "Don tu co phi: nap tien FAP roi gui online",
+              "Xin xac nhan sinh vien: hoan NVQS, vay von, du hoc",
+              "Bao luu hoc ky / tam hoan tien do",
+              "Dang ky hoc lai, cai thien diem, mon cham ky",
+              "Reset mat khau tai khoan FPT"
+            ]
+          },
+          {
+            "type": "info",
+            "content": "Hau het don tu thuc hien online tren FAP. Chi don thoi hoc can nop ban cung tai Truong."
+          }
+        ]
+      },
+      {
+        "icon": "💳",
+        "title": "Nap tien & Gui don",
+        "preview": "3 buoc nap tien, 5 buoc gui don",
+        "blocks": [
+          {
+            "label": "So du FAP khong du",
+            "type": "html",
+            "content": "<div style=\"display:flex;align-items:flex-start;gap:14px\"><div style=\"flex:1;font-size:13px;color:#333;line-height:1.7\">Khi so du FAP khong du, he thong bao loi. Can nap tien vao FAP truoc.</div><div style=\"flex-shrink:0;width:210px\"><img src=\"assets/images/img_d8a7075d135d.jpg\" style=\"width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">So du khong du</p></div></div>}"
+          },
+          {
+            "label": "3 buoc nap tien",
+            "type": "html",
+            "content": "<div style=\"display:flex;align-items:flex-start;gap:14px\"><div style=\"flex:1;font-size:13px;color:#333;line-height:1.7\"><b>B1</b>: FAP &rarr; Choose paid items &rarr; Tien khac &rarr; nhap so tien &rarr; Submit<br><b>B2</b>: dng.fpt.edu.vn/Invoice &rarr; chon thanh toan<br><b>B3</b>: Tien co tren FAP &rarr; chon don de nop</div><div style=\"flex-shrink:0;width:210px\"><img src=\"assets/images/img_ad442a1478e9.jpg\" style=\"width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Chon paid items</p></div></div>}"
+          },
+          {
+            "label": "5 buoc gui don",
+            "type": "html",
+            "content": "<div style=\"display:flex;align-items:flex-start;gap:14px\"><div style=\"flex:1;font-size:13px;color:#333;line-height:1.7\"><b>B1</b>: Chon loai don<br><b>B2</b>: Dien ho ten, MSSV, ly do<br><b>B3</b>: Click here &rarr; tai mau &rarr; dien<br><b>B4</b>: Chon tep &rarr; chon file<br><b>B5</b>: Nhan Send</div><div style=\"flex-shrink:0;width:210px\"><img src=\"assets/images/img_b47e87a9fcc9.jpg\" style=\"width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Giao dien gui don</p></div></div><div style=\"margin:8px 0;text-align:center\"><img src=\"assets/images/img_9fe2aa1b21ce.jpg\" style=\"max-width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">View Application</p></div>}"
+          },
+          {
+            "label": "Cac loai don co phi",
+            "type": "bullets",
+            "content": [
+              "Cap bang diem qua trinh",
+              "Chuyen nganh / chuyen co so",
+              "Chuyen Vo sang Co (kem giay bac si moc do)",
+              "Cap giay xac nhan hoc tap (du hoc)",
+              "Phuc tra diem thi",
+              "Thi cai thien diem",
+              "Gia han hoc phi",
+              "Thi tham dinh mon hoc online"
+            ]
+          },
+          {
+            "type": "warn",
+            "content": "Thi cai thien: ket qua lan 1 bi huy. Vang thi mac nhien nhan diem cu."
+          }
+        ]
+      },
+      {
+        "icon": "🎓",
+        "title": "Xac nhan sinh vien",
+        "preview": "Hoan NVQS, vay von, du hoc, mien thue",
+        "blocks": [
+          {
+            "label": "Cac loai don & cach gui",
+            "type": "html",
+            "content": "<div style=\"display:flex;align-items:flex-start;gap:14px\"><div style=\"flex:1;font-size:13px;color:#333;line-height:1.7\">Hoan NVQS, Mien thue TNCN, Vay von, Xac nhan hoc tap</div><div style=\"flex-shrink:0;width:210px\"><img src=\"assets/images/img_7915c5b68a8a.jpg\" style=\"width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Giao dien xac nhan SV</p></div></div><div style=\"margin:8px 0;text-align:center\"><img src=\"assets/images/img_6223eafb3d53.jpg\" style=\"max-width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Giao dien gui don</p></div><div style=\"margin-top:10px;font-size:13px;color:#333;line-height:1.8\"><b>B1</b>: Chon loai don<br><b>B2</b>: Dien ho ten, MSSV, ly do<br><b>B3</b>: Download here &rarr; dien mau<br><b>B4</b>: Chon tep<br><b>B5</b>: Nhan Send</div>}"
+          }
+        ]
+      },
+      {
+        "icon": "⏸️",
+        "title": "Bao luu hoc ky",
+        "preview": "Tam nghi hoac tam hoan tien do",
+        "blocks": [
+          {
+            "label": "2 hinh thuc bao luu",
+            "type": "html",
+            "content": "<div style=\"display:flex;align-items:flex-start;gap:14px\"><div style=\"flex:1;font-size:13px;color:#333;line-height:1.7\"><b>Tam nghi 1 ky</b>: Khong hoc bat ky mon. Dong phi 4 thang/lan. Toi da 2 ky lien tiep.<br><br><b>Tam hoan tien do</b>: Khong hoc tiep mon moi nhung duoc dang ky hoc lai.</div><div style=\"flex-shrink:0;width:210px\"><img src=\"assets/images/img_9be1baaab7f5.jpg\" style=\"width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Giao dien bao luu</p></div></div>}"
+          },
+          {
+            "label": "Cac buoc nop don",
+            "type": "html",
+            "content": "<div style=\"display:flex;align-items:flex-start;gap:14px\"><div style=\"flex:1;font-size:13px;color:#333;line-height:1.7\"><b>B1</b>: Chon Suspend one semester hoac Suspend one semester to take repeated course<br><b>B2</b>: Dien ho ten, MSSV, ky bao luu, ly do<br><b>B3</b>: Nhan Submit form</div><div style=\"flex-shrink:0;width:210px\"><img src=\"assets/images/img_01fe820d7247.jpg\" style=\"width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Nop don bao luu</p></div></div><div style=\"margin:8px 0;text-align:center\"><img src=\"assets/images/img_36ccad046b64.jpg\" style=\"max-width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Xac nhan bao luu</p></div>}"
+          },
+          {
+            "type": "warn",
+            "content": "Tam hoan ma khong dang ky hoc lai mon nao co the bi canh bao hoc vu."
+          },
+          {
+            "type": "warn",
+            "content": "Bao luu toi da 2 hoc ky lien tiep. Moi ky lam thu tuc rieng 1 lan."
+          }
+        ]
+      },
+      {
+        "icon": "🔄",
+        "title": "Hoc lai & Cai thien",
+        "preview": "Hoc lai, cai thien, mon cham ky",
+        "blocks": [
+          {
+            "label": "Nap tien dang ky hoc lai",
+            "type": "html",
+            "content": "<div style=\"display:flex;align-items:flex-start;gap:14px\"><div style=\"flex:1;font-size:13px;color:#333;line-height:1.7\"><b>B1</b>: Choose paid items &rarr; chon mon &rarr; Add to cart &rarr; Submit<br><b>B2</b>: dng.fpt.edu.vn/Invoice &rarr; thanh toan<br><b>B3</b>: Tien ve FAP &rarr; Register to repeat a course</div><div style=\"flex-shrink:0;width:210px\"><img src=\"assets/images/img_9a20b38c813a.jpg\" style=\"width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Choose paid items</p></div></div>}"
+          },
+          {
+            "label": "Dang ky hoc lai",
+            "type": "html",
+            "content": "<div style=\"display:flex;align-items:flex-start;gap:14px\"><div style=\"flex:1;font-size:13px;color:#333;line-height:1.7\"><b>B1</b>: Register to repeat a course &rarr; nhap ma mon<br><b>B2</b>: Tick o vuong<br><b>B3</b>: Chon lop<br><b>B4</b>: Nhan Save</div><div style=\"flex-shrink:0;width:210px\"><img src=\"assets/images/img_e29f5ef63fbb.jpg\" style=\"width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Giao dien hoc lai</p></div></div><div style=\"background:#fffbe6;border:1.5px solid #ffe082;border-radius:9px;padding:10px 14px;font-size:13px;color:#6d4c00;line-height:1.7;display:flex;gap:8px;margin:8px 0\"><span>&#9888;</span><span>Mon chua mo lop &rarr; dang ky Wishlist ngay trong ky no. Dung han &rarr; giam 50% phi.</span></div><div style=\"margin:8px 0;text-align:center\"><img src=\"assets/images/img_eab2e607cddd.jpg\" style=\"max-width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Wishlist</p></div><div style=\"margin:8px 0;text-align:center\"><img src=\"assets/images/img_16fac0fb8fb7.jpg\" style=\"max-width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Dang ky thanh cong</p></div>}"
+          },
+          {
+            "label": "Dang ky cai thien diem",
+            "type": "html",
+            "content": "<div style=\"display:flex;align-items:flex-start;gap:14px\"><div style=\"flex:1;font-size:13px;color:#333;line-height:1.7\"><b>B1</b>: Register to improve mark &rarr; nhap ma mon<br><b>B2</b>: Tick o vuong<br><b>B3</b>: Chon lop<br><b>B4</b>: Nhan Save</div><div style=\"flex-shrink:0;width:210px\"><img src=\"assets/images/img_b1633fbc8f85.jpg\" style=\"width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Giao dien cai thien</p></div></div><div style=\"background:#fffbe6;border:1.5px solid #ffe082;border-radius:9px;padding:10px 14px;font-size:13px;color:#6d4c00;line-height:1.7;display:flex;gap:8px;margin:8px 0\"><span>&#9888;</span><span>Hoc cai thien: ket qua lan 1 bi huy. Diem tinh theo lan cai thien du thap hon.</span></div>}"
+          },
+          {
+            "label": "Dang ky mon cham ky",
+            "type": "html",
+            "content": "<div style=\"display:flex;align-items:flex-start;gap:14px\"><div style=\"flex:1;font-size:13px;color:#333;line-height:1.7\">Mon cham ky: chua hoc dung ky do chua du dieu kien.<br><b>B1</b>: Register extra courses &rarr; nhap ma mon<br><b>B2</b>: Tick o vuong<br><b>B3</b>: Chon lop<br><b>B4</b>: Nhan Save</div><div style=\"flex-shrink:0;width:210px\"><img src=\"assets/images/img_6cdabf4e026c.jpg\" style=\"width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Register extra courses</p></div></div><div style=\"background:#e3f2fd;border:1.5px solid #90caf9;border-radius:9px;padding:10px 14px;font-size:13px;color:#0d47a1;line-height:1.7;display:flex;gap:8px;margin:8px 0\"><span>&#8505;</span><span>Phong Dao tao khong tu add lop mon cham ky. SV phai chu dong theo doi News dau ky.</span></div>}"
+          },
+          {
+            "label": "Huy dang ky hoc",
+            "type": "html",
+            "content": "<div style=\"display:flex;align-items:flex-start;gap:14px\"><div style=\"flex:1;font-size:13px;color:#333;line-height:1.7\">Tu y huy tai Cancel registration sau khi da dang ky &rarr; mat phi, khong hoan lai.</div><div style=\"flex-shrink:0;width:210px\"><img src=\"assets/images/img_24af296c974a.jpg\" style=\"width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Cancel registration</p></div></div><div style=\"background:#fffbe6;border:1.5px solid #ffe082;border-radius:9px;padding:10px 14px;font-size:13px;color:#6d4c00;line-height:1.7;display:flex;gap:8px;margin:8px 0\"><span>&#9888;</span><span>Khong tu y huy dang ky. Lien he phong dao tao neu can ho tro.</span></div>}"
+          }
+        ]
+      },
+      {
+        "icon": "🔑",
+        "title": "Reset mat khau",
+        "preview": "Dat lai mat khau tai khoan FPT",
+        "blocks": [
+          {
+            "label": "3 buoc reset mat khau",
+            "type": "html",
+            "content": "<div style=\"display:flex;align-items:flex-start;gap:14px\"><div style=\"flex:1;font-size:13px;color:#333;line-height:1.7\"><b>B1</b>: resetdn.fpt.edu.vn &rarr; nhap ma sinh vien &rarr; nhan Gui<br><b>B2</b>: Kiem tra Gmail &rarr; click link trong email</div><div style=\"flex-shrink:0;width:210px\"><img src=\"assets/images/img_8b42da7a4b2c.jpg\" style=\"width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Trang reset</p></div></div><div style=\"margin:8px 0;text-align:center\"><img src=\"assets/images/img_de512ea238d7.jpg\" style=\"max-width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Email xac nhan</p></div><div style=\"display:flex;align-items:flex-start;gap:14px\"><div style=\"flex:1;font-size:13px;color:#333;line-height:1.7\"><b>B3</b>: Nhap mat khau moi &rarr; xac nhan. Dung cho Wifi Exam va phan mem thi.</div><div style=\"flex-shrink:0;width:210px\"><img src=\"assets/images/img_f25a893b81ab.jpg\" style=\"width:100%;border-radius:8px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.1)\"><p style=\"font-size:10px;color:#aaa;text-align:center;margin:3px 0 0\">Dat mat khau moi</p></div></div>}"
+          },
+          {
+            "label": "Link reset",
+            "type": "links",
+            "content": [
+              "https://resetdn.fpt.edu.vn/"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

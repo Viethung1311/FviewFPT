@@ -1,0 +1,205 @@
+/* =============================================
+   LOADING.CSS — Solar system loading screen
+   ============================================= */
+
+#loading-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: linear-gradient(
+        135deg,
+        #ffffff 0%,
+        #fffaf6 35%,
+        #fff1e8 65%,
+        #ffffff 100%
+    );
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+
+#loading-screen.hide {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+/* ── Loading text ── */
+.loading-text {
+    margin-top: 220px;
+    font-family: "Poppins", sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: #f37021;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    animation: loadingPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes loadingPulse {
+    0%, 100% { opacity: 0.4; }
+    50%       { opacity: 1;   }
+}
+
+/* =============================================
+   SOLAR SYSTEM
+   ============================================= */
+.solar {
+    height: 50px;
+    width: 50px;
+    background: #f37021;
+    border-radius: 50%;
+    position: relative;
+    animation: glow 1.5s linear infinite;
+    flex-shrink: 0;
+}
+
+.solar i {
+    border-radius: 50%;
+    display: block;
+    position: absolute;
+    border: 1px solid rgba(243, 112, 33, 0.2);
+    box-sizing: border-box;
+    transform-origin: 50% 50%;
+}
+
+.solar i::before {
+    content: "";
+    border-radius: 50%;
+    display: block;
+    position: absolute;
+    top: -5px;
+    right: 45%;
+}
+
+/* Mercury */
+.solar i.mercury {
+    width: 80px; height: 80px;
+    margin-left: -40px; margin-top: -40px;
+    left: 50%; top: 50%;
+    animation: orbit 0.5s linear infinite;
+}
+.solar i.mercury::before {
+    background: #6f5f5f;
+    height: 7px; width: 7px;
+}
+
+/* Venus */
+.solar i.venus {
+    width: 110px; height: 110px;
+    margin-left: -55px; margin-top: -55px;
+    left: 50%; top: 50%;
+    animation: orbit 1s linear infinite;
+}
+.solar i.venus::before {
+    background: #e7a71f;
+    height: 10px; width: 10px;
+}
+
+/* Earth */
+.solar i.earth {
+    width: 140px; height: 140px;
+    margin-left: -70px; margin-top: -70px;
+    left: 50%; top: 50%;
+    animation: orbit 1.5s linear infinite;
+}
+.solar i.earth::before {
+    background: #63bee2;
+    height: 10px; width: 10px;
+}
+
+/* Mars */
+.solar i.mars {
+    width: 170px; height: 170px;
+    margin-left: -85px; margin-top: -85px;
+    left: 50%; top: 50%;
+    animation: orbit 2s linear infinite;
+}
+.solar i.mars::before {
+    background: #e03c31;
+    height: 10px; width: 10px;
+}
+
+/* Asteroid belt */
+.solar i.belt {
+    border-width: 25px;
+    width: 240px; height: 240px;
+    margin-left: -120px; margin-top: -120px;
+    border-color: rgba(243, 112, 33, 0.1);
+    left: 50%; top: 50%;
+}
+
+/* Jupiter */
+.solar i.jupiter {
+    width: 260px; height: 260px;
+    margin-left: -130px; margin-top: -130px;
+    left: 50%; top: 50%;
+    animation: orbit 2.5s linear infinite;
+}
+.solar i.jupiter::before {
+    background: #cf9b2b;
+    top: -15px;
+    height: 30px; width: 30px;
+}
+
+/* Saturn */
+.solar i.saturn {
+    width: 320px; height: 320px;
+    margin-left: -160px; margin-top: -160px;
+    left: 50%; top: 50%;
+    animation: orbit 3s linear infinite;
+}
+.solar i.saturn::before {
+    background: #cf7a2b;
+    top: -10px;
+    height: 20px; width: 20px;
+}
+.solar i.saturn::after {
+    content: "";
+    position: absolute;
+    display: block;
+    background: rgba(243, 112, 33, 0.5);
+    width: 30px; height: 1px;
+    right: 43.5%;
+    transform: rotate(20deg);
+}
+
+/* Uranus */
+.solar i.uranus {
+    width: 360px; height: 360px;
+    margin-left: -180px; margin-top: -180px;
+    left: 50%; top: 50%;
+    animation: orbit 3.5s linear infinite;
+}
+.solar i.uranus::before {
+    background: #10c593;
+    top: -8px;
+    height: 15px; width: 15px;
+}
+
+/* Neptune */
+.solar i.neptune {
+    width: 400px; height: 400px;
+    margin-left: -200px; margin-top: -200px;
+    left: 50%; top: 50%;
+    animation: orbit 4s linear infinite;
+}
+.solar i.neptune::before {
+    background: #1470e4;
+    top: -8px;
+    height: 15px; width: 15px;
+}
+
+/* ── Keyframes ── */
+@keyframes orbit {
+    from { transform: rotate(0deg);    }
+    to   { transform: rotate(-360deg); }
+}
+
+@keyframes glow {
+    0%   { box-shadow: none; background: #f37021; }
+    50%  { box-shadow: 0 0 28px rgba(243,112,33,0.8), 0 0 60px rgba(243,112,33,0.3); background: #ffb347; }
+    100% { box-shadow: none; background: #f37021; }
+}

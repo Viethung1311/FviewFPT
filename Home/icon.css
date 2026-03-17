@@ -1,0 +1,91 @@
+.navbar .nav-menu .nav-link{
+    padding: 1.3em 3.2em;
+    font-size: 15px;
+    font-family: "Poppins", sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-weight: 600;
+
+    background: transparent;
+    border: none;
+    border-radius: 50px;
+
+    position: relative;
+    color: var(--black-color);
+    cursor: pointer;
+
+    overflow: hidden;
+    z-index: 1;
+
+    transition:
+        transform 0.4s cubic-bezier(.34,1.56,.64,1),
+        box-shadow 0.4s ease,
+        color 0.3s ease;
+}
+
+/* nền chính */
+.navbar .nav-menu .nav-link::before{
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        120deg,
+        var(--orange-color),
+        #ffb703,
+        var(--orange-color)
+    );
+    background-size: 200% 200%;
+    border-radius: 50px;
+
+    opacity: 0;
+    transform: scale(0.6) rotate(-5deg);
+    transition: all 0.5s ease;
+    z-index: -2;
+}
+
+/* ánh sáng quét */
+.navbar .nav-menu .nav-link::after{
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -30%;
+    width: 60%;
+    height: 200%;
+    background: rgba(255,255,255,0.35);
+    transform: rotate(25deg);
+    filter: blur(8px);
+
+    opacity: 0;
+    transition: all 0.6s ease;
+    z-index: -1;
+}
+
+/* hover */
+.navbar .nav-menu .nav-link:hover{
+    color: var(--white-color);
+    transform: translateY(-8px) scale(1.08);
+    box-shadow: 0 20px 35px rgba(0,0,0,0.2);
+}
+
+.navbar .nav-menu .nav-link:hover::before{
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+    animation: gradientMove 3s ease infinite;
+}
+
+.navbar .nav-menu .nav-link:hover::after{
+    left: 120%;
+    opacity: 1;
+}
+
+/* click */
+.navbar .nav-menu .nav-link:active{
+    transform: translateY(-3px) scale(0.96);
+}
+
+/* gradient animation */
+@keyframes gradientMove{
+    0%{ background-position: 0% 50%; }
+    50%{ background-position: 100% 50%; }
+    100%{ background-position: 0% 50%; }
+}

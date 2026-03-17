@@ -1,0 +1,336 @@
+/* =============================================
+   NAVBAR.CSS — Floating pill nav
+   Override style.css
+   ============================================= */
+
+/* ── Header container ── */
+header {
+    position: fixed;
+    top: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 48px);
+    max-width: 1200px;
+    z-index: 1000;
+    background: none;
+    padding: 0;
+    transition: top 0.35s ease;
+}
+
+/* ── Pill navbar ── */
+header .navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 16px 8px 12px;
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1.5px solid rgba(243, 112, 33, 0.18);
+    border-radius: 50px;
+    box-shadow: 0 4px 24px rgba(180, 90, 10, 0.09), 0 1px 3px rgba(0,0,0,0.04);
+    transition: background 0.3s, box-shadow 0.3s, border-color 0.3s;
+}
+
+/* Khi scroll */
+header.scrolled .navbar {
+    background: rgba(255, 255, 255, 0.94);
+    border-color: rgba(243, 112, 33, 0.30);
+    box-shadow: 0 8px 32px rgba(180, 90, 10, 0.13), 0 2px 6px rgba(0,0,0,0.06);
+}
+
+/* ── Logo ── */
+.nav-logo {
+    height: 40px;
+    width: auto;
+    border-radius: 10px;
+    object-fit: contain;
+    flex-shrink: 0;
+    display: block;
+}
+
+/* ── Menu list (desktop) ── */
+.navbar .nav-menu {
+    display: flex !important;
+    align-items: center;
+    gap: 4px;
+    list-style: none;
+    margin: 0;
+    padding: 0 !important;
+    padding-top: 0 !important;
+    position: static !important;
+    width: auto !important;
+    height: auto !important;
+    flex-direction: row !important;
+    background: none !important;
+    box-shadow: none !important;
+    left: unset !important;
+    top: unset !important;
+    transform: none !important;
+    border: none !important;
+    transition: none !important;
+}
+
+/* ── Hamburger – ẩn desktop ── */
+#menu-open-button,
+#menu-close-button {
+    display: none !important;
+}
+
+/* ── Hero: full viewport, căn giữa, override style.css ── */
+main { padding-top: 0; }
+
+.hero-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 0 !important;
+}
+
+.hero-section .section-content {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+/* Override position:absolute từ style.css */
+.hero-details {
+    position: relative !important;
+    top: unset !important;
+    left: unset !important;
+    transform: none !important;
+    text-align: center;
+    width: 100%;
+    z-index: 2;
+    padding: 0 20px;
+}
+
+.hero-details .text {
+    margin: 12px auto 0;
+    text-align: center;
+}
+
+
+/* =============================================
+   NAV BUTTON — Fancy fold + floating points
+   ============================================= */
+.nav-btn {
+    --round: 0.55rem;
+    cursor: pointer;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    background:
+        radial-gradient(65.28% 65.28% at 50% 100%, rgba(255,185,90,0.85) 0%, rgba(255,185,90,0) 100%),
+        linear-gradient(0deg, #f37021, #f37021);
+    border-radius: var(--round);
+    border: none;
+    outline: none;
+    padding: 7px 15px;
+    text-decoration: none;
+}
+
+.nav-btn::before,
+.nav-btn::after {
+    content: "";
+    position: absolute;
+    inset: var(--space);
+    transition: all 0.5s ease-in-out;
+    border-radius: calc(var(--round) - var(--space));
+    z-index: 0;
+}
+.nav-btn::before {
+    --space: 1px;
+    background: linear-gradient(177.95deg, rgba(255,255,255,0.22) 0%, rgba(255,255,255,0) 100%);
+}
+.nav-btn::after {
+    --space: 2px;
+    background:
+        radial-gradient(65.28% 65.28% at 50% 100%, rgba(255,185,90,0.85) 0%, rgba(255,185,90,0) 100%),
+        linear-gradient(0deg, #f37021, #f37021);
+}
+.nav-btn:active { transform: scale(0.95); }
+
+/* Fold */
+.nav-btn .fold {
+    z-index: 1;
+    position: absolute;
+    top: 0; right: 0;
+    height: 1rem; width: 1rem;
+    display: inline-block;
+    transition: all 0.5s ease-in-out;
+    background: radial-gradient(100% 75% at 55%, rgba(255,200,110,0.9) 0%, rgba(255,200,110,0) 100%);
+    box-shadow: 0 0 3px rgba(0,0,0,0.2);
+    border-bottom-left-radius: 0.5rem;
+    border-top-right-radius: var(--round);
+}
+.nav-btn .fold::after {
+    content: "";
+    position: absolute;
+    top: 0; right: 0;
+    width: 150%; height: 150%;
+    transform: rotate(45deg) translateX(0%) translateY(-18px);
+    background-color: #fde8d4;
+    pointer-events: none;
+}
+.nav-btn:hover .fold {
+    margin-top: -1rem;
+    margin-right: -1rem;
+}
+
+/* Points */
+.nav-btn .points_wrapper {
+    overflow: hidden;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    position: absolute;
+    z-index: 1;
+}
+.nav-btn .points_wrapper .point {
+    bottom: -10px;
+    position: absolute;
+    animation: floating-points infinite ease-in-out;
+    pointer-events: none;
+    width: 2px; height: 2px;
+    background-color: #fff;
+    border-radius: 9999px;
+}
+.nav-btn .points_wrapper .point:nth-child(1)  { left: 10%; opacity: 1;   animation-duration: 2.35s; animation-delay: 0.2s;  }
+.nav-btn .points_wrapper .point:nth-child(2)  { left: 30%; opacity: 0.7; animation-duration: 2.5s;  animation-delay: 0.5s;  }
+.nav-btn .points_wrapper .point:nth-child(3)  { left: 25%; opacity: 0.8; animation-duration: 2.2s;  animation-delay: 0.1s;  }
+.nav-btn .points_wrapper .point:nth-child(4)  { left: 44%; opacity: 0.6; animation-duration: 2.05s;                          }
+.nav-btn .points_wrapper .point:nth-child(5)  { left: 50%; opacity: 1;   animation-duration: 1.9s;                           }
+.nav-btn .points_wrapper .point:nth-child(6)  { left: 75%; opacity: 0.5; animation-duration: 1.5s;  animation-delay: 1.5s;  }
+.nav-btn .points_wrapper .point:nth-child(7)  { left: 88%; opacity: 0.9; animation-duration: 2.2s;  animation-delay: 0.2s;  }
+.nav-btn .points_wrapper .point:nth-child(8)  { left: 58%; opacity: 0.8; animation-duration: 2.25s; animation-delay: 0.2s;  }
+.nav-btn .points_wrapper .point:nth-child(9)  { left: 98%; opacity: 0.6; animation-duration: 2.6s;  animation-delay: 0.1s;  }
+.nav-btn .points_wrapper .point:nth-child(10) { left: 65%; opacity: 1;   animation-duration: 2.5s;  animation-delay: 0.2s;  }
+
+@keyframes floating-points {
+    0%   { transform: translateY(0); }
+    85%  { opacity: 0; }
+    100% { transform: translateY(-55px); opacity: 0; }
+}
+
+/* Inner */
+.nav-btn .inner {
+    z-index: 2;
+    gap: 5px;
+    position: relative;
+    color: white;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: "Poppins", sans-serif;
+    line-height: 1.5;
+    white-space: nowrap;
+}
+.nav-btn .inner svg.icon {
+    width: 14px; height: 14px;
+    transition: fill 0.1s linear;
+}
+.nav-btn:hover svg.icon {
+    fill: transparent;
+    animation: dasharray 1s linear forwards, filled 0.1s linear forwards 0.95s;
+}
+@keyframes dasharray { from { stroke-dasharray: 0 0 0 0; } to { stroke-dasharray: 68 68 0 0; } }
+@keyframes filled    { to   { fill: white; } }
+
+
+/* =============================================
+   RESPONSIVE MOBILE ≤ 900px
+   ============================================= */
+@media screen and (max-width: 900px) {
+
+    header {
+        top: 10px;
+        width: calc(100% - 24px);
+    }
+
+    header .navbar {
+        border-radius: 20px;
+        padding: 8px 14px;
+    }
+
+    /* Hiện hamburger */
+    #menu-open-button {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        background: none;
+        border: none;
+        font-size: 1.25rem;
+        color: #f37021;
+        cursor: pointer;
+        padding: 6px 10px;
+        border-radius: 12px;
+        transition: background 0.2s;
+    }
+    #menu-open-button:hover { background: rgba(243,112,33,0.1); }
+
+    /* Mobile menu */
+    .navbar .nav-menu {
+        display: none !important;
+        position: fixed !important;
+        top: 74px !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        width: calc(100% - 32px) !important;
+        max-width: 340px !important;
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 4px !important;
+        background: rgba(255,255,255,0.97) !important;
+        backdrop-filter: blur(16px) !important;
+        border: 1.5px solid rgba(243,112,33,0.18) !important;
+        border-radius: 20px !important;
+        padding: 12px !important;
+        box-shadow: 0 12px 36px rgba(180,90,10,0.13) !important;
+        z-index: 999 !important;
+        height: auto !important;
+    }
+
+    .navbar .nav-menu.mobile-open {
+        display: flex !important;
+        animation: menuDropIn 0.22s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    @keyframes menuDropIn {
+        from { opacity: 0; transform: translateX(-50%) translateY(-10px) scale(0.97); }
+        to   { opacity: 1; transform: translateX(-50%) translateY(0)      scale(1);    }
+    }
+
+    /* Hiện nút close bên trong menu */
+    #menu-close-button {
+        display: flex !important;
+        align-self: flex-end;
+        background: none;
+        border: none;
+        font-size: 1rem;
+        color: #bbb;
+        cursor: pointer;
+        padding: 4px 8px;
+        border-radius: 8px;
+        margin-bottom: 4px;
+        transition: background 0.15s, color 0.15s;
+    }
+    #menu-close-button:hover { background: #f5f5f5; color: #555; }
+
+    /* Nav btn full width trên mobile */
+    .nav-item { width: 100%; }
+
+    .nav-btn {
+        width: 100%;
+        border-radius: 12px !important;
+        padding: 11px 16px;
+        justify-content: flex-start;
+    }
+
+    .nav-btn .inner { font-size: 14px; }
+}

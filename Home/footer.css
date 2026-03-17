@@ -1,0 +1,244 @@
+/* ===== RESET ===== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ===== BASE ===== */
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: #fff;
+  color: #1a1a1a;
+}
+
+/* ===== VARIABLES ===== */
+:root {
+  --color-brand: #F26D21;
+  --color-text-primary: #1a1a1a;
+  --color-text-secondary: #555;
+  --color-text-muted: #999;
+  --color-border: #e8e8e5;
+  --color-community-bg: #FEF4EC;
+  --color-community-border: #F5C896;
+  --color-community-label: #C85A00;
+  --color-community-tagline: #A84F00;
+  --color-heart: #E0442B;
+}
+
+/* ===== FOOTER WRAPPER ===== */
+.footer {
+  background: #fff;
+  border-top: 1px solid var(--color-border);
+  padding: 56px 64px 0;
+}
+
+/* ===== TOP SECTION – 4 COLUMNS ===== */
+.footer-top {
+  display: grid;
+  grid-template-columns: 260px 1fr 1fr 1fr;
+  gap: 48px;
+  padding-bottom: 48px;
+}
+
+/* ===== BRAND COLUMN ===== */
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.logo-badge {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--color-brand);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: 0.3px;
+  flex-shrink: 0;
+}
+
+.brand-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  line-height: 1.2;
+}
+
+.brand-name .dot {
+  color: var(--color-brand);
+}
+
+.brand-sub {
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-top: 2px;
+}
+
+.brand-desc {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  line-height: 1.75;
+}
+
+/* ===== COLUMN HEADINGS ===== */
+.footer-col h4 {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.3px;
+  text-transform: uppercase;
+  color: var(--color-text-primary);
+  margin-bottom: 20px;
+}
+
+/* ===== NAV LINKS ===== */
+.footer-col ul {
+  list-style: none;
+}
+
+.footer-col ul li {
+  margin-bottom: 14px;
+}
+
+.footer-col ul li a {
+  font-size: 14px;
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.footer-col ul li a:hover {
+  color: var(--color-text-primary);
+}
+
+/* ===== SUPPORT EMAIL ===== */
+.support-label {
+  font-size: 12px;
+  color: var(--color-text-muted);
+  margin-top: 20px;
+  margin-bottom: 6px;
+}
+
+.support-email {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-brand);
+  text-decoration: none;
+  transition: opacity 0.15s ease;
+}
+
+.support-email:hover {
+  opacity: 0.8;
+}
+
+.support-email svg {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+}
+
+/* ===== CAMPUS GRID ===== */
+.campus-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 16px;
+  margin-bottom: 20px;
+}
+
+.campus-item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13px;
+  color: var(--color-text-secondary);
+}
+
+.campus-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #ccc;
+  flex-shrink: 0;
+}
+
+/* ===== COMMUNITY BOX ===== */
+.community-box {
+  background: var(--color-community-bg);
+  border: 1px solid var(--color-community-border);
+  border-radius: 12px;
+  padding: 12px 16px;
+}
+
+.community-box .label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: var(--color-community-label);
+  margin-bottom: 4px;
+}
+
+.community-box .tagline {
+  font-size: 13px;
+  font-style: italic;
+  color: var(--color-community-tagline);
+}
+
+/* ===== BOTTOM BAR ===== */
+.footer-bottom {
+  border-top: 1px solid var(--color-border);
+  padding: 24px 0 32px;
+  text-align: center;
+}
+
+.footer-bottom .copy {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+  margin-bottom: 8px;
+}
+
+.footer-bottom .copy .heart {
+  color: var(--color-heart);
+}
+
+.footer-bottom .disclaimer {
+  font-size: 12px;
+  color: var(--color-text-muted);
+  line-height: 1.7;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 960px) {
+  .footer {
+    padding: 48px 40px 0;
+  }
+
+  .footer-top {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .footer {
+    padding: 40px 24px 0;
+  }
+
+  .footer-top {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+}

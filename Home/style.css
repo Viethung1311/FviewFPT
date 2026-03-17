@@ -1,0 +1,145 @@
+/* Add google font */
+@import url('https://fonts.googleapis.com/css2?family=Knewave&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,600;0,700;1,100;1,200;1,300;1,400;1,500&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+:root {
+    --yellow-color:  #FBEF76;
+    --orange-color:  #F27024;
+    --red-color:     #FA5C5C;
+    --white-color:   #FCF8F8;
+    --black-color:   #0F172A;
+
+    --font-size-s:    0.9rem;
+    --font-size-n:    1rem;
+    --font-size-m:    1.12rem;
+    --font-size-l:    1.5rem;
+    --font-size-xl:   2rem;
+    --font-size-xxl:  2.3rem;
+    --font-size-xxxl: 3.0rem;
+
+    --font-weight-normal:   400;
+    --font-weight-medium:   500;
+    --font-weight-semibold: 600;
+    --font-weight-bold:     700;
+
+    --border-radius-s:      8px;
+    --border-radius-m:      30px;
+    --border-radius-circle: 50%;
+
+    --site-max-width: 1300px;
+}
+
+html { scroll-behavior: smooth; }
+
+ul  { list-style: none; }
+a   { text-decoration: none; }
+button { cursor: pointer; border: none; background: none; }
+
+.section-content {
+    margin: 0 auto;
+    padding: 0 20px;
+    max-width: var(--site-max-width);
+}
+
+/* ── Navbar base (navbar.css sẽ override) ── */
+header {
+    position: fixed;
+    width: 100%;
+    z-index: 5;
+}
+
+header .navbar {
+    display: flex;
+    padding: 20px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navbar .nav-menu {
+    display: flex;
+    gap: 15px;
+}
+
+#menu-open-button,
+#menu-close-button { display: none; }
+
+.nav-logo {
+    height: 70px;
+    border-radius: 20px;
+    display: flex;
+}
+.nav-logo img { width: 100%; }
+
+/* ── Hero section ── */
+.hero-section {
+    min-height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+.hero-section .section-content {
+    font-family: cursive;
+    text-align: center;
+}
+
+.hero-details {
+    position: absolute;
+    z-index: 2;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.title {
+    font-size: clamp(32px, 6vw, 60px);
+    color: var(--black-color);
+    margin-bottom: 2px;
+}
+
+.subtitle {
+    font-size: clamp(20px, 4vw, 50px);
+    color: var(--orange-color);
+    font-family: "Roboto", sans-serif;
+}
+
+.title,
+.subtitle { line-height: 1.1; }
+
+.text {
+    color: #969dad;
+    max-width: 520px;
+}
+.text span { display: block; }
+
+/* ── Responsive ── */
+@media screen and (max-width: 900px) {
+    :root {
+        --font-size-m:   0.95rem;
+        --font-size-l:   1.1rem;
+        --font-size-xl:  1.3rem;
+        --font-size-xxl: 1.6rem;
+    }
+
+    .hero-section { background-position: top center; }
+
+    .hero-details {
+        width: 100%;
+        padding: 0 16px;
+        top: 42%;
+    }
+
+    .text {
+        margin: 8px auto 0;
+        text-align: center;
+        font-size: 0.9rem;
+        line-height: 1.5;
+    }
+}

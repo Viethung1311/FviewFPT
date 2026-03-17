@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="login.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+  <link rel="stylesheet" href="../Home/Background.css">
+  <title>Login</title>
+
+  <style>
+    /* nhỏ gọn để hiện message */
+    .msg { width: 320px; font-size: 0.85em; color: #333; background: #fff7f0; border: 1px solid #ffd8c2; padding: 10px 12px; border-radius: 12px; display: none; }
+    .msg.ok { background: #f0fff5; border-color: #c7f0d4; }
+    .msg.err { background: #fff0f0; border-color: #ffd0d0; }
+  </style>
+</head>
+<body>
+  <!-- Floating background icons -->
+  <i class="fa-solid fa-graduation-cap bg-icon i1"></i>
+  <i class="fa-solid fa-laptop-code bg-icon i2"></i>
+  <i class="fa-solid fa-book bg-icon i3"></i>
+  <i class="fa-solid fa-code bg-icon i4"></i>
+  <i class="fa-solid fa-university bg-icon i5"></i>
+  <i class="fa-solid fa-lightbulb bg-icon i6"></i>
+  <i class="fa-solid fa-pen-nib bg-icon i7"></i>
+  <i class="fa-solid fa-user-graduate bg-icon i8"></i>
+
+  <a href="../Home/index.html" class="back">Back</a>
+
+  <div class="container">
+
+    <!-- SIGN UP -->
+    <form class="form signup" id="signupForm" autocomplete="on">
+      <h2>Sign Up</h2>
+
+      <div class="inputBox">
+        <input id="su_username" type="text" required autocomplete="username">
+        <i class="fa-solid fa-user"></i>
+        <span>username</span>
+      </div>
+
+      <div class="inputBox">
+        <input id="su_email" type="email" required autocomplete="email">
+        <i class="fa-solid fa-envelope"></i>
+        <span>email address</span>
+      </div>
+
+      <div class="inputBox">
+        <input id="su_password" type="password" required minlength="6" autocomplete="new-password">
+        <i class="fa-solid fa-lock"></i>
+        <span>create password</span>
+      </div>
+
+      <div class="inputBox">
+        <input id="su_confirm" type="password" required minlength="6" autocomplete="new-password">
+        <i class="fa-solid fa-lock"></i>
+        <span>confirm password</span>
+      </div>
+
+      <div class="msg" id="signupMsg"></div>
+
+      <div class="inputBox">
+        <input type="submit" value="Create Account">
+      </div>
+
+      <p>Already a member ? <a href="#" class="login">Login</a></p>
+    </form>
+
+    <!-- SIGN IN -->
+    <form class="form signin" id="signinForm" autocomplete="on">
+      <h2>Sign In</h2>
+
+      <div class="inputBox">
+        <input id="si_user" type="text" required autocomplete="username">
+        <i class="fa-solid fa-user"></i>
+        <span>username or email</span>
+      </div>
+
+      <div class="inputBox">
+        <input id="si_pass" type="password" required autocomplete="current-password">
+        <i class="fa-solid fa-lock"></i>
+        <span>password</span>
+      </div>
+
+      <div class="msg" id="signinMsg"></div>
+
+      <div class="inputBox">
+        <input type="submit" value="Login">
+      </div>
+
+      <div class="inputBox" style="display:none">
+        <input type="button" id="btnMe" value="Me (test token)">
+      </div>
+
+      <div class="inputBox" style="display:none">
+        <input type="button" id="btnLogout" value="Logout">
+      </div>
+
+      <p>Not registered ? <a href="#" class="create">Create an Account</a></p>
+    </form>
+
+  </div>
+
+  <script src="login.js"></script>
+</body>
+</html>

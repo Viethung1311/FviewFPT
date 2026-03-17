@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="spinv1.css">
+  <link rel="stylesheet" href="spin-button.css">
+  <link rel="stylesheet" href="toad.css">
+  <title>Spin Wheel</title>
+</head>
+<body>
+
+<a href="../Home/index.html" class="back">Back</a>
+
+<div id="wrapper">
+  <div id="pointer"></div>
+  <div id="wheel-border-wrap">
+    <!-- Decorative border dots (16 dots evenly spaced) -->
+    <svg id="border-svg" width="540" height="540" viewBox="0 0 540 540" style="position:absolute;top:0;left:0;z-index:10002;pointer-events:none;">
+      <!-- Outer ornamental ring pattern -->
+      <circle cx="270" cy="270" r="268" fill="none" stroke="url(#goldGrad)" stroke-width="2" stroke-dasharray="8 6"/>
+      <!-- Diamond gems at 16 positions -->
+      <g id="gems"></g>
+      <!-- Lotus petal hints at 8 cardinal points -->
+      <g id="petals"></g>
+      <defs>
+        <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#ffd700"/>
+          <stop offset="25%" style="stop-color:#fff8dc"/>
+          <stop offset="50%" style="stop-color:#c8960c"/>
+          <stop offset="75%" style="stop-color:#ffd700"/>
+          <stop offset="100%" style="stop-color:#fff8dc"/>
+        </linearGradient>
+        <radialGradient id="gemGrad" cx="50%" cy="30%" r="50%">
+          <stop offset="0%" style="stop-color:#fffde0"/>
+          <stop offset="60%" style="stop-color:#ffd700"/>
+          <stop offset="100%" style="stop-color:#8b5e0a"/>
+        </radialGradient>
+      </defs>
+    </svg>
+    <div id="wheel">
+      <div id="inner-wheel">
+        <div class="sec"><span class="number">🪙1</span></div>
+        <div class="sec"><span class="number">🪙1</span></div>
+        <div class="sec"><span class="number">🪙2</span></div>
+        <div class="sec"><span class="number">🪙2</span></div>
+        <div class="sec"><span class="number">🪙3</span></div>
+        <div class="sec"><span class="number">🪙3</span></div>
+        <div class="sec"><span class="number">⭐</span></div>
+        <div class="sec"><span class="number">⭐⭐</span></div>
+      </div>
+
+      <div id="spin">
+        <div id="inner-spin"></div>
+      </div>
+
+      <div id="shine"></div>
+    </div>
+  </div>
+  <div id="txt"></div>
+</div><!-- /#wrapper -->
+
+<!-- Popup kết quả – OUTSIDE wrapper, position:fixed -->
+<div id="popup-overlay">
+  <div id="popup">
+    <div class="popup-content">
+      <span class="result-label">Kết quả</span>
+      <div class="result-number"></div>
+      <div class="result-icon"></div>
+      <div class="popup-divider"></div>
+      <button id="close-popup">Đóng</button>
+    </div>
+  </div>
+</div>
+
+
+
+<script>
+// Draw decorative gems and petals on the SVG border
+(function() {
+  const cx = 270, cy = 270, r = 268;
+  const gemsG = document.getElementById('gems');
+  const petalsG = document.getElementById('petals');
+
+  // 16 diamond gems evenly spaced
+  for (let i = 0; i < 16; i++) {
+    const angle = (i * 360 / 16 - 90) * Math.PI / 180;
+    const x = cx + r * Math.cos(angle);
+    const y = cy + r * Math.sin(angle);
+    // Diamond shape (rotated square)
+    const s = 6;
+    const pts = `${x},${y-s} ${x+s},${y} ${x},${y+s} ${x-s},${y}`;
+    const diamond = document.createElementNS('http://www.w3.org/2000/svg','polygon');
+    diamond.setAttribute('points', pts);
+    diamond.setAttribute('fill', 'url(#gemGrad)');
+    diamond.setAttribute('stroke', '#c8960c');
+    diamond.setAttribute('stroke-width', '0.5');
+    gemsG.appendChild(diamond);
+  }
+
+  // 8 lotus-style petal decorations at cardinal & diagonal points
+  for (let i = 0; i < 8; i++) {
+    const angle = (i * 45 - 90) * Math.PI / 180;
+    const pr = r - 14;
+    const x = cx + pr * Math.cos(angle);
+    const y = cy + pr * Math.sin(angle);
+    const circle = document.createElementNS('http://www.w3.org/2000/svg','circle');
+    circle.setAttribute('cx', x);
+    circle.setAttribute('cy', y);
+    circle.setAttribute('r', 8);
+    circle.setAttribute('fill', 'none');
+    circle.setAttribute('stroke', '#ffd700');
+    circle.setAttribute('stroke-width', '1.5');
+    circle.setAttribute('opacity', '0.7');
+    petalsG.appendChild(circle);
+
+    // Inner dot
+    const dot = document.createElementNS('http://www.w3.org/2000/svg','circle');
+    dot.setAttribute('cx', x);
+    dot.setAttribute('cy', y);
+    dot.setAttribute('r', 3);
+    dot.setAttribute('fill', '#ffd700');
+    dot.setAttribute('opacity', '0.9');
+    petalsG.appendChild(dot);
+  }
+
+  // Animate the gradient rotation by rotating the dashed ring
+  let deg = 0;
+  function animateBorder() {
+    deg = (deg + 0.3) % 360;
+    const svg = document.getElementById('border-svg');
+    if (svg) {
+      const gemsEl = svg.getElementById ? svg.getElementById('gems') : null;
+      // rotate the dashed ring and gems together slowly
+    }
+    requestAnimationFrame(animateBorder);
+  }
+  animateBorder();
+})();
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="spinv1.js"></script>
+
+
+<!-- ── RESOURCE HUD ── -->
+<div id="resource-hud"></div>
+
+<!-- ── INFO POPUP ── -->
+<div id="info-overlay">
+  <div id="info-popup"></div>
+</div>
+
+<!-- ── TOAD PET UI ── -->
+<button id="toad-toggle-btn" aria-label="Cóc vàng">
+  <svg viewBox="0 0 40 34" width="36" height="30" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="20" cy="24" rx="13" ry="9" fill="#5a9e3a"/>
+    <ellipse cx="20" cy="15" rx="11" ry="9" fill="#5a9e3a"/>
+    <ellipse cx="13" cy="9" rx="4" ry="4.5" fill="#4a8a2a" opacity="0.4"/>
+    <ellipse cx="27" cy="9" rx="4" ry="4.5" fill="#4a8a2a" opacity="0.4"/>
+    <ellipse cx="13" cy="9" rx="3" ry="3.5" fill="#fff"/>
+    <ellipse cx="27" cy="9" rx="3" ry="3.5" fill="#fff"/>
+    <circle cx="13" cy="9" r="2" fill="#222"/>
+    <circle cx="27" cy="9" r="2" fill="#222"/>
+    <circle cx="13.7" cy="8.3" r="0.7" fill="#fff"/>
+    <circle cx="27.7" cy="8.3" r="0.7" fill="#fff"/>
+    <path d="M15 19 Q20 23 25 19" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    <circle cx="20" cy="30" r="4" fill="#FFD700" stroke="#c8960c" stroke-width="0.8"/>
+    <text x="20" y="33" font-size="5" fill="#8b5e0a" text-anchor="middle" font-weight="bold">$</text>
+  </svg>
+  <span class="btn-label">Cóc</span>
+  <span id="spin-counter" class="no-spin">0</span>
+</button>
+
+<div id="toad-panel"></div>
+<div id="toad-toast"></div>
+<script src="toad.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,187 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* ===== RESET ===== */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+/* ===== COLOR SYSTEM (FPT STYLE) ===== */
+:root{
+    --fpt-orange: #f37021;
+    --fpt-orange-light: #ff9f66;
+    --fpt-white: #ffffff;
+    --fpt-gray: #f5f5f5;
+    --fpt-text: #333;
+    --fpt-border: #ddd;
+}
+
+/* ===== BODY ===== */
+body{
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--fpt-gray);
+}
+
+/* ===== BACK BUTTON ===== */
+.back{
+    position: absolute;
+    top: 25px;
+    left: 25px;
+
+    padding: 10px 22px;
+    border-radius: 30px;
+
+    font-size: 0.8em;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+
+    text-decoration: none;
+    color: var(--fpt-orange);
+    background: var(--fpt-white);
+
+    border: 1px solid var(--fpt-border);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+
+    transition: 0.3s ease;
+}
+
+.back::before{
+    content: "←";
+    margin-right: 8px;
+}
+
+.back:hover{
+    background: var(--fpt-orange);
+    color: #fff;
+    transform: translateX(-4px);
+}
+
+/* ===== CONTAINER ===== */
+.container{
+    padding: 45px 50px;
+    border-radius: 18px;
+    background: var(--fpt-white);
+    box-shadow: 0 25px 60px rgba(0,0,0,0.12);
+}
+
+/* ===== FORM ===== */
+.container .form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 22px;
+}
+
+.container .signin{
+    display: none;
+}
+
+/* ===== TITLE ===== */
+.container .form h2{
+    color: var(--fpt-orange);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+}
+
+/* ===== INPUT ===== */
+.container .form .inputBox{
+    position: relative;
+    width: 320px;
+}
+
+.container .form .inputBox input{
+    width: 100%;
+    padding: 14px 14px 14px 48px;
+
+    border-radius: 30px;
+    border: 1px solid var(--fpt-border);
+    background: #fff;
+
+    font-size: 0.95em;
+    color: var(--fpt-text);
+    outline: none;
+
+    transition: 0.3s ease;
+}
+
+/* ICON */
+.container .form .inputBox i{
+    position: absolute;
+    top: 15px;
+    left: 18px;
+    color: var(--fpt-orange);
+}
+
+/* LABEL */
+.container .form .inputBox span{
+    position: absolute;
+    left: 48px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    font-size: 0.9em;
+    color: #999;
+    pointer-events: none;
+    transition: 0.3s ease;
+    background: #fff;
+    padding: 0 6px;
+}
+
+/* FLOAT LABEL */
+.container .form .inputBox input:focus ~ span,
+.container .form .inputBox input:valid ~ span{
+    top: -6px;
+    font-size: 0.65em;
+    color: var(--fpt-orange);
+}
+
+/* INPUT FOCUS */
+.container .form .inputBox input:focus{
+    border-color: var(--fpt-orange);
+    box-shadow: 0 0 0 3px rgba(243,112,33,0.15);
+}
+
+/* ===== SUBMIT BUTTON ===== */
+.container .form .inputBox input[type="submit"]{
+    padding: 12px 0;
+    background: var(--fpt-orange);
+    color: #fff;
+
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    border: none;
+
+    box-shadow: 0 10px 20px rgba(243,112,33,0.35);
+    transition: 0.3s ease;
+}
+
+.container .form .inputBox input[type="submit"]:hover{
+    background: var(--fpt-orange-light);
+    transform: translateY(-2px);
+}
+
+/* ===== TEXT ===== */
+.container .form p{
+    font-size: 0.8em;
+    color: #777;
+}
+
+.container .form p a{
+    color: var(--fpt-orange);
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.container .form p a:hover{
+    text-decoration: underline;
+}
+
+
