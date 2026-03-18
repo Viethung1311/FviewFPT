@@ -25,6 +25,19 @@ var TOAD_LEVELS = [
   { level:4, coinsToNext:20,   spins:4, cooldownMs:1.5 * 3600000 },
   { level:5, coinsToNext:null, spins:5, cooldownMs:1.0 * 3600000 }
 ];
+// ─── STORAGE KEY theo từng user ───────────────────────────────────
+// Mỗi tài khoản có state riêng: 'toadPetState_<username>'
+// Nếu chưa đăng nhập → dùng key 'toadPetState_guest'
+function getStorageKey() {
+  try {
+    var u = JSON.parse(localStorage.getItem('currentUser'))
+          || JSON.parse(localStorage.getItem('user'));
+    if (u && u.username) return 'toadPetState_' + u.username;
+    if (u && u.email)    return 'toadPetState_' + u.email;
+  } catch(e) {}
+  return 'toadPetState_guest';
+}
+// Giữ biến STORAGE_KEY để không break bất kỳ code nào tham chiếu trực tiếp
 var STORAGE_KEY = 'toadPetState';
 
 // ─── STATE ────────────────────────────────────────────────────────
@@ -41,11 +54,11 @@ var toadState = {
 
 // ─── PERSISTENCE ──────────────────────────────────────────────────
 function saveState() {
-  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(toadState)); } catch(e) {}
+  try { localStorage.setItem(getStorageKey(), JSON.stringify(toadState)); } catch(e) {}
 }
 function loadState() {
   try {
-    var raw = localStorage.getItem(STORAGE_KEY);
+    var raw = localStorage.getItem(getStorageKey());
     if (raw) {
       var parsed = JSON.parse(raw);
       // Merge để đảm bảo các field mới luôn tồn tại
