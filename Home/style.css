@@ -47,6 +47,11 @@ button { cursor: pointer; border: none; background: none; }
     max-width: var(--site-max-width);
 }
 
+.card__icon {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
 /* ── Navbar base (navbar.css sẽ override) ── */
 header {
     position: fixed;

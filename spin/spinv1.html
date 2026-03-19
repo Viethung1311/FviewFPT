@@ -13,16 +13,13 @@
 
 <a href="../index.html" class="back">Back</a>
 
+<!-- ══ WHEEL ══ -->
 <div id="wrapper">
   <div id="pointer"></div>
   <div id="wheel-border-wrap">
-    <!-- Decorative border dots (16 dots evenly spaced) -->
     <svg id="border-svg" width="540" height="540" viewBox="0 0 540 540" style="position:absolute;top:0;left:0;z-index:10002;pointer-events:none;">
-      <!-- Outer ornamental ring pattern -->
       <circle cx="270" cy="270" r="268" fill="none" stroke="url(#goldGrad)" stroke-width="2" stroke-dasharray="8 6"/>
-      <!-- Diamond gems at 16 positions -->
       <g id="gems"></g>
-      <!-- Lotus petal hints at 8 cardinal points -->
       <g id="petals"></g>
       <defs>
         <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -41,27 +38,192 @@
     </svg>
     <div id="wheel">
       <div id="inner-wheel">
-        <div class="sec"><span class="number">🪙1</span></div>
-        <div class="sec"><span class="number">🪙1</span></div>
-        <div class="sec"><span class="number">🪙2</span></div>
-        <div class="sec"><span class="number">🪙2</span></div>
-        <div class="sec"><span class="number">🪙3</span></div>
-        <div class="sec"><span class="number">🪙3</span></div>
-        <div class="sec"><span class="number">⭐</span></div>
-        <div class="sec"><span class="number">⭐⭐</span></div>
+        <div class="sec"><span class="number">&#x1FA99;1</span></div>
+        <div class="sec"><span class="number">&#x1FA99;1</span></div>
+        <div class="sec"><span class="number">&#x1FA99;2</span></div>
+        <div class="sec"><span class="number">&#x1FA99;2</span></div>
+        <div class="sec"><span class="number">&#x1FA99;3</span></div>
+        <div class="sec"><span class="number">&#x1FA99;3</span></div>
+        <div class="sec"><span class="number">&#11088;</span></div>
+        <div class="sec"><span class="number">&#11088;&#11088;</span></div>
       </div>
-
-      <div id="spin">
-        <div id="inner-spin"></div>
-      </div>
-
+      <div id="spin"><div id="inner-spin"></div></div>
       <div id="shine"></div>
     </div>
   </div>
   <div id="txt"></div>
-</div><!-- /#wrapper -->
+</div>
 
-<!-- Popup kết quả – OUTSIDE wrapper, position:fixed -->
+<!-- ══ BOTTOM BAR — single merged pill ══ -->
+<div id="bottom-bar">
+  <div id="merged-pill">
+
+    <!-- Left: history (clickable) -->
+    <button id="history-chip" onclick="openHistoryPopup()">
+      <span class="hc-dot"></span>
+      <svg class="hc-svg" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="10" cy="10" r="8.5" stroke="currentColor" stroke-width="1.4"/>
+        <path d="M10 5.5V10.5L13 12.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+      </svg>
+      <span class="hc-label">Lịch Sử Quay</span>
+      <span class="hc-count" id="hc-count">0 lượt</span>
+    </button>
+
+    <!-- Separator -->
+    <div class="pill-sep"></div>
+
+    <!-- Right: pity (not clickable, just display) -->
+    <div id="pity-chip">
+      <span class="pc-icon">⭐</span>
+      <div class="pc-track">
+        <div class="pc-label-row">
+          <span class="pc-label">Hiếm đảm bảo</span>
+          <span class="pc-nums"><span id="pc-current">0</span><span class="pc-slash">/</span><span class="pc-max">100</span></span>
+        </div>
+        <div class="pc-bar-bg">
+          <div class="pc-bar-fill" id="pc-bar-fill"></div>
+          <div class="pc-bar-glow" id="pc-bar-glow"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ GUIDE CHIP — top-right ══ -->
+<button id="guide-chip" onclick="openGuidePopup()">📖 Hướng dẫn</button>
+
+<!-- ════════════════════════════════════════════
+     GUIDE POPUP  — compact 2-col, no scroll
+     ════════════════════════════════════════════ -->
+<div id="guide-overlay" onclick="if(event.target===this)closeGuidePopup()">
+  <div id="guide-popup">
+    <button class="gp-x" onclick="closeGuidePopup()">&#10005;</button>
+
+    <div class="gp-head">
+      <span class="gp-head-icon">🎰</span>
+      <div>
+        <div class="gp-title">Vòng Quay May Mắn</div>
+        <div class="gp-sub">Quay mỗi ngày – nhận thưởng xịn xò!</div>
+      </div>
+    </div>
+
+    <div class="gp-divider"></div>
+
+    <div class="gp-cols">
+
+      <!-- LEFT: rewards + claim -->
+      <div class="gp-col">
+        <div class="gp-col-title">🎁 Phần Thưởng</div>
+
+        <div class="rw-card">
+          <span class="rw-ico">🪙</span>
+          <div class="rw-body">
+            <div class="rw-name">1 – 3 Golden Coins</div>
+            <div class="rw-desc">Tích coin nâng cấp Cóc Vàng</div>
+          </div>
+          <span class="rw-tag common-tag">Thường</span>
+        </div>
+
+        <div class="rw-card rare-card">
+          <span class="rw-ico">&#11088;</span>
+          <div class="rw-body">
+            <div class="rw-name">1 Ngôi Sao – Siêu Hiếm</div>
+            <div class="rw-desc">🎓 Khoá học &amp; phần mềm miễn phí</div>
+          </div>
+          <span class="rw-tag rare-tag">Siêu Hiếm</span>
+        </div>
+
+        <div class="rw-card jp-card">
+          <div class="jp-shimmer"></div>
+          <span class="rw-ico jp-star">&#11088;&#11088;</span>
+          <div class="rw-body">
+            <div class="rw-name jp-name">2 Ngôi Sao — JACKPOT!</div>
+            <div class="rw-desc jp-desc">🤖 Tài khoản <strong>ChatGPT Plus</strong></div>
+          </div>
+          <span class="rw-tag jp-tag">CỰC HIẾM</span>
+        </div>
+
+        <div class="gp-claim">
+          <div class="gp-claim-title">🏆 Cách nhận thưởng ⭐ / ⭐⭐</div>
+          <div class="gp-claim-body">Bấm <strong>«Lịch Sử Quay»</strong> dưới bánh xe → chụp màn hình có <strong>UID</strong> + kết quả → nhắn Fanpage:</div>
+          <a href="https://www.facebook.com/profile.php?id=61586414162477" target="_blank" class="gp-fb-btn">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.267h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+            Nhắn Fanpage ngay
+          </a>
+        </div>
+      </div>
+
+      <!-- VERTICAL DIVIDER -->
+      <div class="gp-vdiv"></div>
+
+      <!-- RIGHT: how to play -->
+      <div class="gp-col">
+        <div class="gp-col-title">📋 Cách Chơi</div>
+
+        <div class="gp-step"><span class="gp-snum">1</span><span class="gp-stxt">Nuôi <strong>Cóc Vàng</strong> 🐸 — Cóc tích lũy spin theo <strong>chu kỳ hồi</strong> (1–7 spin/lần tuỳ cấp)</span></div>
+        <div class="gp-step"><span class="gp-snum">2</span><span class="gp-stxt">Khi Cóc đẻ xong, nút <strong>Nhận Spin</strong> xuất hiện — bấm để nhận, rồi cooldown chạy lại</span></div>
+        <div class="gp-step"><span class="gp-snum">3</span><span class="gp-stxt">Bấm nút <strong>SPIN</strong> ở giữa bánh xe để quay — cần có spin trong túi!</span></div>
+        <div class="gp-step"><span class="gp-snum">4</span><span class="gp-stxt">Coin trúng được cộng <strong>tự động</strong>. Tích đủ coin → <strong>nâng cấp Cóc</strong> để nhận nhiều spin hơn</span></div>
+        <div class="gp-step"><span class="gp-snum">5</span><span class="gp-stxt">Spin <strong>không tích lũy qua ngày</strong> — mỗi 00:00 spin còn lại sẽ bị xoá. Dùng hết trước nửa đêm!</span></div>
+        <div class="gp-step"><span class="gp-snum">6</span><span class="gp-stxt">Sau <strong>100 spin</strong> không trúng hiếm, lần quay tiếp theo <strong>đảm bảo</strong> nhận ⭐!</span></div>
+
+        <div class="gp-tip">
+          <span>💡</span>
+          <span>Cóc tối đa <strong>Cấp 7</strong> — 7 spin/lần, hồi mỗi <strong>36 phút</strong>!</span>
+        </div>
+
+        <div class="gp-toad-info-row">
+          <button class="gp-toad-info-btn" onclick="openToadInfoPopup()">
+            <svg viewBox="0 0 40 34" width="18" height="15" xmlns="http://www.w3.org/2000/svg"><ellipse cx="20" cy="24" rx="13" ry="9" fill="#5a9e3a"/><ellipse cx="20" cy="15" rx="11" ry="9" fill="#5a9e3a"/><ellipse cx="13" cy="9" rx="3" ry="3.5" fill="#fff"/><ellipse cx="27" cy="9" rx="3" ry="3.5" fill="#fff"/><circle cx="13" cy="9" r="2" fill="#222"/><circle cx="27" cy="9" r="2" fill="#222"/></svg>
+            Xem bảng cấp độ Cóc Vàng →
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <button class="gp-start-btn" onclick="closeGuidePopup()">PLAY🎉</button>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     HISTORY POPUP
+     ════════════════════════════════════════════ -->
+<div id="history-overlay" onclick="if(event.target===this)closeHistoryPopup()">
+  <div id="history-popup">
+    <button class="gp-x" onclick="closeHistoryPopup()">&#10005;</button>
+
+    <div class="hp-head">
+      <span class="hp-head-icon">🕘</span>
+      <div>
+        <div class="hp-title">Lịch Sử Vòng Quay</div>
+        <div class="hp-sub">10 lượt gần nhất của bạn</div>
+      </div>
+    </div>
+
+    <div id="hp-uid-box">
+      <span class="hp-uid-lbl">🪪 MÃ UID</span>
+      <span id="hp-uid-val">-</span>
+      <button class="hp-copy-btn" onclick="copyUID()">Sao chép</button>
+    </div>
+
+    <div class="hp-divider"></div>
+    <div id="history-list"></div>
+
+    <div class="hp-claim">
+      <span>&#128247;</span>
+      <div>
+        <p>Chụp màn hình trang này (có UID + kết quả trúng) → gửi Fanpage để nhận thưởng ⭐/⭐⭐</p>
+        <a href="https://www.facebook.com/profile.php?id=61586414162477" target="_blank" class="gp-fb-btn" style="font-size:11px;padding:6px 13px;margin-top:7px">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.267h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+          Fanpage chính thức
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ RESULT POPUP ══ -->
 <div id="popup-overlay">
   <div id="popup">
     <div class="popup-content">
@@ -74,107 +236,995 @@
   </div>
 </div>
 
+<!-- ════════════════════════════════════════════
+     STYLES
+     ════════════════════════════════════════════ -->
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+
+/* ─── GUIDE CHIP ─── */
+#guide-chip {
+  font-family: "Poppins", sans-serif;
+  position: fixed; top: 20px; right: 20px; z-index: 99998;
+  display: flex; align-items: center; gap: 6px;
+  padding: 9px 18px; font-size: 13px; font-weight: 600;
+  color: #1a1000;
+  background: linear-gradient(135deg,#c8960c 0%,#f5d060 40%,#d4a820 60%,#c8960c 100%);
+  border: none; border-radius: 30px; cursor: pointer;
+  box-shadow: 0 4px 16px rgba(200,150,12,.45), inset 0 1px 0 rgba(255,255,200,.4);
+  transition: transform .2s, box-shadow .2s;
+}
+#guide-chip:hover  { transform: translateY(-3px); box-shadow: 0 8px 22px rgba(200,150,12,.6); }
+#guide-chip:active { transform: translateY(-1px); }
+
+/* ─── BOTTOM BAR (history + pity side by side) ─── */
+#bottom-bar {
+  position: fixed;
+  top: calc(50% + 294px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 99998;
+  pointer-events: auto;
+}
+/* Single merged pill */
+#merged-pill {
+  display: flex;
+  align-items: center;
+  background: rgba(16,10,3,.97);
+  border: 1px solid rgba(212,175,55,.42);
+  border-radius: 30px;
+  box-shadow:
+    0 5px 24px rgba(0,0,0,.6),
+    0 0 0 1px rgba(212,175,55,.1),
+    inset 0 1px 0 rgba(255,235,150,.07);
+  overflow: hidden;
+  backdrop-filter: blur(12px);
+  transition: box-shadow .22s;
+}
+#merged-pill:hover {
+  box-shadow: 0 8px 30px rgba(0,0,0,.65), 0 0 0 1px rgba(212,175,55,.25), 0 0 14px rgba(212,175,55,.12);
+}
+/* Separator line between the two halves */
+.pill-sep {
+  width: 1px;
+  height: 22px;
+  background: rgba(212,175,55,.22);
+  flex-shrink: 0;
+}
+#history-chip {
+  font-family: "Poppins", sans-serif;
+  display: flex; align-items: center; gap: 6px;
+  padding: 0 14px 0 12px; height: 34px;
+  color: rgba(255,224,130,.9);
+  background: transparent;
+  border: none;
+  cursor: pointer; white-space: nowrap;
+  transition: background .18s;
+}
+#history-chip:hover { background: rgba(212,175,55,.06); }
+#history-chip:active { background: rgba(212,175,55,.1); }
+.hc-dot {
+  width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0;
+  background: #7dd87d; box-shadow: 0 0 6px #7dd87d;
+  animation: dotPulse 2s ease-in-out infinite;
+}
+@keyframes dotPulse {
+  0%,100%{ box-shadow:0 0 4px #7dd87d; opacity:.8; }
+  50%    { box-shadow:0 0 10px #7dd87d; opacity:1; }
+}
+.hc-svg   { width:13px; height:13px; flex-shrink:0; opacity:.7; }
+.hc-label { font-size:11px; font-weight:700; letter-spacing:.2px; }
+.hc-sep   { font-size:10px; color:rgba(212,175,55,.28); }
+.hc-count {
+  font-size:10px; font-weight:700; letter-spacing:.5px;
+  background: linear-gradient(135deg,#c8960c,#f5d060);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+}
+
+/* ─── OVERLAYS ─── */
+#guide-overlay, #history-overlay {
+  display:none; position:fixed; inset:0;
+  background: rgba(6,4,1,.93);
+  z-index:200000;
+  justify-content:center; align-items:center;
+  padding: 12px;
+}
+#guide-overlay.show, #history-overlay.show {
+  display:flex;
+  animation: fadeIn .3s ease forwards;
+}
+@keyframes fadeIn { from{opacity:0} to{opacity:1} }
+@keyframes popIn  {
+  0%  { opacity:0; transform:scale(.88) translateY(20px); }
+  100%{ opacity:1; transform:scale(1)   translateY(0); }
+}
+
+/* ─── GUIDE POPUP — compact wide rectangle ─── */
+#guide-popup {
+  position:relative;
+  background: linear-gradient(155deg,#1c1508 0%,#251906 55%,#181008 100%);
+  border: 1px solid rgba(212,175,55,.35);
+  border-radius: 18px;
+  width: min(1060px, calc(100vw - 24px));
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+  padding: 28px 36px 26px;
+  box-shadow:
+    0 0 0 1px rgba(245,215,120,.07),
+    0 28px 80px rgba(0,0,0,.85),
+    inset 0 1px 0 rgba(255,235,150,.09);
+  animation: popIn .4s cubic-bezier(.34,1.56,.64,1) forwards;
+}
+
+/* ─── CLOSE BTN ─── */
+.gp-x {
+  position:absolute; top:12px; right:12px;
+  background:rgba(255,255,255,.07); border:1px solid rgba(212,175,55,.18);
+  color:rgba(245,230,180,.55); width:26px; height:26px;
+  border-radius:50%; font-size:11px; cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  transition:all .2s; padding:0; font-family:"Poppins",sans-serif;
+}
+.gp-x:hover { background:rgba(212,175,55,.15); color:#ffd700; }
+
+/* ─── HEADER ─── */
+.gp-head { display:flex; align-items:center; gap:12px; }
+.gp-head-icon { font-size:42px; flex-shrink:0; }
+.gp-title {
+  font-size:22px; font-weight:800; font-family:"Poppins",sans-serif;
+  background:linear-gradient(175deg,#fff8dc 0%,#f5d060 30%,#d4a820 55%,#f5d060 80%,#fff8dc 100%);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+  margin-bottom:2px;
+}
+.gp-sub { font-size:13px; color:rgba(245,230,180,.42); font-family:"Poppins",sans-serif; }
+.gp-divider { height:1px; background:linear-gradient(90deg,transparent,rgba(212,175,55,.28),transparent); margin:14px 0; }
+
+/* ─── 2-COL BODY ─── */
+.gp-cols { display:grid; grid-template-columns:1fr 1px 1fr; align-items:start; gap:0; }
+.gp-col  { display:flex; flex-direction:column; gap:10px; padding:0 24px; }
+.gp-col:first-child { padding-left:0; }
+.gp-col:last-child  { padding-right:0; }
+.gp-vdiv { background:linear-gradient(to bottom,transparent,rgba(212,175,55,.22),transparent); }
+.gp-col-title {
+  font-size:12px; font-weight:700; letter-spacing:2px; text-transform:uppercase;
+  color:rgba(212,175,55,.65); margin-bottom:6px; font-family:"Poppins",sans-serif;
+}
+
+/* ─── REWARD CARDS ─── */
+.rw-card {
+  display:flex; align-items:center; gap:9px;
+  background:rgba(255,255,255,.028);
+  border:1px solid rgba(255,255,255,.055);
+  border-radius:10px; padding:11px 13px;
+}
+.rare-card { border-color:rgba(255,100,180,.28); background:rgba(255,80,160,.04); box-shadow:0 0 8px rgba(255,100,180,.08); }
+
+/* JACKPOT NEON CARD */
+.jp-card {
+  position:relative; overflow:hidden;
+  background:linear-gradient(135deg,#0d001f 0%,#130038 50%,#080018 100%) !important;
+  border:none !important; border-radius:9px;
+  box-shadow:0 0 0 1.5px rgba(155,0,255,.7),0 0 16px rgba(155,0,255,.3),0 0 34px rgba(0,195,255,.12);
+  animation:jpGlow 2.5s ease-in-out infinite;
+}
+.jp-card::before {
+  content:''; position:absolute; inset:-2px; border-radius:11px;
+  background:linear-gradient(90deg,#ff00ff,#a000ff,#00ccff,#ff44cc,#ff00ff);
+  background-size:400% 100%; animation:neonFlow 2s linear infinite; z-index:0; opacity:.7;
+}
+.jp-card::after {
+  content:''; position:absolute; inset:1.5px; border-radius:7.5px;
+  background:linear-gradient(135deg,#0d001f 0%,#130038 55%,#080018 100%); z-index:1;
+}
+.jp-shimmer {
+  position:absolute; inset:0; border-radius:9px; z-index:2; pointer-events:none;
+  background:repeating-linear-gradient(45deg,transparent 0,transparent 8px,rgba(255,255,255,.014) 8px,rgba(255,255,255,.014) 9px);
+}
+.jp-card > *:not(.jp-shimmer) { position:relative; z-index:3; }
+
+@keyframes neonFlow { 0%{background-position:0% 50%}100%{background-position:400% 50%} }
+@keyframes jpGlow {
+  0%,100%{ box-shadow:0 0 0 1.5px rgba(155,0,255,.7),0 0 16px rgba(155,0,255,.28),0 0 32px rgba(0,195,255,.1); }
+  50%    { box-shadow:0 0 0 2px rgba(215,0,255,1),0 0 26px rgba(175,0,255,.55),0 0 50px rgba(0,215,255,.25); }
+}
+.jp-star {
+  font-size:22px; flex-shrink:0;
+  filter:drop-shadow(0 0 5px #ff00ff) drop-shadow(0 0 11px #a000ff);
+  animation:starGlow 1.6s ease-in-out infinite;
+}
+@keyframes starGlow {
+  0%,100%{ filter:drop-shadow(0 0 5px #ff00ff) drop-shadow(0 0 11px #a000ff); }
+  50%    { filter:drop-shadow(0 0 10px #ff66ff) drop-shadow(0 0 22px #cc00ff) drop-shadow(0 0 5px #00ffff); }
+}
+.jp-name {
+  font-size:12px !important; font-weight:800 !important;
+  background:linear-gradient(90deg,#ff66ff,#a000ff,#00ccff,#ff66ff) !important;
+  background-size:300% 100% !important;
+  -webkit-background-clip:text !important; -webkit-text-fill-color:transparent !important;
+  background-clip:text !important;
+  animation:neonTxt 2s linear infinite !important;
+}
+@keyframes neonTxt { 0%{background-position:0% 50%}100%{background-position:300% 50%} }
+.jp-desc { color:rgba(205,165,255,.75) !important; }
+.jp-desc strong { color:#d8b4ff !important; }
+
+/* reward shared parts */
+.rw-ico  { font-size:24px; flex-shrink:0; }
+.rw-body { flex:1; display:flex; flex-direction:column; gap:1px; }
+.rw-name { font-size:12px; font-weight:700; color:rgba(255,238,195,.9); font-family:"Poppins",sans-serif; }
+.rw-desc { font-size:10px; color:rgba(200,178,140,.55); font-family:"Poppins",sans-serif; }
+.rw-tag  { font-size:9px; font-weight:700; letter-spacing:.4px; padding:3px 8px; border-radius:20px; white-space:nowrap; font-family:"Poppins",sans-serif; flex-shrink:0; }
+.common-tag { background:rgba(70,175,70,.13); color:#7dd87d; border:1px solid rgba(70,175,70,.22); }
+.rare-tag   { background:rgba(255,100,180,.12); color:#ffadd8; border:1px solid rgba(255,100,180,.35); text-shadow:0 0 6px rgba(255,100,180,.45); }
+.jp-tag {
+  background:linear-gradient(135deg,rgba(155,0,255,.28),rgba(0,195,255,.18));
+  color:#ddb8ff; border:1px solid rgba(155,0,255,.58);
+  text-shadow:0 0 9px rgba(175,0,255,.85);
+  box-shadow:0 0 9px rgba(155,0,255,.28);
+  animation:tagPulse 2s ease-in-out infinite;
+}
+@keyframes tagPulse {
+  0%,100%{ box-shadow:0 0 7px rgba(155,0,255,.25); }
+  50%    { box-shadow:0 0 14px rgba(155,0,255,.55),0 0 4px rgba(0,195,255,.35); }
+}
+
+/* ─── CLAIM NOTE ─── */
+.gp-claim {
+  background:rgba(155,0,255,.05);
+  border:1px solid rgba(155,0,255,.2);
+  border-radius:9px; padding:10px 12px; margin-top:2px;
+}
+.gp-claim-title { font-size:11px; font-weight:700; color:rgba(255,210,100,.88); margin-bottom:5px; font-family:"Poppins",sans-serif; }
+.gp-claim-body  { font-size:10.5px; color:rgba(220,198,165,.58); line-height:1.55; margin-bottom:8px; font-family:"Poppins",sans-serif; }
+.gp-claim-body strong { color:rgba(255,215,100,.82); }
+.gp-fb-btn {
+  display:inline-flex; align-items:center; gap:6px;
+  background:#1877f2; color:#fff !important; text-decoration:none;
+  font-size:11.5px; font-weight:700; padding:7px 15px; border-radius:18px;
+  box-shadow:0 3px 11px rgba(24,119,242,.38);
+  transition:transform .2s,box-shadow .2s; font-family:"Poppins",sans-serif;
+}
+.gp-fb-btn:hover { transform:translateY(-2px); box-shadow:0 6px 17px rgba(24,119,242,.55); }
+
+/* ─── STEPS ─── */
+.gp-step {
+  display:flex; align-items:flex-start; gap:9px;
+  background:rgba(255,255,255,.022);
+  border:1px solid rgba(255,255,255,.048);
+  border-radius:9px; padding:10px 13px;
+}
+.gp-snum {
+  width:20px; height:20px; flex-shrink:0;
+  background:linear-gradient(135deg,#c8960c,#f5d060);
+  color:#1a1000; font-size:10px; font-weight:800;
+  border-radius:50%; display:flex; align-items:center; justify-content:center;
+  margin-top:1px;
+}
+.gp-stxt { font-size:11.5px; color:rgba(245,222,165,.68); line-height:1.5; font-family:"Poppins",sans-serif; }
+.gp-stxt strong { color:rgba(255,215,0,.88); }
+
+.gp-tip {
+  display:flex; align-items:center; gap:8px;
+  background:rgba(212,175,55,.055);
+  border:1px solid rgba(212,175,55,.15);
+  border-radius:8px; padding:9px 11px; margin-top:2px;
+  font-size:11px; color:rgba(245,222,165,.55); font-family:"Poppins",sans-serif;
+}
+.gp-tip > span:first-child { font-size:15px; flex-shrink:0; }
+.gp-tip strong { color:rgba(255,215,0,.82); }
+
+/* ─── START BUTTON ─── */
+.gp-start-btn {
+  display:block; width:100%; margin-top:16px; padding:11px;
+  background:linear-gradient(135deg,#c8960c 0%,#f5d060 40%,#d4a820 60%,#c8960c 100%);
+  color:#1a1000; border:none; border-radius:28px;
+  font-size:15px; font-weight:800; letter-spacing:.8px; cursor:pointer;
+  box-shadow:0 4px 18px rgba(200,150,12,.5),inset 0 1px 0 rgba(255,255,210,.38);
+  transition:transform .2s,box-shadow .2s; font-family:"Segoe UI Emoji","Apple Color Emoji","Noto Color Emoji","Segoe UI","Arial Unicode MS",system-ui,sans-serif;
+}
+.gp-start-btn:hover  { transform:translateY(-3px); box-shadow:0 8px 26px rgba(200,150,12,.62); }
+.gp-start-btn:active { transform:translateY(-1px); }
+
+/* ─── HISTORY POPUP ─── */
+#history-popup {
+  position:relative;
+  background:linear-gradient(160deg,#1c1508 0%,#2a1d0a 45%,#1a120a 100%);
+  border:1px solid rgba(212,175,55,.38);
+  border-radius:18px; padding:28px 24px 24px;
+  width:min(390px,calc(100vw - 24px));
+  max-height:88vh; overflow-y:auto;
+  box-shadow:0 0 0 1px rgba(245,215,120,.07),0 26px 75px rgba(0,0,0,.8),inset 0 1px 0 rgba(255,235,150,.09);
+  animation:popIn .4s cubic-bezier(.34,1.56,.64,1) forwards;
+  scrollbar-width:thin; scrollbar-color:rgba(212,175,55,.22) transparent;
+}
+#history-popup::-webkit-scrollbar{ width:4px; }
+#history-popup::-webkit-scrollbar-thumb{ background:rgba(212,175,55,.22); border-radius:2px; }
+
+.hp-head { display:flex; align-items:center; gap:11px; }
+.hp-head-icon { font-size:28px; }
+.hp-title { font-size:16px; font-weight:800; font-family:"Poppins",sans-serif; background:linear-gradient(175deg,#fff8dc 0%,#f5d060 35%,#d4a820 60%,#fff8dc 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin-bottom:2px; }
+.hp-sub   { font-size:11px; color:rgba(245,230,180,.38); font-family:"Poppins",sans-serif; }
+
+#hp-uid-box {
+  display:flex; align-items:center; gap:8px; flex-wrap:wrap;
+  background:rgba(212,175,55,.07); border:1px solid rgba(212,175,55,.22);
+  border-radius:9px; padding:8px 12px; margin-top:12px;
+}
+.hp-uid-lbl { font-size:9px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:rgba(212,175,55,.48); font-family:"Poppins",sans-serif; }
+#hp-uid-val { font-size:13px; font-weight:800; letter-spacing:2.5px; color:rgba(255,220,100,.95); font-family:"Poppins",sans-serif; flex:1; }
+.hp-copy-btn { background:rgba(212,175,55,.13); border:1px solid rgba(212,175,55,.28); color:rgba(255,220,100,.78); padding:3px 10px; border-radius:16px; font-size:10px; font-weight:600; cursor:pointer; transition:all .2s; font-family:"Poppins",sans-serif; }
+.hp-copy-btn:hover { background:rgba(212,175,55,.25); color:#ffd700; }
+
+.hp-divider { height:1px; background:linear-gradient(90deg,transparent,rgba(212,175,55,.22),transparent); margin:12px 0; }
+
+#history-list { display:flex; flex-direction:column; gap:6px; }
+.h-empty { text-align:center; color:rgba(245,230,180,.25); font-size:13px; font-family:"Poppins",sans-serif; padding:26px 0; line-height:1.8; }
+.h-item { display:flex; align-items:center; gap:10px; background:rgba(255,255,255,.025); border:1px solid rgba(255,255,255,.052); border-radius:8px; padding:9px 11px; }
+.h-item.h-rare    { border-color:rgba(255,100,180,.25); background:rgba(255,80,160,.04); box-shadow:0 0 7px rgba(255,100,180,.1); }
+.h-item.h-jackpot { border-color:rgba(150,0,255,.42); background:linear-gradient(135deg,rgba(60,0,100,.14),rgba(0,70,140,.07)); box-shadow:0 0 9px rgba(150,0,255,.14); animation:jpGlow 2.5s ease-in-out infinite; }
+.h-item-icon { font-size:20px; flex-shrink:0; }
+.h-item-info { flex:1; }
+.h-item-name { font-size:12px; font-weight:600; color:rgba(255,238,195,.85); font-family:"Poppins",sans-serif; }
+.h-item.h-jackpot .h-item-name { background:linear-gradient(90deg,#ff66ff,#a000ff,#00ccff,#ff66ff); background-size:300% 100%; -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; animation:neonTxt 2s linear infinite; }
+.h-item-time { font-size:10px; color:rgba(200,178,135,.35); font-family:"Poppins",sans-serif; margin-top:2px; }
+.h-item-num  { font-size:10px; font-weight:700; color:rgba(200,178,135,.28); font-family:"Poppins",sans-serif; flex-shrink:0; }
+
+.hp-claim { display:flex; gap:9px; align-items:flex-start; background:rgba(150,0,255,.04); border:1px solid rgba(150,0,255,.18); border-radius:9px; padding:10px 12px; margin-top:12px; }
+
+.h-pity-tag {
+  display:inline-block; font-size:9px; font-weight:700;
+  background:rgba(255,140,0,.18); color:#ffaa44;
+  border:1px solid rgba(255,140,0,.35); border-radius:10px;
+  padding:1px 6px; margin-left:5px; vertical-align:middle;
+  letter-spacing:.3px;
+}
+.hp-claim > span:first-child { font-size:15px; flex-shrink:0; margin-top:1px; }
+.hp-claim p { font-size:11px; color:rgba(215,195,160,.56); margin:0; line-height:1.5; font-family:"Poppins",sans-serif; }
 
 
+/* ─── PITY CHIP (right half of merged pill) ─── */
+#pity-chip {
+  display: flex; align-items: center; gap: 8px;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 5px 16px 5px 12px;
+  white-space: nowrap;
+  min-width: 190px;
+}
+.pc-icon { font-size:14px; flex-shrink:0; filter:drop-shadow(0 0 4px rgba(255,215,0,.5)); }
+.pc-track { flex:1; display:flex; flex-direction:column; gap:3px; }
+.pc-label-row { display:flex; justify-content:space-between; align-items:center; }
+.pc-label { font-size:9px; font-weight:600; letter-spacing:.8px; text-transform:uppercase; color:rgba(212,175,55,.55); font-family:"Poppins",sans-serif; }
+.pc-nums { font-size:10px; font-weight:700; font-family:"Poppins",sans-serif; color:rgba(255,220,100,.8); }
+.pc-slash { opacity:.4; margin:0 1px; }
+.pc-max { opacity:.5; }
+.pc-bar-bg {
+  position:relative; height:4px; border-radius:3px;
+  background:rgba(255,255,255,.08);
+  overflow:hidden;
+}
+.pc-bar-fill {
+  position:absolute; left:0; top:0; height:100%; border-radius:3px;
+  background: linear-gradient(90deg,#c8960c,#f5d060,#ffe87c);
+  transition: width .5s ease;
+}
+.pc-bar-glow {
+  position:absolute; left:0; top:-1px; height:200%; border-radius:3px;
+  background: linear-gradient(90deg,transparent,rgba(255,230,100,.35));
+  transition: width .5s ease;
+  filter: blur(2px);
+}
+
+/* near-100 pity warning — animate the outer merged pill */
+#pity-chip.pity-warn ~ * { }
+#merged-pill:has(#pity-chip.pity-warn) {
+  border-color: rgba(255,140,0,.6);
+  animation: pityWarn 1.5s ease-in-out infinite;
+}
+#pity-chip.pity-warn .pc-bar-fill { background:linear-gradient(90deg,#ff6600,#ffaa00,#ffe87c); }
+@keyframes pityWarn {
+  0%,100%{ box-shadow:0 4px 20px rgba(255,140,0,.22),0 0 0 1px rgba(255,140,0,.2); }
+  50%    { box-shadow:0 6px 28px rgba(255,140,0,.45),0 0 0 1.5px rgba(255,140,0,.45); }
+}
+
+/* ─── TOAD INFO BUTTON (inside guide popup) ─── */
+.gp-toad-info-row { margin-top:2px; }
+.gp-toad-info-btn {
+  display:inline-flex; align-items:center; gap:7px;
+  background:rgba(90,158,58,.12); border:1px solid rgba(90,158,58,.3);
+  color:rgba(180,240,140,.82); font-size:11.5px; font-weight:600;
+  padding:7px 14px; border-radius:20px; cursor:pointer;
+  transition:all .2s; font-family:"Poppins",sans-serif;
+}
+.gp-toad-info-btn:hover {
+  background:rgba(90,158,58,.22); border-color:rgba(90,158,58,.55);
+  color:#b4f08c; transform:translateY(-1px);
+}
+
+/* ─── TOAD INFO POPUP ─── */
+#toad-info-overlay {
+  display:none; position:fixed; inset:0;
+  background:rgba(6,4,1,.93); z-index:210000;
+  justify-content:center; align-items:center; padding:12px;
+}
+#toad-info-overlay.show { display:flex; animation:fadeIn .3s ease forwards; }
+
+#toad-info-popup {
+  position:relative;
+  background:linear-gradient(155deg,#0e1a08 0%,#162210 55%,#0a1206 100%);
+  border:1px solid rgba(90,158,58,.4);
+  border-radius:18px; padding:28px 30px 24px;
+  width:min(680px,calc(100vw - 24px));
+  max-height:88vh; overflow-y:auto;
+  box-shadow:0 0 0 1px rgba(90,200,60,.08),0 26px 70px rgba(0,0,0,.85),inset 0 1px 0 rgba(120,200,80,.09);
+  animation:popIn .4s cubic-bezier(.34,1.56,.64,1) forwards;
+  scrollbar-width:thin; scrollbar-color:rgba(90,158,58,.22) transparent;
+}
+
+.ti-header { display:flex; align-items:center; gap:14px; }
+.ti-title {
+  font-size:20px; font-weight:800; font-family:"Poppins",sans-serif;
+  background:linear-gradient(160deg,#d0ffa0 0%,#7dd87d 35%,#4a9e30 60%,#7dd87d 85%,#d0ffa0 100%);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+  margin-bottom:3px;
+}
+.ti-sub { font-size:12px; color:rgba(180,230,140,.4); font-family:"Poppins",sans-serif; }
+.ti-divider { height:1px; background:linear-gradient(90deg,transparent,rgba(90,158,58,.28),transparent); margin:16px 0; }
+
+/* Table */
+.ti-table-wrap { overflow-x:auto; }
+.ti-table {
+  width:100%; border-collapse:collapse; font-family:"Poppins",sans-serif;
+}
+.ti-table thead tr { border-bottom:1px solid rgba(90,158,58,.25); }
+.ti-table th {
+  font-size:10px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase;
+  color:rgba(140,210,100,.55); padding:6px 12px; text-align:left;
+}
+.ti-row td {
+  padding:9px 12px; font-size:12px; color:rgba(220,240,195,.7);
+  border-bottom:1px solid rgba(255,255,255,.04);
+}
+.ti-row:last-child td { border-bottom:none; }
+.ti-row:hover td { background:rgba(90,158,58,.05); }
+.ti-max td { color:rgba(255,220,100,.9) !important; }
+.ti-lv {
+  display:inline-block; font-size:10px; font-weight:700; color:#fff;
+  padding:2px 9px; border-radius:12px; letter-spacing:.3px;
+}
+
+/* Rules */
+.ti-rules-title { font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:rgba(140,210,100,.55); font-family:"Poppins",sans-serif; margin-bottom:10px; }
+.ti-rules { display:flex; flex-direction:column; gap:8px; }
+.ti-rule {
+  display:flex; align-items:flex-start; gap:10px;
+  background:rgba(90,158,58,.06); border:1px solid rgba(90,158,58,.12);
+  border-radius:9px; padding:9px 13px;
+  font-size:12px; color:rgba(210,235,180,.65); line-height:1.5; font-family:"Poppins",sans-serif;
+}
+.ti-rule-icon { font-size:16px; flex-shrink:0; margin-top:1px; }
+.ti-rule strong { color:rgba(255,220,100,.88); }
+
+.ti-close-btn {
+  display:block; width:100%; margin-top:18px; padding:11px;
+  background:linear-gradient(135deg,#2a6010 0%,#5ab830 40%,#3a8020 60%,#2a6010 100%);
+  color:#e8ffe0; border:none; border-radius:24px;
+  font-size:14px; font-weight:700; cursor:pointer; font-family:"Poppins",sans-serif;
+  box-shadow:0 4px 16px rgba(60,160,30,.4);
+  transition:transform .2s,box-shadow .2s;
+}
+.ti-close-btn:hover { transform:translateY(-2px); box-shadow:0 7px 22px rgba(60,160,30,.55); }
+
+/* Responsive additions */
+@media (max-width:680px) {
+  #pity-chip { min-width:160px; padding:4px 11px 4px 9px; }
+  .pc-label { font-size:8px; }
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width:680px) {
+  .gp-cols { grid-template-columns:1fr; }
+  .gp-vdiv { display:none; }
+  .gp-col  { padding:0; }
+  #guide-popup  { padding:16px 14px 14px; border-radius:14px; max-height:90vh; overflow-y:auto; }
+  #guide-chip   { top:14px; right:12px; padding:8px 14px; font-size:12px; }
+  #bottom-bar { top: calc(50% + 275px); }
+  #history-chip { padding:0 10px 0 10px; height:34px; }
+  #pity-chip { min-width:150px; padding:5px 12px 5px 10px; }
+}
+</style>
+
+<!-- ════════════════════════════════════════════
+     SCRIPTS
+     ════════════════════════════════════════════ -->
 <script>
-// Draw decorative gems and petals on the SVG border
-(function() {
-  const cx = 270, cy = 270, r = 268;
-  const gemsG = document.getElementById('gems');
-  const petalsG = document.getElementById('petals');
-
-  // 16 diamond gems evenly spaced
-  for (let i = 0; i < 16; i++) {
-    const angle = (i * 360 / 16 - 90) * Math.PI / 180;
-    const x = cx + r * Math.cos(angle);
-    const y = cy + r * Math.sin(angle);
-    // Diamond shape (rotated square)
-    const s = 6;
-    const pts = `${x},${y-s} ${x+s},${y} ${x},${y+s} ${x-s},${y}`;
-    const diamond = document.createElementNS('http://www.w3.org/2000/svg','polygon');
-    diamond.setAttribute('points', pts);
-    diamond.setAttribute('fill', 'url(#gemGrad)');
-    diamond.setAttribute('stroke', '#c8960c');
-    diamond.setAttribute('stroke-width', '0.5');
-    gemsG.appendChild(diamond);
+/* ── SVG border gems & petals ── */
+(function(){
+  var cx=270,cy=270,r=268;
+  var G=document.getElementById('gems'),P=document.getElementById('petals');
+  for(var i=0;i<16;i++){
+    var a=(i*22.5-90)*Math.PI/180,x=cx+r*Math.cos(a),y=cy+r*Math.sin(a),s=6;
+    var d=document.createElementNS('http://www.w3.org/2000/svg','polygon');
+    d.setAttribute('points',x+','+(y-s)+' '+(x+s)+','+y+' '+x+','+(y+s)+' '+(x-s)+','+y);
+    d.setAttribute('fill','url(#gemGrad)');d.setAttribute('stroke','#c8960c');d.setAttribute('stroke-width','0.5');
+    G.appendChild(d);
   }
-
-  // 8 lotus-style petal decorations at cardinal & diagonal points
-  for (let i = 0; i < 8; i++) {
-    const angle = (i * 45 - 90) * Math.PI / 180;
-    const pr = r - 14;
-    const x = cx + pr * Math.cos(angle);
-    const y = cy + pr * Math.sin(angle);
-    const circle = document.createElementNS('http://www.w3.org/2000/svg','circle');
-    circle.setAttribute('cx', x);
-    circle.setAttribute('cy', y);
-    circle.setAttribute('r', 8);
-    circle.setAttribute('fill', 'none');
-    circle.setAttribute('stroke', '#ffd700');
-    circle.setAttribute('stroke-width', '1.5');
-    circle.setAttribute('opacity', '0.7');
-    petalsG.appendChild(circle);
-
-    // Inner dot
-    const dot = document.createElementNS('http://www.w3.org/2000/svg','circle');
-    dot.setAttribute('cx', x);
-    dot.setAttribute('cy', y);
-    dot.setAttribute('r', 3);
-    dot.setAttribute('fill', '#ffd700');
-    dot.setAttribute('opacity', '0.9');
-    petalsG.appendChild(dot);
+  for(var j=0;j<8;j++){
+    var a2=(j*45-90)*Math.PI/180,pr=r-14,x2=cx+pr*Math.cos(a2),y2=cy+pr*Math.sin(a2);
+    var c=document.createElementNS('http://www.w3.org/2000/svg','circle');
+    c.setAttribute('cx',x2);c.setAttribute('cy',y2);c.setAttribute('r',8);
+    c.setAttribute('fill','none');c.setAttribute('stroke','#ffd700');c.setAttribute('stroke-width','1.5');c.setAttribute('opacity','0.7');
+    P.appendChild(c);
+    var dot=document.createElementNS('http://www.w3.org/2000/svg','circle');
+    dot.setAttribute('cx',x2);dot.setAttribute('cy',y2);dot.setAttribute('r',3);
+    dot.setAttribute('fill','#ffd700');dot.setAttribute('opacity','0.9');
+    P.appendChild(dot);
   }
-
-  // Animate the gradient rotation by rotating the dashed ring
-  let deg = 0;
-  function animateBorder() {
-    deg = (deg + 0.3) % 360;
-    const svg = document.getElementById('border-svg');
-    if (svg) {
-      const gemsEl = svg.getElementById ? svg.getElementById('gems') : null;
-      // rotate the dashed ring and gems together slowly
-    }
-    requestAnimationFrame(animateBorder);
-  }
-  animateBorder();
 })();
 </script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="spinv1.js"></script>
 
-
 <!-- ── RESOURCE HUD ── -->
 <div id="resource-hud"></div>
-
-<!-- ── INFO POPUP ── -->
-<div id="info-overlay">
-  <div id="info-popup"></div>
-</div>
+<div id="info-overlay"><div id="info-popup"></div></div>
 
 <!-- ── TOAD PET UI ── -->
-<button id="toad-toggle-btn" aria-label="Cóc vàng">
-  <svg viewBox="0 0 40 34" width="36" height="30" xmlns="http://www.w3.org/2000/svg">
-    <ellipse cx="20" cy="24" rx="13" ry="9" fill="#5a9e3a"/>
-    <ellipse cx="20" cy="15" rx="11" ry="9" fill="#5a9e3a"/>
-    <ellipse cx="13" cy="9" rx="4" ry="4.5" fill="#4a8a2a" opacity="0.4"/>
-    <ellipse cx="27" cy="9" rx="4" ry="4.5" fill="#4a8a2a" opacity="0.4"/>
-    <ellipse cx="13" cy="9" rx="3" ry="3.5" fill="#fff"/>
-    <ellipse cx="27" cy="9" rx="3" ry="3.5" fill="#fff"/>
-    <circle cx="13" cy="9" r="2" fill="#222"/>
-    <circle cx="27" cy="9" r="2" fill="#222"/>
-    <circle cx="13.7" cy="8.3" r="0.7" fill="#fff"/>
-    <circle cx="27.7" cy="8.3" r="0.7" fill="#fff"/>
-    <path d="M15 19 Q20 23 25 19" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-    <circle cx="20" cy="30" r="4" fill="#FFD700" stroke="#c8960c" stroke-width="0.8"/>
-    <text x="20" y="33" font-size="5" fill="#8b5e0a" text-anchor="middle" font-weight="bold">$</text>
-  </svg>
-  <span class="btn-label">Cóc</span>
-  <span id="spin-counter" class="no-spin">0</span>
-</button>
-
+<div id="toad-btn-wrap">
+  <!-- Effects layers (outside button so they're not clipped) -->
+  <div class="tbw-rad-bg"></div>
+  <div class="tbw-ring"></div>
+  <div id="tbw-orbs"></div>
+  <span class="tbw-rune">✦</span>
+  <!-- The actual button -->
+  <button id="toad-toggle-btn" aria-label="Coc vang">
+    <svg id="toad-btn-svg" viewBox="0 0 40 34" width="36" height="30" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="20" cy="24" rx="13" ry="9" fill="#5a9e3a"/>
+      <ellipse cx="20" cy="15" rx="11" ry="9" fill="#5a9e3a"/>
+      <ellipse cx="13" cy="9" rx="4" ry="4.5" fill="#4a8a2a" opacity="0.4"/>
+      <ellipse cx="27" cy="9" rx="4" ry="4.5" fill="#4a8a2a" opacity="0.4"/>
+      <ellipse cx="13" cy="9" rx="3" ry="3.5" fill="#fff"/>
+      <ellipse cx="27" cy="9" rx="3" ry="3.5" fill="#fff"/>
+      <circle cx="13" cy="9" r="2" fill="#222"/>
+      <circle cx="27" cy="9" r="2" fill="#222"/>
+      <circle cx="13.7" cy="8.3" r="0.7" fill="#fff"/>
+      <circle cx="27.7" cy="8.3" r="0.7" fill="#fff"/>
+      <path d="M15 19 Q20 23 25 19" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+      <circle cx="20" cy="30" r="4" fill="#FFD700" stroke="#c8960c" stroke-width="0.8"/>
+      <text x="20" y="33" font-size="5" fill="#8b5e0a" text-anchor="middle" font-weight="bold">$</text>
+    </svg>
+    <span class="btn-label">Cóc</span>
+    <span id="spin-counter" class="no-spin">0</span>
+  </button>
+</div>
 <div id="toad-panel"></div>
 <div id="toad-toast"></div>
 <script src="toad.js"></script>
+
+<script>
+/* ══ UID — permanent per-device ══ */
+(function(){
+  var uid=localStorage.getItem('spin_uid');
+  if(!uid){
+    var c='ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; uid='UID-';
+    for(var i=0;i<8;i++) uid+=c[Math.floor(Math.random()*c.length)];
+    localStorage.setItem('spin_uid',uid);
+  }
+  window.SPIN_UID=uid;
+})();
+
+/* ══ HISTORY helpers ══ */
+function getHistory(){ try{return JSON.parse(localStorage.getItem('spin_history')||'[]');}catch(e){return[];} }
+function saveHistory(a){ localStorage.setItem('spin_history',JSON.stringify(a.slice(0,10))); }
+
+function recordSpin(prize, wasPityTrigger){
+  var a=getHistory(), now=new Date(), p=function(n){return n<10?'0'+n:n;};
+  // pityTriggered: true only when this spin was the guaranteed pity spin
+  a.unshift({label:prize.label,name:prize.name,type:prize.type,uid:window.SPIN_UID,
+    time:p(now.getDate())+'/'+p(now.getMonth()+1)+'/'+now.getFullYear()+' '+p(now.getHours())+':'+p(now.getMinutes()),
+    pityTriggered: !!wasPityTrigger});
+  saveHistory(a);
+  updateBadge();
+  updatePityUI();
+}
+window.addSpinHistory=recordSpin;
+
+function updateBadge(){
+  var n=getHistory().length, el=document.getElementById('hc-count');
+  if(el) el.textContent=n+' lượt';
+}
+
+/* ══ HISTORY POPUP ══ */
+function renderHistory(){
+  var uid=document.getElementById('hp-uid-val');
+  if(uid) uid.textContent=window.SPIN_UID;
+  var a=getHistory(), list=document.getElementById('history-list');
+  if(!list) return;
+  if(!a.length){ list.innerHTML='<div class="h-empty">Chưa có lượt quay nào 🎰<br>Hãy thử vận may của bạn!</div>'; return; }
+  list.innerHTML=a.map(function(item,i){
+    var cls='h-item'+(item.type==='rare'?(item.label.indexOf('⭐⭐')>=0?' h-jackpot':' h-rare'):'');
+    var pityTag = item.pityTriggered ? '<span class="h-pity-tag">🎯 Pity</span>' : '';
+    return '<div class="'+cls+'"><span class="h-item-icon">'+item.label+'</span>'
+      +'<div class="h-item-info"><div class="h-item-name">'+item.name+pityTag+'</div>'
+      +'<div class="h-item-time">⏰ '+item.time+'</div></div>'
+      +'<span class="h-item-num">#'+(a.length-i)+'</span></div>';
+  }).join('');
+}
+
+function copyUID(){
+  navigator.clipboard.writeText(window.SPIN_UID)
+    .then(function(){ if(typeof showToadToast!=='undefined') showToadToast('✅ Đã sao chép UID!'); })
+    .catch(function(){ prompt('Sao chep UID:',window.SPIN_UID); });
+}
+
+function openHistoryPopup(){ renderHistory(); document.getElementById('history-overlay').classList.add('show'); }
+function closeHistoryPopup(){ document.getElementById('history-overlay').classList.remove('show'); }
+function openGuidePopup()   { document.getElementById('guide-overlay').classList.add('show'); }
+function closeGuidePopup()  { document.getElementById('guide-overlay').classList.remove('show'); sessionStorage.setItem('guide_seen','1'); }
+
+/* ══ INIT ══ */
+window.addEventListener('load',function(){
+  updateBadge();
+  updatePityUI();
+  if(!sessionStorage.getItem('guide_seen'))
+    setTimeout(function(){ document.getElementById('guide-overlay').classList.add('show'); },600);
+});
+
+
+/* ══ PITY CHIP UI ══ */
+function updatePityUI() {
+  var n = 0;
+  try { n = parseInt(localStorage.getItem('spin_pity') || '0'); } catch(e) {}
+  var cur = document.getElementById('pc-current');
+  var fill = document.getElementById('pc-bar-fill');
+  var glow = document.getElementById('pc-bar-glow');
+  var chip = document.getElementById('pity-chip');
+  if (cur)  cur.textContent = n;
+  var pct = Math.min(n / 100 * 100, 100);
+  if (fill) fill.style.width = pct + '%';
+  if (glow) glow.style.width = pct + '%';
+  if (chip) {
+    if (n >= 80) chip.classList.add('pity-warn');
+    else         chip.classList.remove('pity-warn');
+  }
+}
+
+/* ══ TOAD INFO POPUP ══ */
+function openToadInfoPopup() {
+  var el = document.getElementById('toad-info-overlay');
+  if (el) el.classList.add('show');
+}
+function closeToadInfoPopup() {
+  var el = document.getElementById('toad-info-overlay');
+  if (el) el.classList.remove('show');
+}
+
+/* ══ spin history recorded directly in spinv1.js via addSpinHistory() ══ */
+</script>
+
+<!-- ══ TOAD INFO POPUP ══ -->
+<div id="toad-info-overlay" onclick="if(event.target===this)closeToadInfoPopup()">
+  <div id="toad-info-popup">
+    <button class="gp-x" onclick="closeToadInfoPopup()">✕</button>
+
+    <div class="ti-header">
+      <svg viewBox="0 0 40 34" width="36" height="30" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="20" cy="24" rx="13" ry="9" fill="#5a9e3a"/>
+        <ellipse cx="20" cy="15" rx="11" ry="9" fill="#5a9e3a"/>
+        <ellipse cx="13" cy="9" rx="4" ry="4.5" fill="#4a8a2a" opacity="0.4"/>
+        <ellipse cx="27" cy="9" rx="4" ry="4.5" fill="#4a8a2a" opacity="0.4"/>
+        <ellipse cx="13" cy="9" rx="3" ry="3.5" fill="#fff"/><ellipse cx="27" cy="9" rx="3" ry="3.5" fill="#fff"/>
+        <circle cx="13" cy="9" r="2" fill="#222"/><circle cx="27" cy="9" r="2" fill="#222"/>
+        <circle cx="20" cy="30" r="4" fill="#FFD700" stroke="#c8960c" stroke-width="0.8"/>
+        <text x="20" y="33" font-size="5" fill="#8b5e0a" text-anchor="middle" font-weight="bold">$</text>
+      </svg>
+      <div>
+        <div class="ti-title">Cóc Vàng — Bảng Cấp Độ</div>
+        <div class="ti-sub">Nuôi cóc · Lên cấp · Nhận spin</div>
+      </div>
+    </div>
+
+    <div class="ti-divider"></div>
+
+    <!-- Level table -->
+    <div class="ti-table-wrap">
+      <table class="ti-table">
+        <thead>
+          <tr>
+            <th>Cấp</th>
+            <th>Coin cần</th>
+            <th>Spin/lần nhận</th>
+            <th>Thời gian hồi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="ti-row"><td><span class="ti-lv" style="background:#5a9e3a">Cấp 1</span></td><td>5 🪙</td><td>1 spin</td><td>3 giờ</td></tr>
+          <tr class="ti-row"><td><span class="ti-lv" style="background:#3aae6e">Cấp 2</span></td><td>10 🪙</td><td>2 spin</td><td>2.5 giờ</td></tr>
+          <tr class="ti-row"><td><span class="ti-lv" style="background:#2090c0">Cấp 3</span></td><td>18 🪙</td><td>3 spin</td><td>2 giờ</td></tr>
+          <tr class="ti-row"><td><span class="ti-lv" style="background:#a040d0">Cấp 4</span></td><td>28 🪙</td><td>4 spin</td><td>1.5 giờ</td></tr>
+          <tr class="ti-row"><td><span class="ti-lv" style="background:#e8a000">Cấp 5</span></td><td>40 🪙</td><td>5 spin</td><td>1.2 giờ</td></tr>
+          <tr class="ti-row"><td><span class="ti-lv" style="background:#cc2222">Cấp 6</span></td><td>60 🪙</td><td>6 spin</td><td>54 phút</td></tr>
+          <tr class="ti-row ti-max"><td><span class="ti-lv" style="background:linear-gradient(135deg,#ff6600,#ffcc00)">Cấp 7 ✦</span></td><td>MAX</td><td>7 spin</td><td>36 phút</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="ti-divider"></div>
+
+    <!-- Rules -->
+    <div class="ti-rules-title">📜 Quy luật nhận Spin</div>
+    <div class="ti-rules">
+      <div class="ti-rule">
+        <span class="ti-rule-icon">🐸</span>
+        <span>Sau mỗi <strong>chu kỳ hồi</strong>, nút <strong style="color:#6FE87A">Nhận Spin</strong> xuất hiện trên góc trên phải. Bạn cần chủ động bấm nhận — spin chỉ được cộng khi bạn bấm.</span>
+      </div>
+      <div class="ti-rule">
+        <span class="ti-rule-icon">🎰</span>
+        <span>Spin <strong>không tích lũy qua ngày</strong>. Lúc <strong>00:00</strong> mỗi đêm, spin còn lại bị xoá. Dùng hết trong ngày!</span>
+      </div>
+      <div class="ti-rule">
+        <span class="ti-rule-icon">🪙</span>
+        <span>Coin đến từ <strong>quay vòng quay</strong> — 6 ô vàng cho 🪙1, 🪙2 hoặc 🪙3 coin mỗi lần.</span>
+      </div>
+      <div class="ti-rule">
+        <span class="ti-rule-icon">⬆</span>
+        <span>Tích đủ coin → bấm <strong style="color:#F5D060">Lên Cấp</strong> trong panel Cóc. Khi lên cấp, nhận ngay một batch spin thưởng!</span>
+      </div>
+      <div class="ti-rule">
+        <span class="ti-rule-icon">⭐</span>
+        <span>Tỷ lệ ⭐ là ~0.5%, ⭐⭐ là ~0.2%. Sau <strong>100 spin</strong> không trúng hiếm → <strong>đảm bảo</strong> trúng ⭐ lần tiếp theo.</span>
+      </div>
+    </div>
+
+    <button class="ti-close-btn" onclick="closeToadInfoPopup()">Đã hiểu! 👍</button>
+  </div>
+</div>
+
+
+<!-- ══ PITY POPUP — 100 spin guarantee ══ -->
+<div id="pity-overlay">
+  <div id="pity-popup">
+    <div class="pp-particles">
+      <div class="pp-p pp-p1"></div><div class="pp-p pp-p2"></div>
+      <div class="pp-p pp-p3"></div><div class="pp-p pp-p4"></div>
+      <div class="pp-p pp-p5"></div><div class="pp-p pp-p6"></div>
+    </div>
+    <div class="pp-star-row">
+      <span class="pp-star-l">⭐</span>
+      <div class="pp-badge">🎯 PITY</div>
+      <span class="pp-star-r">⭐</span>
+    </div>
+    <div class="pp-title">Đảm Bảo 100 Spin!</div>
+    <div class="pp-sub">Sau 100 lượt quay, bạn chắc chắn nhận được phần thưởng siêu hiếm</div>
+    <div class="pp-divider"></div>
+    <div class="pp-prize-label">Phần thưởng của bạn</div>
+    <div class="pp-prize-icon" id="pp-prize-icon">⭐</div>
+    <div class="pp-prize-name" id="pp-prize-name">✨ Siêu hiếm! Phần thưởng đặc biệt!</div>
+    <div class="pp-divider"></div>
+    <div class="pp-claim-note">
+      <strong>Chụp màn hình lịch sử quay</strong> (có tag 🎯 Pity + UID) rồi nhắn Fanpage để nhận thưởng:
+    </div>
+    <a href="https://www.facebook.com/profile.php?id=61586414162477" target="_blank" class="pp-fb-btn">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.267h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+      Nhắn Fanpage ngay
+    </a>
+    <button class="pp-close-btn" id="pp-close-btn">Đã nhận thưởng ✓</button>
+  </div>
+</div>
+
+<style>
+/* ── RARE/JACKPOT POPUP (shared overlay) ── */
+#pity-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(4,2,0,.95);
+  z-index: 300000;
+  justify-content: center; align-items: center; padding: 16px;
+}
+#pity-overlay.show { display: flex; animation: fadeIn .4s ease forwards; }
+
+/* BASE popup box */
+#pity-popup {
+  position: relative; overflow: hidden;
+  border-radius: 22px; padding: 32px 30px 28px;
+  width: min(420px, calc(100vw - 24px));
+  text-align: center;
+  animation: popIn .5s cubic-bezier(.34,1.56,.64,1) forwards;
+}
+
+/* ── VARIANT: pp-rare (⭐ Siêu Hiếm) — hồng nhạt ấm ── */
+#pity-popup.pp-rare {
+  background: linear-gradient(155deg, #1a0818 0%, #280d22 50%, #140610 100%);
+  border: 1px solid rgba(255,100,180,.45);
+  box-shadow:
+    0 0 0 1px rgba(255,150,200,.1),
+    0 28px 75px rgba(0,0,0,.85),
+    0 0 45px rgba(255,80,160,.14),
+    inset 0 1px 0 rgba(255,180,220,.09);
+}
+#pity-popup.pp-rare .pp-p1 { background:#ff99cc; }
+#pity-popup.pp-rare .pp-p2 { background:#ff66aa; }
+#pity-popup.pp-rare .pp-p3 { background:#ffb3d9; }
+#pity-popup.pp-rare .pp-p4 { background:#ff88bb; }
+#pity-popup.pp-rare .pp-p5 { background:#ffd6eb; }
+#pity-popup.pp-rare .pp-p6 { background:#ff66aa; }
+#pity-popup.pp-rare .pp-star-l,
+#pity-popup.pp-rare .pp-star-r {
+  filter: drop-shadow(0 0 6px #ff88cc) drop-shadow(0 0 14px #ff44aa);
+  animation: ppStarGlowRare 1.8s ease-in-out infinite;
+}
+#pity-popup.pp-rare .pp-star-r { animation-delay:-.9s; }
+@keyframes ppStarGlowRare {
+  0%,100%{ filter:drop-shadow(0 0 5px #ff88cc) drop-shadow(0 0 12px #ff44aa); }
+  50%    { filter:drop-shadow(0 0 10px #ffaadd) drop-shadow(0 0 22px #ff66bb); }
+}
+#pity-popup.pp-rare .pp-badge {
+  background: rgba(255,100,180,.15);
+  border-color: rgba(255,100,180,.45);
+  color: #ffadd8;
+  text-shadow: 0 0 7px rgba(255,100,180,.6);
+  box-shadow: 0 0 10px rgba(255,100,180,.2);
+}
+#pity-popup.pp-rare .pp-title {
+  background: linear-gradient(135deg, #ffccdd, #ff88bb, #ff44aa, #ffccdd);
+  background-size: 300% 100%;
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  animation: neonTxtRare 2.5s linear infinite;
+}
+@keyframes neonTxtRare { 0%{background-position:0% 50%} 100%{background-position:300% 50%} }
+#pity-popup.pp-rare .pp-sub { color: rgba(255,180,210,.5); }
+#pity-popup.pp-rare .pp-divider { background:linear-gradient(90deg,transparent,rgba(255,100,180,.3),transparent); }
+#pity-popup.pp-rare .pp-prize-label { color: rgba(255,130,180,.5); }
+#pity-popup.pp-rare .pp-prize-icon { filter:drop-shadow(0 0 8px #ff88cc) drop-shadow(0 0 18px #ff44aa); }
+#pity-popup.pp-rare .pp-prize-name { color: rgba(255,210,230,.85); }
+#pity-popup.pp-rare .pp-claim-note {
+  color: rgba(255,190,215,.6);
+  background: rgba(255,100,180,.05);
+  border-color: rgba(255,100,180,.2);
+}
+#pity-popup.pp-rare .pp-claim-note strong { color: rgba(255,200,225,.9); }
+#pity-popup.pp-rare .pp-close-btn {
+  background: linear-gradient(135deg, rgba(255,100,180,.2), rgba(255,60,140,.1));
+  border-color: rgba(255,100,180,.4);
+  color: #ffadd8;
+  box-shadow: 0 0 14px rgba(255,100,180,.2);
+}
+#pity-popup.pp-rare .pp-close-btn:hover { box-shadow: 0 0 22px rgba(255,100,180,.4); }
+
+/* ── VARIANT: pp-jackpot (⭐⭐ Cực Hiếm) — tím neon đặc sắc ── */
+#pity-popup.pp-jackpot {
+  background: linear-gradient(155deg, #0d0820 0%, #180c30 50%, #0a0518 100%);
+  border: 1px solid rgba(180,100,255,.5);
+  box-shadow:
+    0 0 0 1px rgba(200,150,255,.12),
+    0 30px 80px rgba(0,0,0,.85),
+    0 0 60px rgba(150,0,255,.22),
+    inset 0 1px 0 rgba(200,150,255,.1);
+}
+#pity-popup.pp-jackpot .pp-p1 { background:#ff66ff; }
+#pity-popup.pp-jackpot .pp-p2 { background:#aa00ff; }
+#pity-popup.pp-jackpot .pp-p3 { background:#00d0ff; }
+#pity-popup.pp-jackpot .pp-p4 { background:#ff66ff; }
+#pity-popup.pp-jackpot .pp-p5 { background:#ffe080; }
+#pity-popup.pp-jackpot .pp-p6 { background:#aa00ff; }
+#pity-popup.pp-jackpot .pp-star-l,
+#pity-popup.pp-jackpot .pp-star-r {
+  filter: drop-shadow(0 0 8px #ff66ff) drop-shadow(0 0 18px #aa00ff);
+  animation: ppStarGlow 1.8s ease-in-out infinite;
+}
+#pity-popup.pp-jackpot .pp-star-r { animation-delay:-.9s; }
+#pity-popup.pp-jackpot .pp-badge {
+  background: linear-gradient(135deg, rgba(160,0,255,.3), rgba(0,200,255,.2));
+  border-color: rgba(160,0,255,.6);
+  color: #ddb8ff;
+  text-shadow: 0 0 8px rgba(160,0,255,.8);
+  box-shadow: 0 0 12px rgba(160,0,255,.3);
+}
+#pity-popup.pp-jackpot .pp-title {
+  background: linear-gradient(135deg, #ff88ff, #aa00ff, #00d0ff, #ff88ff);
+  background-size: 300% 100%;
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  animation: neonTxt 2.5s linear infinite;
+}
+#pity-popup.pp-jackpot .pp-sub { color: rgba(200,170,255,.55); }
+#pity-popup.pp-jackpot .pp-divider { background:linear-gradient(90deg,transparent,rgba(160,0,255,.3),transparent); }
+#pity-popup.pp-jackpot .pp-prize-label { color: rgba(180,130,255,.5); }
+#pity-popup.pp-jackpot .pp-prize-icon { filter:drop-shadow(0 0 10px #ff66ff) drop-shadow(0 0 22px #aa00ff); }
+#pity-popup.pp-jackpot .pp-prize-name { color: rgba(230,200,255,.85); }
+#pity-popup.pp-jackpot .pp-claim-note {
+  color: rgba(210,180,255,.6);
+  background: rgba(160,0,255,.06);
+  border-color: rgba(160,0,255,.2);
+}
+#pity-popup.pp-jackpot .pp-claim-note strong { color: rgba(220,180,255,.9); }
+#pity-popup.pp-jackpot .pp-close-btn {
+  background: linear-gradient(135deg, rgba(160,0,255,.25), rgba(0,180,255,.2));
+  border-color: rgba(160,0,255,.5);
+  color: #ddb8ff;
+  box-shadow: 0 0 16px rgba(160,0,255,.25);
+}
+#pity-popup.pp-jackpot .pp-close-btn:hover { box-shadow: 0 0 24px rgba(160,0,255,.45); }
+
+/* SHARED elements */
+.pp-particles { position:absolute; inset:0; pointer-events:none; overflow:hidden; }
+.pp-p { position:absolute; border-radius:50%; animation: ppFloat 4s ease-in-out infinite; }
+.pp-p1{top:15%;left:12%;width:6px;height:6px;animation-delay:0s;}
+.pp-p2{top:25%;right:15%;width:4px;height:4px;animation-delay:-.7s;}
+.pp-p3{top:60%;left:8%;width:5px;height:5px;animation-delay:-1.4s;}
+.pp-p4{top:70%;right:10%;width:4px;height:4px;animation-delay:-2.1s;}
+.pp-p5{top:40%;left:5%;width:3px;height:3px;animation-delay:-2.8s;}
+.pp-p6{top:80%;left:50%;width:5px;height:5px;animation-delay:-3.5s;}
+@keyframes ppFloat { 0%,100%{transform:translateY(0) scale(1);opacity:.8;} 50%{transform:translateY(-16px) scale(1.3);opacity:1;} }
+@keyframes ppStarGlow { 0%,100%{filter:drop-shadow(0 0 6px #ff66ff) drop-shadow(0 0 14px #aa00ff);} 50%{filter:drop-shadow(0 0 14px #ff88ff) drop-shadow(0 0 28px #cc00ff) drop-shadow(0 0 6px #00ffff);} }
+
+.pp-star-row { display:flex; align-items:center; justify-content:center; gap:12px; margin-bottom:10px; }
+.pp-star-l,.pp-star-r { font-size:32px; }
+.pp-badge { font-size:11px; font-weight:800; letter-spacing:2px; padding:4px 12px; border-radius:20px; font-family:"Poppins",sans-serif; }
+.pp-title { font-size:22px; font-weight:800; margin-bottom:6px; font-family:"Poppins",sans-serif; }
+.pp-sub { font-size:12px; line-height:1.5; margin-bottom:0; font-family:"Poppins",sans-serif; }
+.pp-divider { height:1px; margin:16px 0; }
+.pp-prize-label { font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; font-family:"Poppins",sans-serif; margin-bottom:8px; }
+.pp-prize-icon { font-size:52px; line-height:1; margin-bottom:6px; }
+.pp-prize-name { font-size:15px; font-weight:700; font-family:"Poppins",sans-serif; margin-bottom:0; }
+.pp-claim-note { font-size:11.5px; line-height:1.55; border-radius:10px; padding:10px 14px; margin-bottom:12px; font-family:"Poppins",sans-serif; }
+.pp-fb-btn {
+  display:inline-flex; align-items:center; gap:7px;
+  background:#1877f2; color:#fff !important; text-decoration:none;
+  font-size:12px; font-weight:700; padding:9px 20px; border-radius:22px;
+  box-shadow:0 3px 12px rgba(24,119,242,.45);
+  transition:transform .2s,box-shadow .2s; font-family:"Poppins",sans-serif;
+  margin-bottom:12px;
+}
+.pp-fb-btn:hover { transform:translateY(-2px); box-shadow:0 6px 18px rgba(24,119,242,.6); }
+.pp-close-btn {
+  display:block; width:100%; margin-top:4px; padding:12px;
+  border-radius:26px; font-size:14px; font-weight:700; cursor:pointer;
+  transition:transform .2s,box-shadow .2s; font-family:"Poppins",sans-serif;
+}
+.pp-close-btn:hover { transform:translateY(-2px); }
+.pp-close-btn:active { transform:translateY(-1px); }
+</style>
+
+<script>
+function showPityPopup(result) {
+  var popup = document.getElementById('pity-popup');
+  var iconEl = document.getElementById('pp-prize-icon');
+  var nameEl = document.getElementById('pp-prize-name');
+  var badgeEl = document.querySelector('#pity-popup .pp-badge');
+  var titleEl = document.querySelector('#pity-popup .pp-title');
+  var subEl   = document.querySelector('#pity-popup .pp-sub');
+
+  // Set variant class based on prize
+  var isJackpot = (result.label === '⭐⭐');
+  popup.className = isJackpot ? 'pp-jackpot' : 'pp-rare';
+
+  if (iconEl) iconEl.textContent = result.label;
+  if (nameEl) nameEl.textContent = result.name;
+
+  if (isJackpot) {
+    if (badgeEl) badgeEl.textContent = '🌟 JACKPOT';
+    if (titleEl) titleEl.textContent = 'Cực Hiếm — Jackpot!';
+    if (subEl)   subEl.textContent   = 'Bạn vừa trúng phần thưởng cực kỳ hiếm — tài khoản ChatGPT Plus chính hãng!';
+  } else {
+    if (badgeEl) badgeEl.textContent = '✨ SIÊU HIẾM';
+    if (titleEl) titleEl.textContent = 'Xin Chúc Mừng!';
+    if (subEl)   subEl.textContent   = 'Bạn vừa trúng phần thưởng siêu hiếm — khoá học & phần mềm bản quyền miễn phí!';
+  }
+
+  document.getElementById('pity-overlay').classList.add('show');
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  var closeBtn = document.getElementById('pp-close-btn');
+  if (closeBtn) closeBtn.addEventListener('click', function() {
+    document.getElementById('pity-overlay').classList.remove('show');
+  });
+  var overlay = document.getElementById('pity-overlay');
+  if (overlay) overlay.addEventListener('click', function(e) {
+    if (e.target === overlay) overlay.classList.remove('show');
+  });
+});
+</script>
 
 </body>
 </html>

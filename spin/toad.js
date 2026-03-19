@@ -21,23 +21,12 @@ var TOAD_LEVELS = [
   null,
   { level:1, coinsToNext:5,    spins:1, cooldownMs:3.0 * 3600000 },
   { level:2, coinsToNext:10,   spins:2, cooldownMs:2.5 * 3600000 },
-  { level:3, coinsToNext:15,   spins:3, cooldownMs:2.0 * 3600000 },
-  { level:4, coinsToNext:20,   spins:4, cooldownMs:1.5 * 3600000 },
-  { level:5, coinsToNext:null, spins:5, cooldownMs:1.0 * 3600000 }
+  { level:3, coinsToNext:18,   spins:3, cooldownMs:2.0 * 3600000 },
+  { level:4, coinsToNext:28,   spins:4, cooldownMs:1.5 * 3600000 },
+  { level:5, coinsToNext:40,   spins:5, cooldownMs:1.2 * 3600000 },
+  { level:6, coinsToNext:60,   spins:6, cooldownMs:0.9 * 3600000 },
+  { level:7, coinsToNext:null, spins:7, cooldownMs:0.6 * 3600000 }
 ];
-// ─── STORAGE KEY theo từng user ───────────────────────────────────
-// Mỗi tài khoản có state riêng: 'toadPetState_<username>'
-// Nếu chưa đăng nhập → dùng key 'toadPetState_guest'
-function getStorageKey() {
-  try {
-    var u = JSON.parse(localStorage.getItem('currentUser'))
-          || JSON.parse(localStorage.getItem('user'));
-    if (u && u.username) return 'toadPetState_' + u.username;
-    if (u && u.email)    return 'toadPetState_' + u.email;
-  } catch(e) {}
-  return 'toadPetState_guest';
-}
-// Giữ biến STORAGE_KEY để không break bất kỳ code nào tham chiếu trực tiếp
 var STORAGE_KEY = 'toadPetState';
 
 // ─── STATE ────────────────────────────────────────────────────────
@@ -54,11 +43,11 @@ var toadState = {
 
 // ─── PERSISTENCE ──────────────────────────────────────────────────
 function saveState() {
-  try { localStorage.setItem(getStorageKey(), JSON.stringify(toadState)); } catch(e) {}
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(toadState)); } catch(e) {}
 }
 function loadState() {
   try {
-    var raw = localStorage.getItem(getStorageKey());
+    var raw = localStorage.getItem(STORAGE_KEY);
     if (raw) {
       var parsed = JSON.parse(raw);
       // Merge để đảm bảo các field mới luôn tồn tại
@@ -69,7 +58,7 @@ function loadState() {
 
 // ─── HELPERS ──────────────────────────────────────────────────────
 function getLevelCfg(lvl) {
-  return TOAD_LEVELS[Math.min(Math.max(lvl, 1), 5)];
+  return TOAD_LEVELS[Math.min(Math.max(lvl, 1), 7)];
 }
 
 /** ms còn lại cho đến khi sinh spin tiếp */
@@ -159,7 +148,7 @@ function useOneSpin() {
  * FIX: Nếu không đủ coin nhưng đang pending → reset pending (tránh spin bị khóa oan)
  */
 function checkLevelUp() {
-  if (toadState.level >= 5) {
+  if (toadState.level >= 7) {
     toadState.pendingLevelUp = false;
     return false;
   }
@@ -182,7 +171,7 @@ function checkLevelUp() {
 /** Thực sự lên cấp — chỉ gọi khi người dùng xác nhận. */
 function doLevelUp() {
   if (!toadState.pendingLevelUp) return false;
-  if (toadState.level >= 5) return false;
+  if (toadState.level >= 7) return false;
   var cfg = getLevelCfg(toadState.level);
   toadState.coins         -= cfg.coinsToNext;
   toadState.level++;
@@ -199,17 +188,19 @@ function doLevelUp() {
 
 // ─── SVG CÓC ──────────────────────────────────────────────────────
 function getToadSVG(lvl) {
-  var colors  = ['#5a9e3a', '#3aae6e', '#2090c0', '#a040d0', '#e8a000'];
-  var darkens = ['#1a4010', '#0a5030', '#004060', '#500080', '#804000'];
+  lvl = Math.min(Math.max(lvl, 1), 7);
+  var colors  = ['#5a9e3a', '#3aae6e', '#2090c0', '#a040d0', '#e8a000', '#cc2222', '#FFD700'];
+  var darkens = ['#1a4010', '#0a5030', '#004060', '#500080', '#804000', '#660000', '#b8860b'];
   var c = colors[lvl - 1], d = darkens[lvl - 1];
-  var crown = lvl >= 5
+  var crown = lvl >= 7
     ? '<polygon points="32,8 36,16 40,10 44,16 48,8 48,18 32,18" fill="#FFD700" stroke="#c8960c" stroke-width="1"/>'
     : '';
   var stars = '';
   for (var s = 0; s < lvl; s++)
     stars += '<text x="' + (18 + s * 10) + '" y="76" font-size="8" fill="#FFD700" text-anchor="middle">★</text>';
 
-  return '<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" width="64" height="64">' +
+  var baseSVG =
+    '<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" width="64" height="64">' +
     crown +
     '<ellipse cx="40" cy="50" rx="24" ry="18" fill="' + c + '"/>' +
     '<ellipse cx="40" cy="32" rx="20" ry="16" fill="' + c + '"/>' +
@@ -231,6 +222,50 @@ function getToadSVG(lvl) {
       : '') +
     stars +
     '</svg>';
+
+  // Cấp 1-5: trả về SVG thuần
+  if (lvl < 6) return baseSVG;
+
+  // Cấp 6 & 7: bọc trong wrapper có hiệu ứng A+B+D
+  var isLv7    = lvl === 7;
+  var ringCol  = isLv7 ? 'rgba(255,215,0,.8)'   : 'rgba(255,80,0,.7)';
+  var glowCol  = isLv7 ? 'rgba(255,215,0,.5)'   : 'rgba(255,80,0,.4)';
+  var runeCol  = isLv7 ? '#ffd700'               : '#ff6a00';
+  var runeGlow = isLv7 ? 'rgba(255,215,0,.9)'   : 'rgba(255,80,0,.85)';
+  var radBg    = isLv7 ? 'rgba(255,200,0,.18)'  : 'rgba(255,60,0,.15)';
+  var cls      = isLv7 ? 'toad-fx toad-fx-7'    : 'toad-fx toad-fx-6';
+
+  // Orb sparks: 3 for lv6, 4 for lv7 — inline SVG overlay
+  var orbs = '';
+  var orbCount = isLv7 ? 4 : 3;
+  var orbColors6 = ['#ff6a00','#ff4400','#ffaa00'];
+  var orbColors7 = ['#FFD700','#fff4a0','#FFD700','#ffe080'];
+  var orbR       = isLv7 ? 3 : 2.5;
+  for (var o = 0; o < orbCount; o++) {
+    var oColor = isLv7 ? orbColors7[o] : orbColors6[o];
+    var oDur   = isLv7 ? (2 + o * 0.15) + 's' : (3 + o * 0.2) + 's';
+    var oDel   = '-' + (o / orbCount * (isLv7 ? 2 : 3)).toFixed(2) + 's';
+    orbs +=
+      '<svg class="toad-orb-svg" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" width="64" height="64">' +
+        '<g style="transform-origin:32px 32px;animation:toadOrb ' + oDur + ' linear ' + oDel + ' infinite">' +
+          '<circle cx="40" cy="5" r="' + orbR + '" fill="' + oColor + '" opacity=".92"/>' +
+        '</g>' +
+      '</svg>';
+  }
+
+  return '<div class="' + cls + '" style="' +
+      '--ring-col:' + ringCol + ';' +
+      '--glow-col:' + glowCol + ';' +
+      '--rune-col:' + runeCol + ';' +
+      '--rune-glow:' + runeGlow + ';' +
+      '--rad-bg:' + radBg + ';' +
+    '">' +
+    '<div class="toad-rad-bg"></div>' +
+    '<span class="toad-rune">✦</span>' +
+    '<div class="toad-ring"></div>' +
+    '<div class="toad-svg-wrap">' + baseSVG + '</div>' +
+    orbs +
+  '</div>';
 }
 
 // ─── HUD (GÓC TRÊN PHẢI) ──────────────────────────────────────────
@@ -329,6 +364,8 @@ function hudClaimSpins() {
 
 /** Cập nhật toàn bộ UI sau khi state thay đổi (không gây vòng lặp) */
 function _updateAllUI() {
+  // 0. Cập nhật icon nút cóc ngoài
+  updateToggleBtnIcon();
   // 1. Badge nút cóc + enable/disable spin button
   var el = document.getElementById('spin-counter');
   if (el) {
@@ -355,6 +392,87 @@ function _updateAllUI() {
   var panel = document.getElementById('toad-panel');
   if (panel && panel.classList.contains('open')) renderToad();
 }
+
+// ─── CẬP NHẬT ICON NÚT CÓC NGOÀI ─────────────────────────────────
+function updateToggleBtnIcon() {
+  var wrap = document.getElementById('toad-btn-wrap');
+  var svgEl = document.getElementById('toad-btn-svg');
+  if (!wrap || !svgEl) return;
+
+  var lvl = toadState.level;
+  var colors  = ['#5a9e3a','#3aae6e','#2090c0','#a040d0','#e8a000','#cc2222','#FFD700'];
+  var darkens = ['#1a4010','#0a5030','#004060','#500080','#804000','#660000','#b8860b'];
+  var c = colors[lvl - 1], d = darkens[lvl - 1];
+
+  // Update SVG colors
+  var crown = lvl >= 7
+    ? '<polygon points="10,2 12.5,7 15,3.5 17.5,7 20,2 20,7 10,7" fill="#FFD700" stroke="#c8960c" stroke-width="0.5"/>'
+    : '';
+  var spots = lvl >= 3
+    ? '<circle cx="17" cy="23" r="1.5" fill="' + d + '" opacity="0.45"/><circle cx="23" cy="25" r="1.2" fill="' + d + '" opacity="0.45"/>'
+    : '';
+  svgEl.innerHTML =
+    crown +
+    '<ellipse cx="20" cy="24" rx="13" ry="9" fill="' + c + '"/>' +
+    '<ellipse cx="20" cy="15" rx="11" ry="9" fill="' + c + '"/>' +
+    '<ellipse cx="13" cy="9" rx="4" ry="4.5" fill="' + d + '" opacity="0.4"/>' +
+    '<ellipse cx="27" cy="9" rx="4" ry="4.5" fill="' + d + '" opacity="0.4"/>' +
+    '<ellipse cx="13" cy="9" rx="3" ry="3.5" fill="#fff"/>' +
+    '<ellipse cx="27" cy="9" rx="3" ry="3.5" fill="#fff"/>' +
+    '<circle cx="13" cy="9" r="2" fill="#222"/>' +
+    '<circle cx="27" cy="9" r="2" fill="#222"/>' +
+    '<circle cx="13.7" cy="8.3" r="0.7" fill="#fff"/>' +
+    '<circle cx="27.7" cy="8.3" r="0.7" fill="#fff"/>' +
+    '<path d="M15 19 Q20 23 25 19" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round"/>' +
+    '<circle cx="20" cy="30" r="4" fill="#FFD700" stroke="#c8960c" stroke-width="0.8"/>' +
+    '<text x="20" y="33" font-size="5" fill="#8b5e0a" text-anchor="middle" font-weight="bold">$</text>' +
+    spots;
+
+  // Set wrapper data-level for CSS targeting
+  wrap.setAttribute('data-level', lvl);
+
+  // Effects only for lv6/7
+  var orbsEl = document.getElementById('tbw-orbs');
+  if (lvl < 6) {
+    if (orbsEl) orbsEl.innerHTML = '';
+    return;
+  }
+
+  var isLv7     = lvl === 7;
+  var ringCol   = isLv7 ? 'rgba(255,215,0,.85)'  : 'rgba(255,80,0,.75)';
+  var glowCol   = isLv7 ? 'rgba(255,215,0,.5)'   : 'rgba(255,80,0,.4)';
+  var runeCol   = isLv7 ? '#ffd700'               : '#ff6a00';
+  var runeGlow  = isLv7 ? 'rgba(255,215,0,.9)'   : 'rgba(255,80,0,.85)';
+  var radBg     = isLv7 ? 'rgba(255,200,0,.2)'   : 'rgba(255,60,0,.17)';
+
+  // Set CSS variables on wrapper
+  wrap.style.setProperty('--ring-col',  ringCol);
+  wrap.style.setProperty('--glow-col',  glowCol);
+  wrap.style.setProperty('--rune-col',  runeCol);
+  wrap.style.setProperty('--rune-glow', runeGlow);
+  wrap.style.setProperty('--rad-bg',    radBg);
+
+  // Rebuild orbs
+  if (orbsEl) {
+    var orbCount   = isLv7 ? 4 : 3;
+    var orbColors6 = ['#ff6a00','#ff4400','#ffaa00'];
+    var orbColors7 = ['#FFD700','#fff4a0','#FFD700','#ffe080'];
+    var html = '';
+    for (var o = 0; o < orbCount; o++) {
+      var oColor = isLv7 ? orbColors7[o] : orbColors6[o];
+      var oDur   = (isLv7 ? 1.8 : 2.5) + o * (isLv7 ? 0.12 : 0.18);
+      var oDel   = -(o / orbCount * (isLv7 ? 1.8 : 2.5));
+      html +=
+        '<svg class="tbw-orb" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" width="64" height="64">' +
+          '<g style="transform-origin:32px 32px;animation:toadOrb ' + oDur.toFixed(2) + 's linear ' + oDel.toFixed(2) + 's infinite">' +
+            '<circle cx="32" cy="3" r="3" fill="' + oColor + '" opacity=".92"/>' +
+          '</g>' +
+        '</svg>';
+    }
+    orbsEl.innerHTML = html;
+  }
+}
+
 
 // ─── BADGE SỐ SPIN (nút cóc góc dưới phải) ───────────────────────
 function renderSpinCounter() {
@@ -397,7 +515,7 @@ function renderToad() {
   var spins  = toadState.spinsLeft;
   var ready  = toadState.spinReadyToClaim;
   var msLeft = msUntilNextSpawn();
-  var maxLvl = lvl >= 5;
+  var maxLvl = lvl >= 7;
   var needed = cfg.coinsToNext || '—';
   var pct    = maxLvl ? 100 : Math.min(100, Math.round(coins / cfg.coinsToNext * 100));
   var cdHours = cfg.cooldownMs / 3600000;
@@ -465,10 +583,10 @@ function renderToad() {
 
 function renderLevelDots(current) {
   var html = '<div class="level-dots">';
-  for (var i = 1; i <= 5; i++) {
+  for (var i = 1; i <= 7; i++) {
     var cls = i < current ? 'dot done' : (i === current ? 'dot active' : 'dot');
-    html += '<div class="' + cls + '">' + ['①','②','③','④','⑤'][i-1] + '</div>';
-    if (i < 5) html += '<div class="dot-line ' + (i < current ? 'done' : '') + '"></div>';
+    html += '<div class="' + cls + '">' + ['①','②','③','④','⑤','⑥','⑦'][i-1] + '</div>';
+    if (i < 7) html += '<div class="dot-line ' + (i < current ? 'done' : '') + '"></div>';
   }
   return html + '</div>';
 }
@@ -506,10 +624,10 @@ function renderInfoPopup() {
   var lvl   = toadState.level;
   var coins = toadState.coins;
   var spins = toadState.spinsLeft;
-  var dotColors = ['#5a9e3a','#3aae6e','#2090c0','#a040d0','#e8a000'];
+  var dotColors = ['#5a9e3a','#3aae6e','#2090c0','#a040d0','#e8a000','#cc2222','#FFD700'];
 
   var tableRows = '';
-  for (var i = 1; i <= 5; i++) {
+  for (var i = 1; i <= 7; i++) {
     var c      = TOAD_LEVELS[i];
     var isDone = i < lvl;
     var isCur  = i === lvl;
@@ -619,10 +737,11 @@ function initToad() {
   }
 
   // Cập nhật toàn bộ UI (đảm bảo spin button đúng trạng thái ngay từ đầu)
+  updateToggleBtnIcon();
   _updateAllUI();
 
   // Nếu đang chờ nâng cấp từ session trước → show popup sau 500ms
-  if (toadState.pendingLevelUp && toadState.level < 5) {
+  if (toadState.pendingLevelUp && toadState.level < 7) {
     setTimeout(function(){ showLevelUpPopup(); }, 500);
   }
 
@@ -700,7 +819,7 @@ function renderLevelUpPopup() {
   var nextLvl = lvl + 1;
   var cfg     = getLevelCfg(lvl);
   var nextCfg = getLevelCfg(nextLvl);
-  var dotColors = ['#5a9e3a','#3aae6e','#2090c0','#a040d0','#e8a000'];
+  var dotColors = ['#5a9e3a','#3aae6e','#2090c0','#a040d0','#e8a000','#cc2222','#FFD700'];
 
   box.innerHTML =
     // Particles (CSS-only)
@@ -767,26 +886,45 @@ function checkAndShowLevelUp() {
 }
 
 // ═══════════════════════════════════════════════════════════════════
-//  ADMIN PANEL
-//  Kích hoạt: gõ "admin" | hoặc bấm nút cóc 5 lần trong 3 giây
+//  ADMIN PANEL  —  Bảo mật 2 lớp
+//  Lớp 1: URL phải có ?dev=TOKEN
+//  Lớp 2: Nhập mật khẩu (lưu dạng SHA-256, không lộ plaintext)
 // ═══════════════════════════════════════════════════════════════════
 (function() {
-  // Phím tắt
+  var _DEV_TOKEN  = '1d7dc070aa795a62a2ee4f283fcd6b74';
+  var _PW_HASH    = 'dea8c2e7b4083333aa0a6feeecfde945abcbe5ea4db3b5e0e1619fe68931a1ef';
+  var _SESS_KEY   = 'adm_ok';
+
+  function sha256(str) {
+    return crypto.subtle.digest('SHA-256', new TextEncoder().encode(str))
+      .then(function(h) {
+        return Array.from(new Uint8Array(h))
+          .map(function(b){ return b.toString(16).padStart(2,'0'); }).join('');
+      });
+  }
+
+  function hasToken() {
+    try { return new URLSearchParams(window.location.search).get('dev') === _DEV_TOKEN; }
+    catch(e) { return false; }
+  }
+
+  function tryOpen() {
+    if (!hasToken()) return;
+    if (sessionStorage.getItem(_SESS_KEY) === '1') { openAdminPanel(); return; }
+    var pw = prompt('🔐 Admin Password:');
+    if (!pw) return;
+    sha256(pw.trim()).then(function(h) {
+      if (h === _PW_HASH) { sessionStorage.setItem(_SESS_KEY, '1'); openAdminPanel(); }
+      else alert('❌ Sai mật khẩu.');
+    });
+  }
+
   var _seq = '';
   document.addEventListener('keydown', function(e) {
-    _seq = (_seq + e.key.toLowerCase()).slice(-5);
-    if (_seq === 'admin') openAdminPanel();
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+    _seq = (_seq + e.key.toLowerCase()).slice(-4);
+    if (_seq === 'open') { _seq = ''; tryOpen(); }
   });
-
-  // Tap nhanh 5 lần
-  var _tapCount = 0, _tapTimer = null;
-  document.addEventListener('click', function(e) {
-    if (!e.target.closest || !e.target.closest('#toad-toggle-btn')) return;
-    _tapCount++;
-    if (_tapTimer) clearTimeout(_tapTimer);
-    if (_tapCount >= 5) { _tapCount = 0; openAdminPanel(); return; }
-    _tapTimer = setTimeout(function() { _tapCount = 0; }, 3000);
-  }, true);
 
   function openAdminPanel() {
     var el = document.getElementById('admin-overlay');
@@ -822,6 +960,7 @@ function checkAndShowLevelUp() {
         '<div class="adm-stat"><span class="adm-stat-val adm-gold" id="adm-coin">'  + s.coins     + '</span><span class="adm-stat-lbl">Coin</span></div>' +
         '<div class="adm-stat"><span class="adm-stat-val adm-green" id="adm-spin">' + s.spinsLeft + '</span><span class="adm-stat-lbl">Spin</span></div>' +
         '<div class="adm-stat"><span class="adm-stat-val adm-dim" id="adm-timer">'  + (s.spinReadyToClaim ? 'SẴN SÀNG' : formatMs(msLeft)) + '</span><span class="adm-stat-lbl">Hồi spin</span></div>' +
+        '<div class="adm-stat"><span class="adm-stat-val adm-pink" id="adm-pity">'  + (function(){ try{ return localStorage.getItem("spin_pity")||0; }catch(e){return 0;} })() + '</span><span class="adm-stat-lbl">Pity</span></div>' +
       '</div>' +
 
       '<div class="adm-divider"></div>' +
@@ -835,6 +974,25 @@ function checkAndShowLevelUp() {
       '<div class="adm-row">' +
         '<button class="adm-btn adm-dim-btn" onclick="adminResetCooldown()">⚡ Hiện nút nhận spin ngay</button>' +
       '</div>' +
+
+      '<div class="adm-divider"></div>' +
+      '<div class="adm-section-title">⭐ Pity</div>' +
+      '<div class="adm-row">' +
+        '<button class="adm-btn adm-pink-btn" onclick="adminAddPity(10)">+10</button>' +
+        '<button class="adm-btn adm-pink-btn" onclick="adminAddPity(25)">+25</button>' +
+        '<button class="adm-btn adm-pink-btn" onclick="adminAddPity(50)">+50</button>' +
+        '<button class="adm-btn adm-pink-btn" onclick="adminSetPity(99)">→ 99 (kích hoạt)</button>' +
+        '<button class="adm-btn adm-red-btn"  onclick="adminSetPity(0)">Reset</button>' +
+      '</div>' +
+
+      '<div class="adm-divider"></div>' +
+      '<div class="adm-section-title">🧪 Test kết quả</div>' +
+      '<div class="adm-row">' +
+        '<button class="adm-btn adm-jp-btn" onclick="adminForceResult(6)">Force ⭐ Siêu Hiếm</button>' +
+        '<button class="adm-btn adm-jp-btn" onclick="adminForceResult(7)">Force ⭐⭐ Jackpot</button>' +
+        (function(){ try{ var f=localStorage.getItem("spin_force_result"); return f!==null ? '<span class="adm-force-badge">⏳ Đang chờ: index '+f+'</span>' : ''; }catch(e){return '';} })() +
+      '</div>' +
+      '<div class="adm-note">Kết quả được ép đúng 1 lần spin tiếp theo, sau đó tự xóa.</div>' +
 
       '<div class="adm-divider"></div>' +
       '<div class="adm-section-title">🪙 Coin</div>' +
@@ -853,7 +1011,7 @@ function checkAndShowLevelUp() {
       '<div class="adm-divider"></div>' +
       '<div class="adm-section-title">⬆ Cấp độ</div>' +
       '<div class="adm-row">' +
-        [1,2,3,4,5].map(function(l) {
+        [1,2,3,4,5,6,7].map(function(l) {
           return '<button class="adm-btn ' + (s.level === l ? 'adm-active-btn' : 'adm-dim-btn') + '" onclick="adminSetLevel(' + l + ')">Cấp ' + l + '</button>';
         }).join('') +
       '</div>' +
@@ -901,6 +1059,32 @@ function checkAndShowLevelUp() {
     toadState.spinReadyToClaim = true;
     saveState(); _updateAllUI(); refreshAdminUI();
   };
+  window.adminForceResult = function(prizeIndex) {
+    try { localStorage.setItem('spin_force_result', String(prizeIndex)); } catch(e) {}
+    // Đảm bảo có đủ spin để test
+    if (toadState.spinsLeft <= 0) {
+      toadState.spinsLeft = 1;
+      saveState();
+    }
+    _updateAllUI();
+    refreshAdminUI();
+    showToadToast('🧪 Spin tiếp theo sẽ ra index ' + prizeIndex + '!');
+  };
+
+  window.adminAddPity = function(n) {
+    var cur = 0; try { cur = parseInt(localStorage.getItem('spin_pity') || '0'); } catch(e) {}
+    var next = Math.min(cur + n, 100);
+    try { localStorage.setItem('spin_pity', next); } catch(e) {}
+    if (typeof updatePityUI === 'function') updatePityUI();
+    refreshAdminUI();
+    showToadToast('Pity: ' + next + '/100');
+  };
+  window.adminSetPity = function(n) {
+    try { localStorage.setItem('spin_pity', n); } catch(e) {}
+    if (typeof updatePityUI === 'function') updatePityUI();
+    refreshAdminUI();
+    showToadToast('Pity đặt thành ' + n + '/100');
+  };
   window.adminSimulateReset = function() {
     toadState.lastResetDate    = null;
     toadState.spinsLeft        = 0;
@@ -922,8 +1106,13 @@ function checkAndShowLevelUp() {
     var t  = document.getElementById('adm-timer');
     var sp = document.getElementById('adm-spin');
     var co = document.getElementById('adm-coin');
+    var pt = document.getElementById('adm-pity');
     if (t)  t.textContent  = toadState.spinReadyToClaim ? 'SẴN SÀNG' : formatMs(msUntilNextSpawn());
     if (sp) sp.textContent = toadState.spinsLeft;
     if (co) co.textContent = toadState.coins;
+    if (pt) { try { pt.textContent = localStorage.getItem('spin_pity') || 0; } catch(e) {} }
+    // refresh force badge if present
+    var fb = document.querySelector('.adm-force-badge');
+    if (fb) { try { var f=localStorage.getItem('spin_force_result'); fb.textContent = f!==null ? '⏳ Đang chờ: index '+f : ''; } catch(e){} }
   }, 1000);
 })();

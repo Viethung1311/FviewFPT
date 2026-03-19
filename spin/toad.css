@@ -868,6 +868,12 @@
 
 .adm-green-btn  { background: rgba(111,232,122,0.15); color: #6FE87A; border: 1px solid rgba(111,232,122,0.3); }
 .adm-gold-btn   { background: rgba(245,208,96,0.15);  color: #F5D060; border: 1px solid rgba(245,208,96,0.3); }
+.adm-pink-btn  { background: rgba(255,100,180,0.12); color: #ffadd8; border: 1px solid rgba(255,100,180,0.32); }
+.adm-pink-btn:hover { background: rgba(255,100,180,0.22); }
+.adm-jp-btn    { background: rgba(160,0,255,0.15); color: #ddb8ff; border: 1px solid rgba(160,0,255,0.4); }
+.adm-jp-btn:hover { background: rgba(160,0,255,0.28); }
+.adm-force-badge { font-size: 11px; color: #ffe080; background: rgba(255,200,0,0.12); border: 1px solid rgba(255,200,0,0.3); border-radius: 10px; padding: 3px 10px; align-self: center; }
+.adm-note { font-size: 10px; color: rgba(245,230,180,0.35); font-family: "Poppins", sans-serif; padding: 4px 2px; }
 .adm-red-btn    { background: rgba(255,80,80,0.15);   color: #ff6b6b; border: 1px solid rgba(255,80,80,0.3); }
 .adm-dim-btn    { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.5); border: 1px solid rgba(255,255,255,0.1); }
 .adm-active-btn { background: rgba(245,208,96,0.25);  color: #F5D060; border: 1px solid rgba(245,208,96,0.6); box-shadow: 0 0 8px rgba(245,208,96,0.2); }
@@ -1182,4 +1188,218 @@
   #levelup-popup { padding: 28px 20px 22px; border-radius: 20px; }
   .lup-title { font-size: 17px; }
   .lup-toad-wrap svg { width: 48px !important; height: 48px !important; }
+}
+
+
+/* ══════════════════════════════════════════════════
+   CÓC CẤP 6 & 7 — HIỆU ỨNG A (ring) + B (orbs) + D (rune/glow)
+   ══════════════════════════════════════════════════ */
+
+/* Wrapper — kích thước bằng SVG, chứa tất cả layers */
+.toad-fx {
+  position: relative;
+  display: inline-block;
+  width: 64px;
+  height: 64px;
+  flex-shrink: 0;
+}
+
+/* D — Radial glow background */
+.toad-rad-bg {
+  position: absolute;
+  inset: -12px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--rad-bg) 0%, transparent 68%);
+  animation: toadRadPulse 2.4s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+@keyframes toadRadPulse {
+  0%,100% { opacity: .7; transform: scale(1); }
+  50%      { opacity: 1;  transform: scale(1.12); }
+}
+
+/* D — Floating rune (✦) rotating top-right */
+.toad-rune {
+  position: absolute;
+  top: -10px;
+  right: -8px;
+  font-size: 13px;
+  color: var(--rune-col);
+  text-shadow: 0 0 6px var(--rune-glow), 0 0 12px var(--rune-glow);
+  animation: toadRuneSpin 6s linear infinite;
+  z-index: 4;
+  pointer-events: none;
+  line-height: 1;
+}
+.toad-fx-7 .toad-rune {
+  animation-duration: 4s;
+  font-size: 15px;
+  top: -13px;
+  right: -9px;
+}
+@keyframes toadRuneSpin {
+  0%   { transform: rotate(0deg) scale(1);    opacity: .85; }
+  50%  { transform: rotate(180deg) scale(1.2); opacity: 1; }
+  100% { transform: rotate(360deg) scale(1);   opacity: .85; }
+}
+
+/* A — Pulsing ring */
+.toad-ring {
+  position: absolute;
+  inset: -5px;
+  border-radius: 50%;
+  border: 2px solid var(--ring-col);
+  box-shadow: 0 0 8px var(--glow-col), inset 0 0 4px var(--glow-col);
+  animation: toadRingPulse 2s ease-in-out infinite;
+  z-index: 1;
+  pointer-events: none;
+}
+.toad-fx-7 .toad-ring {
+  animation-duration: 1.6s;
+  border-width: 2.5px;
+}
+@keyframes toadRingPulse {
+  0%,100% { inset: -5px;  opacity: .75; box-shadow: 0 0 6px var(--glow-col); }
+  50%      { inset: -9px;  opacity: 1;   box-shadow: 0 0 16px var(--glow-col), 0 0 28px var(--glow-col); }
+}
+
+/* SVG itself sits above the ring */
+.toad-svg-wrap {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* B — Orb spark SVGs (layered on top) */
+.toad-orb-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  pointer-events: none;
+  overflow: visible;
+}
+@keyframes toadOrb {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* toad-avatar overflow tweak so ring/orbs aren't clipped */
+.toad-avatar {
+  overflow: visible !important;
+}
+
+
+
+/* ══════════════════════════════════════════════════
+   TOAD BTN WRAP — effects container OUTSIDE the button
+   ══════════════════════════════════════════════════ */
+#toad-btn-wrap {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 64px;
+  height: 64px;
+  z-index: 9000;
+  /* CSS vars default (lv1-5, no effects show) */
+  --ring-col:  transparent;
+  --glow-col:  transparent;
+  --rune-col:  transparent;
+  --rune-glow: transparent;
+  --rad-bg:    transparent;
+}
+
+/* Move the actual button to fill the wrapper */
+#toad-btn-wrap #toad-toggle-btn {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  bottom: auto;
+  right: auto;
+  z-index: 2;
+}
+
+/* ── D: Radial glow background ── */
+.tbw-rad-bg {
+  position: absolute;
+  inset: -14px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--rad-bg) 0%, transparent 65%);
+  pointer-events: none;
+  z-index: 0;
+  animation: toadRadPulse 2.4s ease-in-out infinite;
+  opacity: 0;
+  transition: opacity .4s;
+}
+#toad-btn-wrap[data-level="6"] .tbw-rad-bg,
+#toad-btn-wrap[data-level="7"] .tbw-rad-bg { opacity: 1; }
+
+/* ── A: Pulsing ring ── */
+.tbw-ring {
+  position: absolute;
+  inset: -5px;
+  border-radius: 50%;
+  border: 2px solid var(--ring-col);
+  box-shadow: 0 0 8px var(--glow-col);
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity .4s;
+  animation: tbwRingPulse 2s ease-in-out infinite;
+}
+#toad-btn-wrap[data-level="7"] .tbw-ring {
+  border-width: 2.5px;
+  animation-duration: 1.6s;
+}
+#toad-btn-wrap[data-level="6"] .tbw-ring,
+#toad-btn-wrap[data-level="7"] .tbw-ring { opacity: 1; }
+@keyframes tbwRingPulse {
+  0%,100% { inset:-5px;  box-shadow:0 0 6px var(--glow-col); }
+  50%      { inset:-10px; box-shadow:0 0 18px var(--glow-col), 0 0 32px var(--glow-col); }
+}
+
+/* ── B: Orb SVGs container ── */
+#tbw-orbs {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 3;
+}
+.tbw-orb {
+  position: absolute;
+  top: 0; left: 0;
+  overflow: visible;
+}
+
+/* ── D: Floating rune ── */
+.tbw-rune {
+  position: absolute;
+  top: -11px;
+  right: -8px;
+  font-size: 13px;
+  color: var(--rune-col);
+  text-shadow: 0 0 6px var(--rune-glow), 0 0 12px var(--rune-glow);
+  animation: toadRuneSpin 6s linear infinite;
+  z-index: 4;
+  pointer-events: none;
+  line-height: 1;
+  opacity: 0;
+  transition: opacity .4s;
+}
+#toad-btn-wrap[data-level="7"] .tbw-rune {
+  font-size: 15px;
+  animation-duration: 4s;
+  top: -13px;
+  right: -9px;
+}
+#toad-btn-wrap[data-level="6"] .tbw-rune,
+#toad-btn-wrap[data-level="7"] .tbw-rune { opacity: 1; }
+
+/* Responsive */
+@media (max-width: 480px) {
+  #toad-btn-wrap { bottom: 14px; right: 14px; }
 }

@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FLM — FPT Launcher</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{--o:#F47920;--od:#D4611A;--ol:#fff3e8;--ob:#ffd4aa;}
+body{font-family:"Be Vietnam Pro",sans-serif;height:100vh;display:flex;overflow:hidden;background:#f5f5f5;}
+
+/* ── SIDEBAR ── */
+.sidebar{width:76px;background:linear-gradient(180deg,#f47920,#c85a00);height:100vh;flex-shrink:0;
+  display:flex;flex-direction:column;align-items:center;padding:14px 6px 12px;overflow-y:auto;z-index:20;
+  box-shadow:3px 0 18px rgba(0,0,0,.15);}
+.sidebar-logo{background:white;border-radius:8px;padding:3px 8px;font-size:13px;font-weight:800;
+  color:var(--o);margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,.2);letter-spacing:.5px;}
+.sb-list{width:100%;display:flex;flex-direction:column;gap:3px;}
+.sb-btn{display:flex;flex-direction:column;align-items:center;gap:3px;padding:7px 4px;
+  border-radius:10px;cursor:pointer;border:none;background:transparent;width:100%;transition:all .18s;}
+.sb-btn:hover{background:rgba(255,255,255,.18);}
+.sb-btn.active{background:rgba(255,255,255,.3);box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.5);}
+.sb-iw{width:42px;height:42px;border-radius:11px;background:white;display:flex;align-items:center;
+  justify-content:center;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.18);transition:transform .18s;flex-shrink:0;}
+.sb-btn:hover .sb-iw,.sb-btn.active .sb-iw{transform:scale(1.07);}
+.sb-iw img{width:30px;height:30px;object-fit:contain;}
+.sb-iw span{font-size:20px;}
+.sb-lb{font-size:9px;font-weight:700;color:rgba(255,255,255,.9);text-align:center;line-height:1.2;
+  max-width:64px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.sidebar::-webkit-scrollbar{width:0;}
+
+/* ── MAIN ── */
+.main{flex:1;display:flex;flex-direction:column;background:#fafafa;overflow:hidden;}
+
+/* ── TOPBAR ── */
+.topbar{display:flex;align-items:center;gap:10px;padding:11px 28px;
+  border-bottom:2px solid var(--o);background:white;flex-shrink:0;
+  box-shadow:0 2px 8px rgba(244,121,32,.08);}
+.search-box{display:flex;align-items:center;gap:8px;background:#f6f6f6;
+  border:1.5px solid #e8e8e8;border-radius:9px;padding:7px 13px;width:240px;transition:all .2s;}
+.search-box:focus-within{border-color:var(--o);background:white;box-shadow:0 0 0 3px rgba(244,121,32,.1);}
+.search-box input{border:none;background:transparent;outline:none;font-family:inherit;font-size:13px;color:#333;width:100%;}
+.search-box input::placeholder{color:#bbb;}
+.tspc{flex:1;}
+/* ── CONTENT AREA ── */
+.content-area{flex:1;position:relative;overflow:hidden;}
+.view{position:absolute;inset:0;display:flex;flex-direction:column;overflow:hidden;
+  transition:opacity .28s,transform .28s;}
+.view.hidden{opacity:0;pointer-events:none;}
+.view.sl{transform:translateX(-36px);}
+.view.sr{transform:translateX(36px);}
+
+/* ── HOME GRID ── */
+#v-home{overflow-y:auto;padding:28px 32px;}
+#v-home::-webkit-scrollbar{width:5px;}
+#v-home::-webkit-scrollbar-thumb{background:#e0e0e0;border-radius:3px;}
+.grid-title{font-size:10.5px;font-weight:800;color:#c0c0c0;letter-spacing:.12em;text-transform:uppercase;margin-bottom:20px;}
+.app-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:16px;}
+.g-item{display:flex;align-items:center;gap:15px;padding:18px 20px;border-radius:16px;cursor:pointer;
+  transition:all .22s;border:1.5px solid #ebebeb;background:white;
+  box-shadow:0 2px 10px rgba(0,0,0,.05);animation:fadeUp .4s ease both;}
+.g-item:hover{border-color:var(--o);background:var(--ol);transform:translateY(-3px);
+  box-shadow:0 8px 24px rgba(244,121,32,.14);}
+.g-ico{width:68px;height:68px;border-radius:16px;display:flex;align-items:center;justify-content:center;
+  overflow:hidden;box-shadow:0 4px 14px rgba(0,0,0,.12);flex-shrink:0;transition:transform .22s;}
+.g-item:hover .g-ico{transform:scale(1.06);}
+.g-ico img{width:52px;height:52px;object-fit:contain;}
+.g-ico span{font-size:32px;}
+.g-info{flex:1;min-width:0;}
+.g-name{font-size:14px;font-weight:800;color:#1a1a1a;margin-bottom:3px;}
+.g-sub{font-size:11.5px;color:#999;line-height:1.4;margin-bottom:7px;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.g-tag{background:var(--ol);border:1px solid var(--ob);border-radius:20px;
+  padding:2px 9px;font-size:10.5px;font-weight:700;color:var(--o);}
+.g-arr{font-size:18px;color:#ddd;flex-shrink:0;margin-left:auto;transition:color .2s;}
+.g-item:hover .g-arr{color:var(--o);}
+
+/* ── VIEW HEADER ── */
+.view-hdr{display:flex;align-items:center;gap:14px;padding:14px 24px;
+  border-bottom:1.5px solid #f0f0f0;background:white;flex-shrink:0;
+  box-shadow:0 2px 6px rgba(0,0,0,.04);}
+.app-badge{display:flex;align-items:center;gap:11px;}
+.ab-ico{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;
+  overflow:hidden;box-shadow:0 3px 10px rgba(0,0,0,.1);}
+.ab-ico img{width:30px;height:30px;object-fit:contain;}
+.ab-ico span{font-size:20px;}
+.ab-name{font-size:16px;font-weight:800;color:#1a1a1a;}
+.ab-sub{font-size:11.5px;color:#bbb;margin-top:1px;}
+
+/* ── SECTION LIST ── */
+.sec-body{flex:1;overflow-y:auto;padding:20px 24px;display:flex;flex-direction:column;gap:9px;}
+.sec-body::-webkit-scrollbar{width:5px;}
+.sec-body::-webkit-scrollbar-thumb{background:#e8e8e8;border-radius:3px;}
+.sec-row{display:flex;align-items:center;gap:13px;padding:15px 18px;background:white;
+  border:1.5px solid #ebebeb;border-radius:13px;cursor:pointer;transition:all .2s;
+  box-shadow:0 2px 8px rgba(0,0,0,.04);animation:fadeUp .3s ease both;}
+.sec-row:hover{border-color:var(--o);background:var(--ol);transform:translateX(5px);
+  box-shadow:0 4px 16px rgba(244,121,32,.12);}
+.sr-ico{font-size:22px;width:36px;text-align:center;flex-shrink:0;}
+.sr-title{font-size:13.5px;font-weight:700;color:#222;}
+.sr-prev{font-size:11.5px;color:#bbb;margin-top:2px;white-space:nowrap;overflow:hidden;
+  text-overflow:ellipsis;max-width:360px;}
+.sr-arr{font-size:15px;color:#ccc;flex-shrink:0;transition:all .2s;margin-left:auto;}
+.sec-row:hover .sr-arr{color:var(--o);transform:translateX(3px);}
+
+/* ── DETAIL ── */
+.det-hdr{display:flex;align-items:center;gap:13px;padding:14px 24px;
+  border-bottom:1.5px solid #f0f0f0;background:white;flex-shrink:0;
+  box-shadow:0 2px 6px rgba(0,0,0,.04);}
+.det-info{flex:1;display:flex;align-items:center;gap:9px;}
+.det-ico{font-size:24px;}
+.det-name{font-size:15px;font-weight:800;color:#222;}
+.det-chip{background:var(--ol);border:1.5px solid var(--ob);border-radius:20px;
+  padding:2px 11px;font-size:10.5px;font-weight:700;color:var(--o);margin-left:6px;}
+.det-body{flex:1;overflow-y:auto;padding:22px 28px;display:flex;flex-direction:column;gap:12px;}
+.det-body::-webkit-scrollbar{width:5px;}
+.det-body::-webkit-scrollbar-thumb{background:#e8e8e8;border-radius:3px;}
+
+/* ── CONTENT BLOCKS ── */
+.cblock{border:1.5px solid #ebebeb;border-radius:13px;overflow:hidden;background:white;
+  box-shadow:0 2px 8px rgba(0,0,0,.05);animation:fadeUp .35s ease both;}
+.cblock:hover{box-shadow:0 4px 16px rgba(244,121,32,.1);}
+.cbhead{padding:13px 17px;background:linear-gradient(135deg,#fff9f5,#fff3e8);
+  display:flex;align-items:center;gap:9px;cursor:pointer;user-select:none;transition:background .15s;}
+.cbhead:hover{background:linear-gradient(135deg,#fff1e0,#ffe8cc);}
+.cbdot{width:4px;height:17px;background:var(--o);border-radius:2px;flex-shrink:0;}
+.cblabel{font-size:11.5px;font-weight:800;color:var(--o);text-transform:uppercase;letter-spacing:.07em;flex:1;}
+.cbarr{font-size:12px;color:#ccc;transition:transform .25s,color .2s;flex-shrink:0;}
+.cbhead:hover .cbarr,.cblock.open .cbarr{color:var(--o);}
+.cblock.open .cbarr{transform:rotate(90deg);}
+.cbbody{max-height:0;overflow:hidden;padding:0 17px;transition:max-height .35s ease,padding .28s ease;}
+.cblock.open .cbbody{padding:15px 17px;max-height:9999px;}
+.wbox{background:#fffbe6;border:1.5px solid #ffe082;border-radius:9px;padding:10px 14px;
+  font-size:13px;color:#6d4c00;line-height:1.7;display:flex;gap:8px;margin:7px 0;animation:fadeUp .3s ease both;}
+.ibox{background:#e3f2fd;border:1.5px solid #90caf9;border-radius:9px;padding:10px 14px;
+  font-size:13px;color:#0d47a1;line-height:1.7;display:flex;gap:8px;margin:7px 0;animation:fadeUp .3s ease both;}
+.tbox{font-size:13.5px;color:#333;line-height:1.8;white-space:pre-wrap;word-break:break-word;}
+.tbox a{color:var(--o);text-decoration:underline;}
+.blist{list-style:none;display:flex;flex-direction:column;gap:7px;}
+.blist li{display:flex;align-items:flex-start;gap:9px;font-size:13.5px;color:#333;line-height:1.6;}
+.bull{color:var(--o);font-weight:900;font-size:14px;flex-shrink:0;margin-top:2px;}
+.nlist{list-style:none;display:flex;flex-direction:column;gap:7px;counter-reset:n;}
+.nlist li{display:flex;align-items:flex-start;gap:9px;font-size:13.5px;color:#333;line-height:1.6;counter-increment:n;}
+.nlist li::before{content:counter(n);background:var(--o);color:white;border-radius:50%;
+  width:21px;height:21px;min-width:21px;display:flex;align-items:center;justify-content:center;
+  font-size:10.5px;font-weight:800;margin-top:2px;}
+.brow{display:flex;flex-wrap:wrap;gap:6px;}
+.badge{background:var(--ol);border:1.5px solid var(--ob);border-radius:20px;
+  padding:3px 12px;font-size:11.5px;font-weight:700;color:var(--o);}
+.lrow{display:flex;flex-wrap:wrap;gap:8px;}
+.lchip{display:flex;align-items:center;gap:6px;background:var(--ol);border:1.5px solid var(--o);
+  border-radius:9px;padding:7px 13px;font-size:12px;font-weight:700;color:var(--o);
+  text-decoration:none;transition:all .2s;word-break:break-all;}
+.lchip:hover{background:var(--o);color:white;}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+
+
+<aside class="sidebar">
+  <div class="sidebar-logo">FPT</div>
+  <div class="sb-list" id="sbList"></div>
+</aside>
+
+<div class="main">
+  <div class="topbar">
+    <div class="search-box">
+      <span style="color:#ccc;font-size:13px">🔍</span>
+      <input type="text" id="searchInput" placeholder="Tìm kiếm ứng dụng...">
+    </div>
+    <button onclick="window.location.href='../index.html'" style="background:none;border:0.5px solid #F9A82544;border-radius:8px;cursor:pointer;font-size:13px;color:#F9A825;padding:6px 12px;margin-right:4px;white-space:nowrap">⌂ FView</button><button onclick="window.location.href='HomeApp.html'" style="background:none;border:0.5px solid #F9A82544;border-radius:8px;cursor:pointer;font-size:13px;color:#F9A825;padding:6px 12px;margin-right:8px;white-space:nowrap">📱 Apps</button><div class="tspc"></div>
+
+  </div>
+
+  <div class="content-area">
+    <!-- HOME -->
+    <div class="view" id="v-home">
+      <div style="padding:28px 32px 0">
+        <div class="grid-title">Ứng dụng</div>
+        <div class="app-grid" id="appGrid"></div>
+      </div>
+    </div>
+
+    <!-- SECTIONS -->
+    <div class="view hidden sr" id="v-sections">
+      <div class="view-hdr">
+        <div class="app-badge">
+          <div class="ab-ico" id="vs-ico"></div>
+          <div>
+            <div class="ab-name" id="vs-name"></div>
+            <div class="ab-sub" id="vs-sub"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sec-body" id="secBody"></div>
+    </div>
+
+    <!-- DETAIL -->
+    <div class="view hidden sr" id="v-detail">
+      <div class="det-hdr">
+        <div class="det-info">
+          <span class="det-ico" id="vd-ico"></span>
+          <span class="det-name" id="vd-name"></span>
+          <span class="det-chip" id="vd-chip"></span>
+        </div>
+      </div>
+      <div class="det-body" id="detBody"></div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+const APPS = [
+  {
+    id:'flm', name:'FLM', icon_img:'data:image/png;base64,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', color:'#2E7D32',
+    bg:'linear-gradient(135deg,#e8f5e9,#a5d6a7)',
+    sub:'Tra cứu đề cương & học liệu môn học FPT',
+    sections:[
+      { icon:'📋', title:'Khái quát', preview:'FLM — tra cứu đề cương & syllabus', autoOpen:true,
+        blocks:[
+          {label:'Mô tả', type:'text', content:'FLM (FPT Learning Management) là hệ thống tra cứu đề cương và nội dung môn học chính thức của FPT University. Dùng để xem syllabus chi tiết, cấu trúc điểm, yêu cầu môn học và tài liệu học tập theo mã môn.'},
+          {label:'Link truy cập', type:'links', content:['https://flm.fpt.edu.vn/Login']},
+          {label:'Đăng nhập', type:'text', content:'Đăng nhập bằng tài khoản email FPT (@fpt.edu.vn).'},
+        
+        ]
+      },
+      { icon:'🎬', title:'Hướng dẫn FLM', preview:'Xem video hướng dẫn',
+        blocks:[
+          {type:'html', content:`<div style=\"margin:8px 0;border-radius:10px;overflow:hidden;border:0.5px solid #eee\"><div style=\"position:relative;width:100%;aspect-ratio:16/9;cursor:pointer;background:#000\" onclick=\"var f=this.nextSibling;this.style.display='none';f.style.display='block';f.src='https://www.youtube.com/embed/YOUTUBE_FLM?autoplay=1'\"><img src=\"https://img.youtube.com/vi/YOUTUBE_FLM/hqdefault.jpg\" style=\"width:100%;height:100%;object-fit:cover\"><div style=\"position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:52px;height:52px;background:rgba(255,0,0,.9);border-radius:50%;display:flex;align-items:center;justify-content:center\"><svg width=\"20\" height=\"20\" fill=\"#fff\" viewBox=\"0 0 24 24\"><polygon points=\"5,3 19,12 5,21\"/></svg></div></div><iframe style=\"width:100%;aspect-ratio:16/9;display:none;border:none\" allowfullscreen allow=\"autoplay;encrypted-media\"></iframe><div style=\"padding:8px 12px;display:flex;align-items:center;gap:8px;border-top:0.5px solid #eee\"><svg width=\"18\" height=\"13\" viewBox=\"0 0 90 63\"><path fill=\"#FF0000\" d=\"M88 9.8C87 6 84 3 80.2 2 73.2 0 45 0 45 0S16.8 0 9.8 2C6 3 3 6 2 9.8 0 16.8 0 31.5 0 31.5s0 14.7 2 21.7C3 57 6 60 9.8 61c7 2 35.2 2 35.2 2s28.2 0 35.2-2C84 60 87 57 88 53.2 90 46.2 90 31.5 90 31.5S90 16.8 88 9.8z\"/><polygon fill=\"#fff\" points=\"36,45 59,31.5 36,18\"/></svg><span style=\"font-size:12px;color:#999\">&#9654; Nhấn để xem video</span></div></div>`},
+        ]
+      },
+
+      { icon:'🔍', title:'Cách tra cứu môn học', preview:'Lấy mã môn từ FAP, tìm syllabus trên FLM',
+        blocks:[
+          {label:'Bước 1 — Lấy Subject code từ FAP', type:'text', content:'Vào FAP Web → mục Academic Transcript → xem cột Subject code. Dùng mã code này để tra cứu trên FLM.'},
+          {label:'Bước 2 — Tra cứu trên FLM', type:'steps', content:[
+            'Đăng nhập FLM tại https://flm.fpt.edu.vn/Login',
+            'Nhập Subject code vào ô tìm kiếm',
+            'Click vào môn học để xem chi tiết Syllabus',
+            'Đọc nội dung, yêu cầu và cách tính điểm của môn',
+          ]},
+          {label:'Thông tin có trong Syllabus', type:'bullets', content:[
+            'Mô tả môn học và mục tiêu',
+            'Cấu trúc điểm: process / midterm / final và tỷ trọng',
+            'Danh sách bài học theo từng buổi',
+            'Tài liệu tham khảo và learning materials',
+            'Yêu cầu Pass/Fail của môn học',
+          ]},
+        ]
+      },
+      { icon:'⭐', title:'Tính năng nổi bật', preview:'Syllabus, cấu trúc điểm, tài liệu học',
+        blocks:[
+          {label:'Ưu điểm', type:'bullets', content:[
+            'Tra cứu syllabus chi tiết theo Subject code',
+            'Xem cấu trúc điểm và tỷ trọng từng đầu điểm',
+            'Tải tài liệu học tập giảng viên cung cấp',
+            'Tra cứu đề cương theo từng học kỳ',
+            'Tích hợp link trực tiếp từ FAP Web',
+          ]},
+        ]
+      },
+      { icon:'⚠️', title:'Lưu ý quan trọng', preview:'Cách lấy mã môn đúng, cập nhật theo kỳ', autoOpen:true,
+        blocks:[
+          {type:'warn', content:'Subject code phải lấy từ FAP Web → Academic Transcript → cột Subject code. Dùng mã này mới tra được chính xác trên FLM.'},
+          {type:'info', content:'Đề cương được cập nhật theo từng học kỳ. Nên kiểm tra FLM vào đầu mỗi kỳ học để nắm yêu cầu mới nhất.'},
+          {type:'warn', content:'Nếu không tìm thấy môn trên FLM → hỏi trực tiếp giảng viên hoặc liên hệ phòng đào tạo.'},
+        ]
+      },
+      { icon:'🆘', title:'Hỗ trợ', preview:'Liên hệ khi không tìm được môn', autoOpen:true,
+        blocks:[
+          {label:'Liên hệ', type:'text', content:'Liên hệ giảng viên phụ trách môn học hoặc phòng đào tạo nếu không tìm thấy môn học trên FLM.'},
+          {label:'Link truy cập', type:'links', content:['https://flm.fpt.edu.vn/Login']},
+        ]
+      },
+    ]
+  }
+];
+
+var curApp=null, curView='home';
+
+
+
+var curApp=null, curView='home';
+
+/* ── NAV ── */
+function goTo(view){
+  var ord={home:0,sections:1,detail:2};
+  var vm={home:'v-home',sections:'v-sections',detail:'v-detail'};
+  var fwd=ord[view]>ord[curView];
+  Object.keys(vm).forEach(function(v){
+    var el=document.getElementById(vm[v]);
+    el.classList.add('hidden');
+    el.classList.remove('sl','sr');
+  });
+  var t=document.getElementById(vm[view]);
+  t.classList.add(fwd?'sr':'sl');
+  t.classList.remove('hidden');
+  requestAnimationFrame(function(){
+    requestAnimationFrame(function(){t.classList.remove('sl','sr');});
+  });
+  curView=view;
+  document.querySelectorAll('.sb-btn').forEach(function(b){b.classList.remove('active');});
+  if(curApp){var sb=document.getElementById('sb-'+curApp);if(sb)sb.classList.add('active');}
+}
+
+/* ── ICON HTML ── */
+function icoHtml(app, size){
+  if(app.icon_img){
+    return '<img src="'+app.icon_img+'" style="width:'+(size*0.75)+'px;height:'+(size*0.75)+'px;object-fit:contain">';
+  }
+  return '<span style="font-size:'+(size*0.5)+'px">'+(app.emoji||'📱')+'</span>';
+}
+
+/* ── SIDEBAR ── */
+function renderSidebar(){
+  var el=document.getElementById('sbList');
+  el.innerHTML='';
+  APPS.forEach(function(a){
+    var btn=document.createElement('button');
+    btn.className='sb-btn';
+    btn.id='sb-'+a.id;
+    btn.innerHTML='<div class="sb-iw">'+icoHtml(a,42)+'</div>'
+      +'<span class="sb-lb">'+a.name+'</span>';
+    btn.addEventListener('click',function(){openApp(a.id);});
+    el.appendChild(btn);
+  });
+}
+
+/* ── GRID ── */
+function renderGrid(filter){
+  filter=filter||'';
+  var list=APPS.filter(function(a){
+    return a.name.toLowerCase().indexOf(filter.toLowerCase())>=0
+        || a.sub.toLowerCase().indexOf(filter.toLowerCase())>=0;
+  });
+  var grid=document.getElementById('appGrid');
+  grid.innerHTML='';
+  list.forEach(function(a,i){
+    var btn=document.createElement('button');
+    btn.className='g-item';
+    btn.style.animationDelay=(i*0.055)+'s';
+    btn.innerHTML=
+      '<div class="g-ico" style="background:'+a.bg+'">'+icoHtml(a,68)+'</div>'
+      +'<div class="g-info">'
+      +'<div class="g-name">'+a.name+'</div>'
+      +'<div class="g-sub">'+a.sub+'</div>'
+      +'<span class="g-tag">'+a.sections.length+' mục</span>'
+      +'</div>'
+      +'<span class="g-arr">›</span>';
+    btn.addEventListener('click',function(){openApp(a.id);});
+    grid.appendChild(btn);
+  });
+}
+
+/* ── OPEN APP ── */
+function openApp(id){
+  curApp=id;
+  var app=APPS.find(function(a){return a.id===id;});
+  if(!app)return;
+  document.getElementById('vs-ico').innerHTML='<div style="width:40px;height:40px;border-radius:10px;background:'+app.bg+';display:flex;align-items:center;justify-content:center;overflow:hidden">'+icoHtml(app,40)+'</div>';
+  document.getElementById('vs-name').textContent=app.name;
+  document.getElementById('vs-sub').textContent=app.sub;
+  var sb=document.getElementById('secBody');
+  sb.innerHTML='';
+  app.sections.forEach(function(sec,i){
+    var row=document.createElement('div');
+    row.className='sec-row';
+    row.style.animationDelay=(i*0.05)+'s';
+    row.innerHTML='<span class="sr-ico">'+sec.icon+'</span>'
+      +'<div style="flex:1;min-width:0">'
+      +'<div class="sr-title">'+sec.title+'</div>'
+      +'<div class="sr-prev">'+sec.preview+'</div>'
+      +'</div><span class="sr-arr">›</span>';
+    row.addEventListener('click',(function(idx){return function(){openSection(idx);};})(i));
+    sb.appendChild(row);
+  });
+  goTo('sections');
+}
+
+/* ── OPEN SECTION ── */
+function openSection(idx){
+  var app=APPS.find(function(a){return a.id===curApp;});
+  var sec=app.sections[idx];
+  document.getElementById('vd-ico').textContent=sec.icon;
+  document.getElementById('vd-name').textContent=sec.title;
+  document.getElementById('vd-chip').textContent=app.name;
+  var db=document.getElementById('detBody');
+  db.innerHTML=sec.blocks.map(function(b,i){return renderBlock(b,i);}).join('');
+  if(sec.autoOpen){
+    db.querySelectorAll('.cblock').forEach(function(el){
+      el.classList.add('open');
+      var body=el.querySelector('.cbbody');
+      body.style.padding='15px 17px';
+      body.style.maxHeight='none';
+    });
+  }
+  goTo('detail');
+}
+
+/* ── TOGGLE BLOCK ── */
+document.addEventListener('click',function(e){
+  var head=e.target.closest('.cbhead');
+  if(!head)return;
+  var block=head.closest('.cblock');
+  if(!block)return;
+  var body=block.querySelector('.cbbody');
+  if(block.classList.contains('open')){
+    body.style.maxHeight=body.scrollHeight+'px';
+    body.style.padding='15px 17px';
+    requestAnimationFrame(function(){
+      body.style.transition='max-height .32s ease,padding .28s ease';
+      body.style.maxHeight='0';
+      body.style.padding='0 17px';
+    });
+    block.classList.remove('open');
+  } else {
+    body.style.transition='max-height .38s ease,padding .28s ease';
+    body.style.maxHeight=body.scrollHeight+'px';
+    body.style.padding='15px 17px';
+    block.classList.add('open');
+    setTimeout(function(){if(block.classList.contains('open'))body.style.maxHeight='none';},400);
+  }
+});
+
+/* ── RENDER BLOCK ── */
+function renderBlock(b,i){
+  var delay='animation-delay:'+(i*0.065)+'s';
+  if(!b.label){
+    if(b.type==='warn') return '<div class="wbox" style="'+delay+'"><span>⚠️</span><span>'+b.content+'</span></div>';
+    if(b.type==='info') return '<div class="ibox" style="'+delay+'"><span>ℹ️</span><span>'+b.content+'</span></div>';
+    return '';
+  }
+  var inner='';
+  switch(b.type){
+    case 'text':
+      inner='<div class="tbox">'+b.content.replace(/(https?:\/\/[^\s<]+)/g,'<a href="$1" target="_blank">$1</a>')+'</div>';
+      break;
+    case 'bullets':
+      inner='<ul class="blist">'+b.content.map(function(x){
+        return '<li><span class="bull">›</span><span>'+x+'</span></li>';
+      }).join('')+'</ul>';
+      break;
+    case 'steps':
+      inner='<ol class="nlist">'+b.content.map(function(x){
+        return '<li><span>'+x+'</span></li>';
+      }).join('')+'</ol>';
+      break;
+    case 'badges':
+      inner='<div class="brow">'+b.content.map(function(x){
+        return '<span class="badge">'+x+'</span>';
+      }).join('')+'</div>';
+      break;
+    case 'links':
+      inner='<div class="lrow">'+b.content.map(function(l){
+        return '<a class="lchip" href="'+l+'" target="_blank">🔗 '+l.replace(/^https?:\/\//,'')+'</a>';
+      }).join('')+'</div>';
+      break;
+    case 'html':
+      inner=b.content;
+      break;
+    default:
+      inner='<div class="tbox">'+b.content+'</div>';
+  }
+  return '<div class="cblock" style="'+delay+'">'
+    +'<div class="cbhead"><div class="cbdot"></div>'
+    +'<div class="cblabel">'+b.label+'</div>'
+    +'<span class="cbarr">›</span></div>'
+    +'<div class="cbbody">'+inner+'</div></div>';
+}
+
+/* ── BACK BUTTONS ── */
+/* ── SEARCH ── */
+document.getElementById('searchInput').addEventListener('input',function(){renderGrid(this.value);});
+
+/* ── INIT ── */
+renderSidebar();
+renderGrid();
+
+
+window.addEventListener('DOMContentLoaded',function(){
+  renderSidebar();
+  renderGrid();
+var si=document.getElementById('searchInput');
+  if(si) si.addEventListener('input',function(){renderGrid(this.value);});
+  openApp('flm');
+});
+
+</script>
+</body>
+</html>

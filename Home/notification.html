@@ -1,0 +1,57 @@
+<div class="notif-wrapper" id="notif-wrapper">
+
+  <!-- Bell button -->
+  <button class="notif-button" id="notif-bell-btn" aria-label="Thông báo">
+    <span class="notif-badge" id="notif-badge">3</span>
+    <svg viewBox="0 0 448 512" class="bell">
+      <path d="M224 0c-17.7 0-32 14.3-32 32V49.9C119.5 61.4 64 124.2 64 200v33.4c0 45.4-15.5 89.5-43.8 124.9L5.3 377c-5.8 7.2-6.9 17.1-2.9 25.4S14.8 416 24 416H424c9.2 0 17.6-5.3 21.6-13.6s2.9-18.2-2.9-25.4l-14.9-18.6C399.5 322.9 384 278.8 384 233.4V200c0-75.8-55.5-138.6-128-150.1V32c0-17.7-14.3-32-32-32zm0 96h8c57.4 0 104 46.6 104 104v33.4c0 47.9 13.9 94.6 39.7 134.6H72.3C98.1 328 112 281.3 112 233.4V200c0-57.4 46.6-104 104-104h8zm64 352H224 160c0 17 6.7 33.3 18.7 45.3s28.3 18.7 45.3 18.7s33.3-6.7 45.3-18.7s18.7-28.3 18.7-45.3z"/>
+    </svg>
+  </button>
+
+  <!-- Notification panel -->
+  <div class="notif-panel" id="notif-panel" aria-hidden="true">
+    <div class="notif-panel-header">
+      <span class="notif-panel-title">🔔 Thông báo</span>
+      <button class="notif-clear-btn" id="notif-clear-btn">Xóa tất cả</button>
+    </div>
+    <ul class="notif-list" id="notif-list">
+      <li class="notif-item notif-unread">
+        <div class="notif-icon-wrap notif-icon-info">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+        </div>
+        <div class="notif-content">
+          <p class="notif-msg">Lịch thi EOS học kỳ mới đã được cập nhật.</p>
+          <span class="notif-time">5 phút trước</span>
+        </div>
+        <span class="notif-dot"></span>
+      </li>
+      <li class="notif-item notif-unread">
+        <div class="notif-icon-wrap notif-icon-warn">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>
+        </div>
+        <div class="notif-content">
+          <p class="notif-msg">Nhớ kích hoạt SEB trước khi vào phòng thi 15 phút.</p>
+          <span class="notif-time">1 giờ trước</span>
+        </div>
+        <span class="notif-dot"></span>
+      </li>
+      <li class="notif-item notif-unread">
+        <div class="notif-icon-wrap notif-icon-success">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+        </div>
+        <div class="notif-content">
+          <p class="notif-msg">Tính năng Vòng quay may mắn đã được cập nhật!</p>
+          <span class="notif-time">Hôm qua</span>
+        </div>
+        <span class="notif-dot"></span>
+      </li>
+    </ul>
+    <div class="notif-empty" id="notif-empty" style="display:none">
+      <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor" style="opacity:.4">
+        <path d="M20 18.69L5.84 4.53 4.27 3 3 4.27l2.04 2.04C5.04 6.54 5 6.76 5 7v7l-2 2v1h13.73l2 2L20 17.73l-.01.96zM12 22c1.11 0 2-.89 2-2h-4c0 1.11.89 2 2 2zm6-7.32V11c0-3.08-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68c-.24.06-.47.15-.69.23L18 12.31l.01 2.37z"/>
+      </svg>
+      <p>Không có thông báo nào</p>
+    </div>
+  </div>
+
+</div>

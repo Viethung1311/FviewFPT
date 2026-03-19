@@ -14,9 +14,74 @@
 <link rel="stylesheet" href="Home/scroll-reveal.css">
 <link rel="stylesheet" href="Home/loading.css">
 <link rel="stylesheet" href="Home/footer.css">
+<link rel="stylesheet" href="Home/notification.css">
 
 </head>
 <body>
+    <div class="notif-wrapper" id="notif-wrapper">
+
+  <button class="notif-button" id="notif-bell-btn" aria-label="Thông báo">
+    <span class="notif-badge" id="notif-badge">3</span>
+    <svg viewBox="0 0 448 512" class="bell">
+      <path d="M224 0c-17.7 0-32 14.3-32 32V49.9C119.5 61.4 64 124.2 64 200v33.4c0 45.4-15.5 89.5-43.8 124.9L5.3 377c-5.8 7.2-6.9 17.1-2.9 25.4S14.8 416 24 416H424c9.2 0 17.6-5.3 21.6-13.6s2.9-18.2-2.9-25.4l-14.9-18.6C399.5 322.9 384 278.8 384 233.4V200c0-75.8-55.5-138.6-128-150.1V32c0-17.7-14.3-32-32-32zm0 96h8c57.4 0 104 46.6 104 104v33.4c0 47.9 13.9 94.6 39.7 134.6H72.3C98.1 328 112 281.3 112 233.4V200c0-57.4 46.6-104 104-104h8zm64 352H224 160c0 17 6.7 33.3 18.7 45.3s28.3 18.7 45.3 18.7s33.3-6.7 45.3-18.7s18.7-28.3 18.7-45.3z"/>
+    </svg>
+  </button>
+
+  <div class="notif-panel" id="notif-panel" aria-hidden="true">
+    <div class="notif-panel-header">
+      <span class="notif-panel-title">🔔 Thông báo</span>
+      <button class="notif-clear-btn" id="notif-clear-btn">Xóa tất cả</button>
+    </div>
+    <ul class="notif-list" id="notif-list">
+      <li class="notif-item notif-unread">
+        <div class="notif-icon-wrap notif-icon-info">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+        </div>
+        <div class="notif-content">
+          <p class="notif-msg">Lịch thi EOS học kỳ mới đã được cập nhật.</p>
+          <span class="notif-time">5 phút trước</span>
+        </div>
+        <span class="notif-dot"></span>
+      </li>
+      <li class="notif-item notif-unread">
+        <div class="notif-icon-wrap notif-icon-warn">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>
+        </div>
+        <div class="notif-content">
+          <p class="notif-msg">
+                App thi FE mới Update version mới ClientEOS_FU_LAPTOP_23.02.20.26.zip <br>
+                <a href="https://lmsdn.fpt.edu.vn/hd/eos/" target="_blank" class="link-pe">
+                    LINK TRUY CẬP
+                </a>
+            </p>
+          <span class="notif-time">1 giờ trước</span>
+        </div>
+        <span class="notif-dot"></span>
+      </li>
+      <li class="notif-item notif-unread">
+        <div class="notif-icon-wrap notif-icon-success">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+        </div>
+        <div class="notif-content">
+            <p class="notif-msg">
+                App thi PE mới update version mới ClientPEA_16.10.20.25 — <br>
+                <a href="https://lmsdn.fpt.edu.vn/hd/pea/" target="_blank" class="link-pe">
+                    LINK TRUY CẬP
+                </a>
+            </p>
+          <span class="notif-time">Hôm qua</span>
+        </div>
+        <span class="notif-dot"></span>
+      </li>
+    </ul>
+    <div class="notif-empty" id="notif-empty" style="display:none">
+      <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor" style="opacity:.4">
+        <path d="M20 18.69L5.84 4.53 4.27 3 3 4.27l2.04 2.04C5.04 6.54 5 6.76 5 7v7l-2 2v1h13.73l2 2L20 17.73l-.01.96zM12 22c1.11 0 2-.89 2-2h-4c0 1.11.89 2 2 2zm6-7.32V11c0-3.08-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68c-.24.06-.47.15-.69.23L18 12.31l.01 2.37z"/>
+      </svg>
+      <p>Không có thông báo nào</p>
+    </div>
+  </div>
+</div>
 
     <!-- ===== LOADING SCREEN ===== -->
     <div id="loading-screen">
@@ -147,21 +212,20 @@
                 <div class="cards-grid reveal-stagger">
 
                     <!-- Card 1 -->
-                    <div class="card reveal-scale" onclick="window.location.href='../APP/app.html'">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/>
-                        </svg>
+                    <div class="card reveal-scale" onclick="window.location.href='/APP/flm.html'">
+    
+                        <img src="6.png" alt="FLM icon" class="card__icon">
+
                         <div class="card__content">
                             <p class="card__title">FLM</p>
                             <p class="card__description">Hệ thống quản lý học tập trực tuyến của FPT University.</p>
                         </div>
                     </div>
+                    
 
                     <!-- Card 2 -->
-                    <div class="card reveal-scale" onclick="window.location.href='../APP/app.html'">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                            <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/>
-                        </svg>
+                    <div class="card reveal-scale" onclick="window.location.href='/APP/fapweb.html'">
+                        <img src="1.png" alt="FAP WEB icon" class="card__icon">
                         <div class="card__content">
                             <p class="card__title">FAP WEB</p>
                             <p class="card__description">Cổng thông tin sinh viên trên nền web — xem điểm, lịch học, đăng ký môn.</p>
@@ -169,10 +233,8 @@
                     </div>
 
                     <!-- Card 3 -->
-                    <div class="card reveal-scale" onclick="window.location.href='../APP/app.html'">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/>
-                        </svg>
+                    <div class="card reveal-scale" onclick="window.location.href='/APP/fapapp.html'">
+                        <img src="4.png" alt="FAP APP icon" class="card__icon">
                         <div class="card__content">
                             <p class="card__title">FAP APP</p>
                             <p class="card__description">Ứng dụng di động FAP — tra cứu thông tin học vụ mọi lúc mọi nơi.</p>
@@ -180,10 +242,8 @@
                     </div>
 
                     <!-- Card 4 -->
-                    <div class="card reveal-scale" onclick="window.location.href='../APP/app.html'">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                            <path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/>
-                        </svg>
+                    <div class="card reveal-scale" onclick="window.location.href='/APP/eos.html'">
+                        <img src="7.png" alt="EOS icon" class="card__icon">
                         <div class="card__content">
                             <p class="card__title">EOS</p>
                             <p class="card__description">Hệ thống thi trực tuyến — làm bài kiểm tra và thi cuối kỳ trên nền tảng EOS.</p>
@@ -191,10 +251,8 @@
                     </div>
 
                     <!-- Card 5 -->
-                    <div class="card reveal-scale" onclick="window.location.href='../APP/app.html'">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                            <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-                        </svg>
+                    <div class="card reveal-scale" onclick="window.location.href='/APP/seb.html'">
+                        <img src="3.png" alt="SEB icon" class="card__icon">
                         <div class="card__content">
                             <p class="card__title">SEB</p>
                             <p class="card__description">Trình duyệt thi an toàn — khoá màn hình và giám sát trong suốt kỳ thi.</p>
@@ -202,10 +260,8 @@
                     </div>
 
                     <!-- Card 6 -->
-                    <div class="card reveal-scale" onclick="window.location.href='../APP/app.html'">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                            <path d="M20 5H4V19L13.2923 9.70649C13.6828 9.31595 14.3159 9.31591 14.7065 9.70641L20 15.0104V5ZM2 3.9934C2 3.44476 2.45531 3 2.9918 3H21.0082C21.556 3 22 3.44495 22 3.9934V20.0066C22 20.5552 21.5447 21 21.0082 21H2.9918C2.44405 21 2 20.5551 2 20.0066V3.9934ZM8 11C6.89543 11 6 10.1046 6 9C6 7.89543 6.89543 7 8 7C9.10457 7 10 7.89543 10 9C10 10.1046 9.10457 11 8 11Z"/>
-                        </svg>
+                    <div class="card reveal-scale" onclick="window.location.href='/APP/edunext.html'">
+                        <img src="5.png" alt="EDUNEXT icon" class="card__icon">
                         <div class="card__content">
                             <p class="card__title">EDUNEXT</p>
                             <p class="card__description">Nền tảng quản lý đào tạo — lịch thi, kết quả học tập và thông báo từ nhà trường.</p>
@@ -304,5 +360,7 @@
 <script src="Home/navbar.js"></script>
 <script src="Home/scroll-reveal.js"></script>
 <script src="Home/loading.js"></script>
+ <script src="Home/notification.js"></script>
+
 </body>
 </html>
