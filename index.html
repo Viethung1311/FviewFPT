@@ -15,10 +15,15 @@
 <link rel="stylesheet" href="Home/loading.css">
 <link rel="stylesheet" href="Home/footer.css">
 <link rel="stylesheet" href="Home/notification.css">
+<link rel="stylesheet" href="Home/social-float.css">
+
 
 </head>
 <body>
     <div class="notif-wrapper" id="notif-wrapper">
+         <!-- Instagram Button -->
+  
+
 
   <button class="notif-button" id="notif-bell-btn" aria-label="Thông báo">
     <span class="notif-badge" id="notif-badge">3</span>
@@ -81,21 +86,24 @@
       <p>Không có thông báo nào</p>
     </div>
   </div>
+
+  
+  <!-- Facebook Button -->
+  <button class="Btn" onclick="window.open('https:www.facebook.com/profile.php?id=61586414162477', '_blank')" aria-label="Facebook">
+    <span class="svgContainer">
+      <svg fill="white" class="svgIcon" viewBox="0 0 512 512" height="1.5em" xmlns="http://www.w3.org/2000/svg"><path d="M512 256C512 114.6 397.4 0 256 0S0 114.6 0 256C0 376 82.7 476.8 194.2 504.5V334.2H141.4V256h52.8V222.3c0-87.1 39.4-127.5 125-127.5c16.2 0 44.2 3.2 55.7 6.4V172c-6-.6-16.5-1-29.6-1c-42 0-58.2 15.9-58.2 57.2V256h83.6l-14.4 78.2H287V510.1C413.8 494.8 512 386.9 512 256h0z"/></svg>
+    </span>
+    <span class="BG" style="background: #1877f2;"></span>
+  </button>
+
+
+
 </div>
 
+    
     <!-- ===== LOADING SCREEN ===== -->
     <div id="loading-screen">
-        <div class="solar">
-            <i class="mercury"></i>
-            <i class="venus"></i>
-            <i class="earth"></i>
-            <i class="mars"></i>
-            <i class="belt"></i>
-            <i class="jupiter"></i>
-            <i class="saturn"></i>
-            <i class="uranus"></i>
-            <i class="neptune"></i>
-        </div>
+        <div class="loader"></div>
     </div>
 
     <!-- Floating background icons -->
@@ -354,13 +362,15 @@
       </div>
     </footer>
 
-<script src="Home/script.js"></script>
-<script src="Home/auth-nav.js"></script>
-<script src="Home/hieu_ung.js"></script>
-<script src="Home/navbar.js"></script>
-<script src="Home/scroll-reveal.js"></script>
-<script src="Home/loading.js"></script>
- <script src="Home/notification.js"></script>
+
+    <script src="Home/loading.js"></script>
+    <script src="Home/script.js"></script>
+    <script src="Home/auth-nav.js"></script>
+    <script src="Home/hieu_ung.js"></script>
+    <script src="Home/navbar.js"></script>
+    <script src="Home/scroll-reveal.js"></script>
+    <script src="Home/loading.js"></script>
+    <script src="Home/notification.js"></script>
 
 </body>
 </html>

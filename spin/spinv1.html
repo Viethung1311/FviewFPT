@@ -2,11 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="spinv1.css">
   <link rel="stylesheet" href="spin-button.css">
   <link rel="stylesheet" href="toad.css">
+  <link rel="stylesheet" href="daily.css">
+  <link rel="stylesheet" href="mobile.css">
   <title>Spin Wheel</title>
 </head>
 <body>
@@ -86,6 +88,26 @@
         </div>
       </div>
     </div>
+
+    <!-- Separator -->
+    <div class="pill-sep"></div>
+
+    <!-- Daily check-in chip -->
+    <button id="daily-chip" onclick="openDailyPopup()">
+      <span class="dc-chip-dot" id="daily-dot"></span>
+      <svg class="dc-chip-svg" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="2" y="4" width="16" height="14" rx="2.5" stroke="currentColor" stroke-width="1.4"/>
+        <path d="M2 8h16" stroke="currentColor" stroke-width="1.4"/>
+        <path d="M6 2v3M14 2v3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+        <rect x="5.5" y="11" width="2" height="2" rx=".4" fill="currentColor"/>
+        <rect x="9" y="11" width="2" height="2" rx=".4" fill="currentColor"/>
+        <rect x="12.5" y="11" width="2" height="2" rx=".4" fill="currentColor"/>
+      </svg>
+      <div class="dc-chip-body">
+        <span class="dc-chip-label">Điểm Danh</span>
+        <span class="dc-chip-sub" id="daily-chip-sub">Đang tải...</span>
+      </div>
+    </button>
 
   </div>
 </div>
@@ -247,7 +269,7 @@
   font-family: "Poppins", sans-serif;
   position: fixed; top: 20px; right: 20px; z-index: 99998;
   display: flex; align-items: center; gap: 6px;
-  padding: 9px 18px; font-size: 13px; font-weight: 600;
+  padding: 11px 22px; font-size: 17px; font-weight: 600;
   color: #1a1000;
   background: linear-gradient(135deg,#c8960c 0%,#f5d060 40%,#d4a820 60%,#c8960c 100%);
   border: none; border-radius: 30px; cursor: pointer;
@@ -287,14 +309,14 @@
 /* Separator line between the two halves */
 .pill-sep {
   width: 1px;
-  height: 22px;
+  height: 28px;
   background: rgba(212,175,55,.22);
   flex-shrink: 0;
 }
 #history-chip {
   font-family: "Poppins", sans-serif;
-  display: flex; align-items: center; gap: 6px;
-  padding: 0 14px 0 12px; height: 34px;
+  display: flex; align-items: center; gap: 8px;
+  padding: 0 16px 0 14px; height: 44px;
   color: rgba(255,224,130,.9);
   background: transparent;
   border: none;
@@ -304,7 +326,7 @@
 #history-chip:hover { background: rgba(212,175,55,.06); }
 #history-chip:active { background: rgba(212,175,55,.1); }
 .hc-dot {
-  width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0;
+  width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0;
   background: #7dd87d; box-shadow: 0 0 6px #7dd87d;
   animation: dotPulse 2s ease-in-out infinite;
 }
@@ -312,17 +334,24 @@
   0%,100%{ box-shadow:0 0 4px #7dd87d; opacity:.8; }
   50%    { box-shadow:0 0 10px #7dd87d; opacity:1; }
 }
-.hc-svg   { width:13px; height:13px; flex-shrink:0; opacity:.7; }
-.hc-label { font-size:11px; font-weight:700; letter-spacing:.2px; }
-.hc-sep   { font-size:10px; color:rgba(212,175,55,.28); }
+.hc-svg   { width:17px; height:17px; flex-shrink:0; opacity:.7; }
+.hc-label { font-size: 14.5px; font-weight:700; letter-spacing:.2px; }
+.hc-sep   { font-size: 13px; color:rgba(212,175,55,.28); }
 .hc-count {
-  font-size:10px; font-weight:700; letter-spacing:.5px;
+  font-size: 13px; font-weight:700; letter-spacing:.5px;
   background: linear-gradient(135deg,#c8960c,#f5d060);
   -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
 }
 
 /* ─── OVERLAYS ─── */
-#guide-overlay, #history-overlay {
+#guide-overlay {
+  display:none; position:fixed; inset:0;
+  background: rgba(6,4,1,.93);
+  z-index:200000;
+  justify-content:center; align-items:center;
+  padding: 20px 12px;
+}
+#history-overlay {
   display:none; position:fixed; inset:0;
   background: rgba(6,4,1,.93);
   z-index:200000;
@@ -346,14 +375,17 @@
   border: 1px solid rgba(212,175,55,.35);
   border-radius: 18px;
   width: min(1060px, calc(100vw - 24px));
-  max-height: calc(100vh - 40px);
-  overflow-y: auto;
-  padding: 28px 36px 26px;
+  height: calc(100vh - 48px);
+  max-height: calc(100vh - 48px);
+  overflow: hidden;
+  padding: 14px 26px 14px;
   box-shadow:
     0 0 0 1px rgba(245,215,120,.07),
     0 28px 80px rgba(0,0,0,.85),
     inset 0 1px 0 rgba(255,235,150,.09);
   animation: popIn .4s cubic-bezier(.34,1.56,.64,1) forwards;
+  display: flex;
+  flex-direction: column;
 }
 
 /* ─── CLOSE BTN ─── */
@@ -361,33 +393,33 @@
   position:absolute; top:12px; right:12px;
   background:rgba(255,255,255,.07); border:1px solid rgba(212,175,55,.18);
   color:rgba(245,230,180,.55); width:26px; height:26px;
-  border-radius:50%; font-size:11px; cursor:pointer;
+  border-radius:50%; font-size: 14.5px; cursor:pointer;
   display:flex; align-items:center; justify-content:center;
   transition:all .2s; padding:0; font-family:"Poppins",sans-serif;
 }
 .gp-x:hover { background:rgba(212,175,55,.15); color:#ffd700; }
 
 /* ─── HEADER ─── */
-.gp-head { display:flex; align-items:center; gap:12px; }
-.gp-head-icon { font-size:42px; flex-shrink:0; }
+.gp-head { display:flex; align-items:center; gap:12px; flex-shrink:0; }
+.gp-head-icon { font-size: 34px; flex-shrink:0; }
 .gp-title {
-  font-size:22px; font-weight:800; font-family:"Poppins",sans-serif;
+  font-size: 28.5px; font-weight:800; font-family:"Poppins",sans-serif;
   background:linear-gradient(175deg,#fff8dc 0%,#f5d060 30%,#d4a820 55%,#f5d060 80%,#fff8dc 100%);
   -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
-  margin-bottom:2px;
+  margin-bottom:1px;
 }
-.gp-sub { font-size:13px; color:rgba(245,230,180,.42); font-family:"Poppins",sans-serif; }
-.gp-divider { height:1px; background:linear-gradient(90deg,transparent,rgba(212,175,55,.28),transparent); margin:14px 0; }
+.gp-sub { font-size: 17px; color:rgba(245,230,180,.42); font-family:"Poppins",sans-serif; }
+.gp-divider { height:1px; background:linear-gradient(90deg,transparent,rgba(212,175,55,.28),transparent); margin:8px 0; flex-shrink:0; }
 
 /* ─── 2-COL BODY ─── */
-.gp-cols { display:grid; grid-template-columns:1fr 1px 1fr; align-items:start; gap:0; }
-.gp-col  { display:flex; flex-direction:column; gap:10px; padding:0 24px; }
+.gp-cols { display:grid; grid-template-columns:1fr 1px 1fr; align-items:start; gap:0; flex:1 1 0; overflow:hidden; min-height:0; }
+.gp-col  { display:flex; flex-direction:column; gap:5px; padding:0 20px; height:100%; overflow:hidden; }
 .gp-col:first-child { padding-left:0; }
 .gp-col:last-child  { padding-right:0; }
-.gp-vdiv { background:linear-gradient(to bottom,transparent,rgba(212,175,55,.22),transparent); }
+.gp-vdiv { background:linear-gradient(to bottom,transparent,rgba(212,175,55,.22),transparent); align-self:stretch; }
 .gp-col-title {
-  font-size:12px; font-weight:700; letter-spacing:2px; text-transform:uppercase;
-  color:rgba(212,175,55,.65); margin-bottom:6px; font-family:"Poppins",sans-serif;
+  font-size: 15.5px; font-weight:700; letter-spacing:2px; text-transform:uppercase;
+  color:rgba(212,175,55,.65); margin-bottom:2px; font-family:"Poppins",sans-serif; flex-shrink:0;
 }
 
 /* ─── REWARD CARDS ─── */
@@ -395,7 +427,8 @@
   display:flex; align-items:center; gap:9px;
   background:rgba(255,255,255,.028);
   border:1px solid rgba(255,255,255,.055);
-  border-radius:10px; padding:11px 13px;
+  border-radius:10px; padding:6px 12px;
+  flex-shrink:0;
 }
 .rare-card { border-color:rgba(255,100,180,.28); background:rgba(255,80,160,.04); box-shadow:0 0 8px rgba(255,100,180,.08); }
 
@@ -428,7 +461,7 @@
   50%    { box-shadow:0 0 0 2px rgba(215,0,255,1),0 0 26px rgba(175,0,255,.55),0 0 50px rgba(0,215,255,.25); }
 }
 .jp-star {
-  font-size:22px; flex-shrink:0;
+  font-size: 28.5px; flex-shrink:0;
   filter:drop-shadow(0 0 5px #ff00ff) drop-shadow(0 0 11px #a000ff);
   animation:starGlow 1.6s ease-in-out infinite;
 }
@@ -437,7 +470,7 @@
   50%    { filter:drop-shadow(0 0 10px #ff66ff) drop-shadow(0 0 22px #cc00ff) drop-shadow(0 0 5px #00ffff); }
 }
 .jp-name {
-  font-size:12px !important; font-weight:800 !important;
+  font-size: 15.5px !important; font-weight:800 !important;
   background:linear-gradient(90deg,#ff66ff,#a000ff,#00ccff,#ff66ff) !important;
   background-size:300% 100% !important;
   -webkit-background-clip:text !important; -webkit-text-fill-color:transparent !important;
@@ -449,11 +482,11 @@
 .jp-desc strong { color:#d8b4ff !important; }
 
 /* reward shared parts */
-.rw-ico  { font-size:24px; flex-shrink:0; }
+.rw-ico  { font-size: 31px; flex-shrink:0; }
 .rw-body { flex:1; display:flex; flex-direction:column; gap:1px; }
-.rw-name { font-size:12px; font-weight:700; color:rgba(255,238,195,.9); font-family:"Poppins",sans-serif; }
-.rw-desc { font-size:10px; color:rgba(200,178,140,.55); font-family:"Poppins",sans-serif; }
-.rw-tag  { font-size:9px; font-weight:700; letter-spacing:.4px; padding:3px 8px; border-radius:20px; white-space:nowrap; font-family:"Poppins",sans-serif; flex-shrink:0; }
+.rw-name { font-size: 15.5px; font-weight:700; color:rgba(255,238,195,.9); font-family:"Poppins",sans-serif; }
+.rw-desc { font-size: 13px; color:rgba(200,178,140,.55); font-family:"Poppins",sans-serif; }
+.rw-tag  { font-size: 11.5px; font-weight:700; letter-spacing:.4px; padding:3px 8px; border-radius:20px; white-space:nowrap; font-family:"Poppins",sans-serif; flex-shrink:0; }
 .common-tag { background:rgba(70,175,70,.13); color:#7dd87d; border:1px solid rgba(70,175,70,.22); }
 .rare-tag   { background:rgba(255,100,180,.12); color:#ffadd8; border:1px solid rgba(255,100,180,.35); text-shadow:0 0 6px rgba(255,100,180,.45); }
 .jp-tag {
@@ -472,15 +505,15 @@
 .gp-claim {
   background:rgba(155,0,255,.05);
   border:1px solid rgba(155,0,255,.2);
-  border-radius:9px; padding:10px 12px; margin-top:2px;
+  border-radius:9px; padding:6px 12px; margin-top:0; flex-shrink:0;
 }
-.gp-claim-title { font-size:11px; font-weight:700; color:rgba(255,210,100,.88); margin-bottom:5px; font-family:"Poppins",sans-serif; }
-.gp-claim-body  { font-size:10.5px; color:rgba(220,198,165,.58); line-height:1.55; margin-bottom:8px; font-family:"Poppins",sans-serif; }
+.gp-claim-title { font-size: 14.5px; font-weight:700; color:rgba(255,210,100,.88); margin-bottom:4px; font-family:"Poppins",sans-serif; }
+.gp-claim-body  { font-size: 13.5px; color:rgba(220,198,165,.58); line-height:1.45; margin-bottom:6px; font-family:"Poppins",sans-serif; }
 .gp-claim-body strong { color:rgba(255,215,100,.82); }
 .gp-fb-btn {
   display:inline-flex; align-items:center; gap:6px;
   background:#1877f2; color:#fff !important; text-decoration:none;
-  font-size:11.5px; font-weight:700; padding:7px 15px; border-radius:18px;
+  font-size: 15px; font-weight:700; padding:6px 14px; border-radius:18px;
   box-shadow:0 3px 11px rgba(24,119,242,.38);
   transition:transform .2s,box-shadow .2s; font-family:"Poppins",sans-serif;
 }
@@ -491,34 +524,36 @@
   display:flex; align-items:flex-start; gap:9px;
   background:rgba(255,255,255,.022);
   border:1px solid rgba(255,255,255,.048);
-  border-radius:9px; padding:10px 13px;
+  border-radius:9px; padding:6px 11px;
+  flex-shrink:0;
 }
 .gp-snum {
-  width:20px; height:20px; flex-shrink:0;
+  width:22px; height:22px; flex-shrink:0;
   background:linear-gradient(135deg,#c8960c,#f5d060);
-  color:#1a1000; font-size:10px; font-weight:800;
+  color:#1a1000; font-size: 13px; font-weight:800;
   border-radius:50%; display:flex; align-items:center; justify-content:center;
   margin-top:1px;
 }
-.gp-stxt { font-size:11.5px; color:rgba(245,222,165,.68); line-height:1.5; font-family:"Poppins",sans-serif; }
+.gp-stxt { font-size: 15px; color:rgba(245,222,165,.68); line-height:1.4; font-family:"Poppins",sans-serif; }
 .gp-stxt strong { color:rgba(255,215,0,.88); }
 
 .gp-tip {
   display:flex; align-items:center; gap:8px;
   background:rgba(212,175,55,.055);
   border:1px solid rgba(212,175,55,.15);
-  border-radius:8px; padding:9px 11px; margin-top:2px;
-  font-size:11px; color:rgba(245,222,165,.55); font-family:"Poppins",sans-serif;
+  border-radius:8px; padding:5px 11px; margin-top:0;
+  font-size: 14.5px; color:rgba(245,222,165,.55); font-family:"Poppins",sans-serif;
+  flex-shrink:0;
 }
-.gp-tip > span:first-child { font-size:15px; flex-shrink:0; }
+.gp-tip > span:first-child { font-size: 19.5px; flex-shrink:0; }
 .gp-tip strong { color:rgba(255,215,0,.82); }
 
 /* ─── START BUTTON ─── */
 .gp-start-btn {
-  display:block; width:100%; margin-top:16px; padding:11px;
+  display:block; width:100%; margin-top:8px; padding:9px; flex-shrink:0;
   background:linear-gradient(135deg,#c8960c 0%,#f5d060 40%,#d4a820 60%,#c8960c 100%);
   color:#1a1000; border:none; border-radius:28px;
-  font-size:15px; font-weight:800; letter-spacing:.8px; cursor:pointer;
+  font-size: 19.5px; font-weight:800; letter-spacing:.8px; cursor:pointer;
   box-shadow:0 4px 18px rgba(200,150,12,.5),inset 0 1px 0 rgba(255,255,210,.38);
   transition:transform .2s,box-shadow .2s; font-family:"Segoe UI Emoji","Apple Color Emoji","Noto Color Emoji","Segoe UI","Arial Unicode MS",system-ui,sans-serif;
 }
@@ -541,62 +576,62 @@
 #history-popup::-webkit-scrollbar-thumb{ background:rgba(212,175,55,.22); border-radius:2px; }
 
 .hp-head { display:flex; align-items:center; gap:11px; }
-.hp-head-icon { font-size:28px; }
-.hp-title { font-size:16px; font-weight:800; font-family:"Poppins",sans-serif; background:linear-gradient(175deg,#fff8dc 0%,#f5d060 35%,#d4a820 60%,#fff8dc 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin-bottom:2px; }
-.hp-sub   { font-size:11px; color:rgba(245,230,180,.38); font-family:"Poppins",sans-serif; }
+.hp-head-icon { font-size: 36.5px; }
+.hp-title { font-size: 21px; font-weight:800; font-family:"Poppins",sans-serif; background:linear-gradient(175deg,#fff8dc 0%,#f5d060 35%,#d4a820 60%,#fff8dc 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin-bottom:2px; }
+.hp-sub   { font-size: 14.5px; color:rgba(245,230,180,.38); font-family:"Poppins",sans-serif; }
 
 #hp-uid-box {
   display:flex; align-items:center; gap:8px; flex-wrap:wrap;
   background:rgba(212,175,55,.07); border:1px solid rgba(212,175,55,.22);
   border-radius:9px; padding:8px 12px; margin-top:12px;
 }
-.hp-uid-lbl { font-size:9px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:rgba(212,175,55,.48); font-family:"Poppins",sans-serif; }
-#hp-uid-val { font-size:13px; font-weight:800; letter-spacing:2.5px; color:rgba(255,220,100,.95); font-family:"Poppins",sans-serif; flex:1; }
-.hp-copy-btn { background:rgba(212,175,55,.13); border:1px solid rgba(212,175,55,.28); color:rgba(255,220,100,.78); padding:3px 10px; border-radius:16px; font-size:10px; font-weight:600; cursor:pointer; transition:all .2s; font-family:"Poppins",sans-serif; }
+.hp-uid-lbl { font-size: 11.5px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:rgba(212,175,55,.48); font-family:"Poppins",sans-serif; }
+#hp-uid-val { font-size: 17px; font-weight:800; letter-spacing:2.5px; color:rgba(255,220,100,.95); font-family:"Poppins",sans-serif; flex:1; }
+.hp-copy-btn { background:rgba(212,175,55,.13); border:1px solid rgba(212,175,55,.28); color:rgba(255,220,100,.78); padding:3px 10px; border-radius:16px; font-size: 13px; font-weight:600; cursor:pointer; transition:all .2s; font-family:"Poppins",sans-serif; }
 .hp-copy-btn:hover { background:rgba(212,175,55,.25); color:#ffd700; }
 
 .hp-divider { height:1px; background:linear-gradient(90deg,transparent,rgba(212,175,55,.22),transparent); margin:12px 0; }
 
 #history-list { display:flex; flex-direction:column; gap:6px; }
-.h-empty { text-align:center; color:rgba(245,230,180,.25); font-size:13px; font-family:"Poppins",sans-serif; padding:26px 0; line-height:1.8; }
+.h-empty { text-align:center; color:rgba(245,230,180,.25); font-size: 17px; font-family:"Poppins",sans-serif; padding:26px 0; line-height:1.8; }
 .h-item { display:flex; align-items:center; gap:10px; background:rgba(255,255,255,.025); border:1px solid rgba(255,255,255,.052); border-radius:8px; padding:9px 11px; }
 .h-item.h-rare    { border-color:rgba(255,100,180,.25); background:rgba(255,80,160,.04); box-shadow:0 0 7px rgba(255,100,180,.1); }
 .h-item.h-jackpot { border-color:rgba(150,0,255,.42); background:linear-gradient(135deg,rgba(60,0,100,.14),rgba(0,70,140,.07)); box-shadow:0 0 9px rgba(150,0,255,.14); animation:jpGlow 2.5s ease-in-out infinite; }
-.h-item-icon { font-size:20px; flex-shrink:0; }
+.h-item-icon { font-size: 26px; flex-shrink:0; }
 .h-item-info { flex:1; }
-.h-item-name { font-size:12px; font-weight:600; color:rgba(255,238,195,.85); font-family:"Poppins",sans-serif; }
+.h-item-name { font-size: 15.5px; font-weight:600; color:rgba(255,238,195,.85); font-family:"Poppins",sans-serif; }
 .h-item.h-jackpot .h-item-name { background:linear-gradient(90deg,#ff66ff,#a000ff,#00ccff,#ff66ff); background-size:300% 100%; -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; animation:neonTxt 2s linear infinite; }
-.h-item-time { font-size:10px; color:rgba(200,178,135,.35); font-family:"Poppins",sans-serif; margin-top:2px; }
-.h-item-num  { font-size:10px; font-weight:700; color:rgba(200,178,135,.28); font-family:"Poppins",sans-serif; flex-shrink:0; }
+.h-item-time { font-size: 13px; color:rgba(200,178,135,.35); font-family:"Poppins",sans-serif; margin-top:2px; }
+.h-item-num  { font-size: 13px; font-weight:700; color:rgba(200,178,135,.28); font-family:"Poppins",sans-serif; flex-shrink:0; }
 
 .hp-claim { display:flex; gap:9px; align-items:flex-start; background:rgba(150,0,255,.04); border:1px solid rgba(150,0,255,.18); border-radius:9px; padding:10px 12px; margin-top:12px; }
 
 .h-pity-tag {
-  display:inline-block; font-size:9px; font-weight:700;
+  display:inline-block; font-size: 11.5px; font-weight:700;
   background:rgba(255,140,0,.18); color:#ffaa44;
   border:1px solid rgba(255,140,0,.35); border-radius:10px;
   padding:1px 6px; margin-left:5px; vertical-align:middle;
   letter-spacing:.3px;
 }
-.hp-claim > span:first-child { font-size:15px; flex-shrink:0; margin-top:1px; }
-.hp-claim p { font-size:11px; color:rgba(215,195,160,.56); margin:0; line-height:1.5; font-family:"Poppins",sans-serif; }
+.hp-claim > span:first-child { font-size: 19.5px; flex-shrink:0; margin-top:1px; }
+.hp-claim p { font-size: 14.5px; color:rgba(215,195,160,.56); margin:0; line-height:1.5; font-family:"Poppins",sans-serif; }
 
 
 /* ─── PITY CHIP (right half of merged pill) ─── */
 #pity-chip {
-  display: flex; align-items: center; gap: 8px;
+  display: flex; align-items: center; gap: 10px;
   background: transparent;
   border: none;
   border-radius: 0;
-  padding: 5px 16px 5px 12px;
+  padding: 7px 20px 7px 14px;
   white-space: nowrap;
-  min-width: 190px;
+  min-width: 240px;
 }
-.pc-icon { font-size:14px; flex-shrink:0; filter:drop-shadow(0 0 4px rgba(255,215,0,.5)); }
+.pc-icon { font-size: 18px; flex-shrink:0; filter:drop-shadow(0 0 4px rgba(255,215,0,.5)); }
 .pc-track { flex:1; display:flex; flex-direction:column; gap:3px; }
 .pc-label-row { display:flex; justify-content:space-between; align-items:center; }
-.pc-label { font-size:9px; font-weight:600; letter-spacing:.8px; text-transform:uppercase; color:rgba(212,175,55,.55); font-family:"Poppins",sans-serif; }
-.pc-nums { font-size:10px; font-weight:700; font-family:"Poppins",sans-serif; color:rgba(255,220,100,.8); }
+.pc-label { font-size: 11.5px; font-weight:600; letter-spacing:.8px; text-transform:uppercase; color:rgba(212,175,55,.55); font-family:"Poppins",sans-serif; }
+.pc-nums { font-size: 13px; font-weight:700; font-family:"Poppins",sans-serif; color:rgba(255,220,100,.8); }
 .pc-slash { opacity:.4; margin:0 1px; }
 .pc-max { opacity:.5; }
 .pc-bar-bg {
@@ -629,11 +664,11 @@
 }
 
 /* ─── TOAD INFO BUTTON (inside guide popup) ─── */
-.gp-toad-info-row { margin-top:2px; }
+.gp-toad-info-row { margin-top:0; flex-shrink:0; }
 .gp-toad-info-btn {
   display:inline-flex; align-items:center; gap:7px;
   background:rgba(90,158,58,.12); border:1px solid rgba(90,158,58,.3);
-  color:rgba(180,240,140,.82); font-size:11.5px; font-weight:600;
+  color:rgba(180,240,140,.82); font-size: 15px; font-weight:600;
   padding:7px 14px; border-radius:20px; cursor:pointer;
   transition:all .2s; font-family:"Poppins",sans-serif;
 }
@@ -664,12 +699,12 @@
 
 .ti-header { display:flex; align-items:center; gap:14px; }
 .ti-title {
-  font-size:20px; font-weight:800; font-family:"Poppins",sans-serif;
+  font-size: 26px; font-weight:800; font-family:"Poppins",sans-serif;
   background:linear-gradient(160deg,#d0ffa0 0%,#7dd87d 35%,#4a9e30 60%,#7dd87d 85%,#d0ffa0 100%);
   -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
   margin-bottom:3px;
 }
-.ti-sub { font-size:12px; color:rgba(180,230,140,.4); font-family:"Poppins",sans-serif; }
+.ti-sub { font-size: 15.5px; color:rgba(180,230,140,.4); font-family:"Poppins",sans-serif; }
 .ti-divider { height:1px; background:linear-gradient(90deg,transparent,rgba(90,158,58,.28),transparent); margin:16px 0; }
 
 /* Table */
@@ -679,38 +714,38 @@
 }
 .ti-table thead tr { border-bottom:1px solid rgba(90,158,58,.25); }
 .ti-table th {
-  font-size:10px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase;
+  font-size: 13px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase;
   color:rgba(140,210,100,.55); padding:6px 12px; text-align:left;
 }
 .ti-row td {
-  padding:9px 12px; font-size:12px; color:rgba(220,240,195,.7);
+  padding:9px 12px; font-size: 15.5px; color:rgba(220,240,195,.7);
   border-bottom:1px solid rgba(255,255,255,.04);
 }
 .ti-row:last-child td { border-bottom:none; }
 .ti-row:hover td { background:rgba(90,158,58,.05); }
 .ti-max td { color:rgba(255,220,100,.9) !important; }
 .ti-lv {
-  display:inline-block; font-size:10px; font-weight:700; color:#fff;
+  display:inline-block; font-size: 13px; font-weight:700; color:#fff;
   padding:2px 9px; border-radius:12px; letter-spacing:.3px;
 }
 
 /* Rules */
-.ti-rules-title { font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:rgba(140,210,100,.55); font-family:"Poppins",sans-serif; margin-bottom:10px; }
+.ti-rules-title { font-size: 14.5px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:rgba(140,210,100,.55); font-family:"Poppins",sans-serif; margin-bottom:10px; }
 .ti-rules { display:flex; flex-direction:column; gap:8px; }
 .ti-rule {
   display:flex; align-items:flex-start; gap:10px;
   background:rgba(90,158,58,.06); border:1px solid rgba(90,158,58,.12);
   border-radius:9px; padding:9px 13px;
-  font-size:12px; color:rgba(210,235,180,.65); line-height:1.5; font-family:"Poppins",sans-serif;
+  font-size: 15.5px; color:rgba(210,235,180,.65); line-height:1.5; font-family:"Poppins",sans-serif;
 }
-.ti-rule-icon { font-size:16px; flex-shrink:0; margin-top:1px; }
+.ti-rule-icon { font-size: 21px; flex-shrink:0; margin-top:1px; }
 .ti-rule strong { color:rgba(255,220,100,.88); }
 
 .ti-close-btn {
   display:block; width:100%; margin-top:18px; padding:11px;
   background:linear-gradient(135deg,#2a6010 0%,#5ab830 40%,#3a8020 60%,#2a6010 100%);
   color:#e8ffe0; border:none; border-radius:24px;
-  font-size:14px; font-weight:700; cursor:pointer; font-family:"Poppins",sans-serif;
+  font-size: 18px; font-weight:700; cursor:pointer; font-family:"Poppins",sans-serif;
   box-shadow:0 4px 16px rgba(60,160,30,.4);
   transition:transform .2s,box-shadow .2s;
 }
@@ -718,8 +753,8 @@
 
 /* Responsive additions */
 @media (max-width:680px) {
-  #pity-chip { min-width:160px; padding:4px 11px 4px 9px; }
-  .pc-label { font-size:8px; }
+  #pity-chip { min-width:200px; padding:6px 13px 6px 11px; }
+  .pc-label { font-size: 10.5px; }
 }
 
 /* ─── RESPONSIVE ─── */
@@ -727,11 +762,11 @@
   .gp-cols { grid-template-columns:1fr; }
   .gp-vdiv { display:none; }
   .gp-col  { padding:0; }
-  #guide-popup  { padding:16px 14px 14px; border-radius:14px; max-height:90vh; overflow-y:auto; }
-  #guide-chip   { top:14px; right:12px; padding:8px 14px; font-size:12px; }
+  #guide-popup  { padding:14px 14px 12px; border-radius:14px; height:calc(100vh - 16px); max-height:none; overflow-y:auto; }
+  #guide-chip   { top:14px; right:12px; padding:9px 16px; font-size: 15.5px; }
   #bottom-bar { top: calc(50% + 275px); }
-  #history-chip { padding:0 10px 0 10px; height:34px; }
-  #pity-chip { min-width:150px; padding:5px 12px 5px 10px; }
+  #history-chip { padding:0 12px 0 12px; height:44px; }
+  #pity-chip { min-width:190px; padding:6px 13px 6px 11px; }
 }
 </style>
 
@@ -1158,19 +1193,19 @@ function closeToadInfoPopup() {
 @keyframes ppStarGlow { 0%,100%{filter:drop-shadow(0 0 6px #ff66ff) drop-shadow(0 0 14px #aa00ff);} 50%{filter:drop-shadow(0 0 14px #ff88ff) drop-shadow(0 0 28px #cc00ff) drop-shadow(0 0 6px #00ffff);} }
 
 .pp-star-row { display:flex; align-items:center; justify-content:center; gap:12px; margin-bottom:10px; }
-.pp-star-l,.pp-star-r { font-size:32px; }
-.pp-badge { font-size:11px; font-weight:800; letter-spacing:2px; padding:4px 12px; border-radius:20px; font-family:"Poppins",sans-serif; }
-.pp-title { font-size:22px; font-weight:800; margin-bottom:6px; font-family:"Poppins",sans-serif; }
-.pp-sub { font-size:12px; line-height:1.5; margin-bottom:0; font-family:"Poppins",sans-serif; }
+.pp-star-l,.pp-star-r { font-size: 41.5px; }
+.pp-badge { font-size: 14.5px; font-weight:800; letter-spacing:2px; padding:4px 12px; border-radius:20px; font-family:"Poppins",sans-serif; }
+.pp-title { font-size: 28.5px; font-weight:800; margin-bottom:6px; font-family:"Poppins",sans-serif; }
+.pp-sub { font-size: 15.5px; line-height:1.5; margin-bottom:0; font-family:"Poppins",sans-serif; }
 .pp-divider { height:1px; margin:16px 0; }
-.pp-prize-label { font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; font-family:"Poppins",sans-serif; margin-bottom:8px; }
-.pp-prize-icon { font-size:52px; line-height:1; margin-bottom:6px; }
-.pp-prize-name { font-size:15px; font-weight:700; font-family:"Poppins",sans-serif; margin-bottom:0; }
-.pp-claim-note { font-size:11.5px; line-height:1.55; border-radius:10px; padding:10px 14px; margin-bottom:12px; font-family:"Poppins",sans-serif; }
+.pp-prize-label { font-size: 13px; font-weight:700; letter-spacing:2px; text-transform:uppercase; font-family:"Poppins",sans-serif; margin-bottom:8px; }
+.pp-prize-icon { font-size: 67.5px; line-height:1; margin-bottom:6px; }
+.pp-prize-name { font-size: 19.5px; font-weight:700; font-family:"Poppins",sans-serif; margin-bottom:0; }
+.pp-claim-note { font-size: 15px; line-height:1.55; border-radius:10px; padding:10px 14px; margin-bottom:12px; font-family:"Poppins",sans-serif; }
 .pp-fb-btn {
   display:inline-flex; align-items:center; gap:7px;
   background:#1877f2; color:#fff !important; text-decoration:none;
-  font-size:12px; font-weight:700; padding:9px 20px; border-radius:22px;
+  font-size: 15.5px; font-weight:700; padding:9px 20px; border-radius:22px;
   box-shadow:0 3px 12px rgba(24,119,242,.45);
   transition:transform .2s,box-shadow .2s; font-family:"Poppins",sans-serif;
   margin-bottom:12px;
@@ -1178,7 +1213,7 @@ function closeToadInfoPopup() {
 .pp-fb-btn:hover { transform:translateY(-2px); box-shadow:0 6px 18px rgba(24,119,242,.6); }
 .pp-close-btn {
   display:block; width:100%; margin-top:4px; padding:12px;
-  border-radius:26px; font-size:14px; font-weight:700; cursor:pointer;
+  border-radius:26px; font-size: 18px; font-weight:700; cursor:pointer;
   transition:transform .2s,box-shadow .2s; font-family:"Poppins",sans-serif;
 }
 .pp-close-btn:hover { transform:translateY(-2px); }
@@ -1225,6 +1260,21 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 </script>
+
+<!-- ════════════════════════════════════════════
+     DAILY CHECK-IN POPUP
+     ════════════════════════════════════════════ -->
+<div id="daily-overlay" onclick="if(event.target===this)closeDailyPopup()">
+  <div id="daily-popup">
+    <button class="dc-x" onclick="closeDailyPopup()">&#10005;</button>
+    <div id="daily-popup-inner">
+      <!-- Nội dung render bởi daily.js -->
+    </div>
+  </div>
+</div>
+
+<script src="daily.js"></script>
+<script src="mobile.js"></script>
 
 </body>
 </html>

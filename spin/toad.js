@@ -1021,6 +1021,26 @@ function checkAndShowLevelUp() {
       '<div class="adm-row">' +
         '<button class="adm-btn adm-dim-btn" onclick="adminSimulateReset()">🔄 Giả lập reset 00:00</button>' +
         '<button class="adm-btn adm-red-btn" onclick="adminResetAll()">🗑 Xóa toàn bộ</button>' +
+      '</div>' +
+
+      '<div class="adm-divider"></div>' +
+      '<div class="adm-section-title">📅 Daily Check-In</div>' +
+      '<div class="adm-row">' +
+        '<button class="adm-btn adm-dim-btn" onclick="adminSimulateDaily()">🗓 Mở lại daily ngay</button>' +
+        '<button class="adm-btn adm-red-btn" onclick="adminResetDaily()">🗑 Reset daily streak</button>' +
+      '</div>' +
+      '<div class="adm-note" id="adm-daily-info">' +
+        (function(){
+          try {
+            var raw = localStorage.getItem('dailyCheckIn');
+            if (!raw) return 'Chưa có dữ liệu daily';
+            var d = JSON.parse(raw);
+            var streak = d.streak || 0;
+            var msLeft = d.lastClaimTs ? Math.max(0, 24*3600000 - (Date.now() - d.lastClaimTs)) : 0;
+            var hh = Math.floor(msLeft/3600000), mm = Math.floor((msLeft%3600000)/60000);
+            return 'Streak: ' + streak + '/7 | ' + (msLeft > 0 ? 'Mở sau ' + hh + 'h' + mm + 'm' : 'SẴN SÀNG');
+          } catch(e) { return ''; }
+        })() +
       '</div>';
   }
 
@@ -1099,6 +1119,37 @@ function checkAndShowLevelUp() {
       lastSpawnTime:null, lastClaimTime:null, lastResetDate:null
     };
     saveState(); _updateAllUI(); refreshAdminUI();
+  };
+
+  // ── Admin Daily actions ───────────────────────────────────────────
+  window.adminSimulateDaily = function() {
+    try {
+      var raw = localStorage.getItem('dailyCheckIn');
+      var d = raw ? JSON.parse(raw) : {};
+      // Đặt lastClaimTs về 25h trước để daily mở ngay
+      d.lastClaimTs = Date.now() - 25 * 3600000;
+      localStorage.setItem('dailyCheckIn', JSON.stringify(d));
+      if (typeof dailyState !== 'undefined') {
+        dailyState.lastClaimTs = d.lastClaimTs;
+      }
+      if (typeof updateDailyChipUI === 'function') updateDailyChipUI();
+      refreshAdminUI();
+      showToadToast('📅 Daily đã mở lại!');
+    } catch(e) {}
+  };
+  window.adminResetDaily = function() {
+    if (!confirm('Reset toàn bộ daily streak?')) return;
+    try {
+      localStorage.removeItem('dailyCheckIn');
+      if (typeof dailyState !== 'undefined') {
+        dailyState.streak = 0;
+        dailyState.lastClaimTs = null;
+        dailyState.lastClaimDate = null;
+      }
+      if (typeof updateDailyChipUI === 'function') updateDailyChipUI();
+      refreshAdminUI();
+      showToadToast('🗑 Daily streak đã reset!');
+    } catch(e) {}
   };
 
   // Live update timer trong admin

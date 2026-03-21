@@ -5,26 +5,34 @@
 body {
   background: #eaeaea url("bgtet.png") center/cover no-repeat fixed;
   color: #fff;
-  font-size: 18px;
+  font-size: 23.5px;
   font-family: "Exo 2", sans-serif;
   height: 100vh;
   margin: 0;
   padding: 0;
+  /* padding-bottom nhường chỗ cho bottom-bar (~56px) */
+  padding-bottom: 56px;
+  box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
+  /* overflow:clip thay overflow:hidden — không tạo stacking context mới,
+     nên position:fixed bên trong vẫn hoạt động đúng trên mọi máy */
+  overflow: clip;
+  overflow-x: clip;
 }
 #wrapper {
-  margin: 40px auto 0;
+  margin: 0 auto;
   width: 540px;
   position: relative;
+  /* translateY dương nhẹ → wheel hơi xuống dưới để cân bằng khoảng trống */
+  transform: translateY(10px);
 }
 #txt {
   color: #2c3e50;
   text-align: center;
   margin-top: 30px;
-  font-size: 24px;
+  font-size: 31px;
   font-weight: bold;
   display: none;
 }
@@ -153,7 +161,7 @@ body {
 /* Nhãn nhỏ phía trên số */
 .popup-content .result-label {
   display: block;
-  font-size: 11px;
+  font-size: 14.5px;
   font-weight: 600;
   letter-spacing: 3.5px;
   text-transform: uppercase;
@@ -164,7 +172,7 @@ body {
 
 /* Số kết quả lớn */
 .popup-content .result-number {
-  font-size: 80px;
+  font-size: 104px;
   font-weight: 900;
   line-height: 1;
   margin-bottom: 6px;
@@ -189,7 +197,7 @@ body {
 
 /* Tên phần thưởng */
 .popup-content .result-icon {
-  font-size: 15px;
+  font-size: 19.5px;
   color: rgba(245, 230, 180, 0.55);
   margin-bottom: 28px;
   font-weight: 400;
@@ -214,7 +222,7 @@ body {
   border: none;
   padding: 13px 44px;
   border-radius: 30px;
-  font-size: 14px;
+  font-size: 18px;
   font-weight: 700;
   letter-spacing: 2px;
   text-transform: uppercase;
@@ -466,7 +474,7 @@ body {
   top: -140px;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 28px;
+  font-size: 36.5px;
   font-weight: bold;
   color: rgba(255, 255, 255, 0.9);
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
@@ -500,7 +508,7 @@ body {
   width: 100px;
   height: 100px;
   display: block;
-  font-size: 20px;
+  font-size: 26px;
   font-weight: bold;
 }
 #spin:before {
@@ -544,7 +552,7 @@ body {
   box-shadow: rgba(0, 0, 0, 0.4) 0px 0px 5px inset;
 }
 #spin:active:after {
-  font-size: 18px;
+  font-size: 23.5px;
 }
 #shine {
   width: 500px;
@@ -580,26 +588,27 @@ body {
 
 @media (max-width: 600px) {
   body {
-    height: 100vh;                 /* ✅ luôn theo chiều cao màn hình */
+    height: 100dvh;               /* dvh thay vh — tránh lỗi trên mobile khi keyboard/bar xuất hiện */
     display: flex;
-    justify-content: center;       /* ✅ căn giữa theo chiều dọc */
-    align-items: center;           /* ✅ căn giữa theo chiều ngang */
-    padding: 16px;
-    padding-top: calc(16px + env(safe-area-inset-top));
-    padding-bottom: calc(16px + env(safe-area-inset-bottom));
+    justify-content: center;
+    align-items: center;
+    padding: 12px;
+    padding-top: calc(12px + env(safe-area-inset-top));
+    /* padding-bottom nhường chỗ cho bottom-bar + safe area */
+    padding-bottom: calc(72px + env(safe-area-inset-bottom));
     box-sizing: border-box;
+    overflow: clip;
   }
 
-  /* wrapper không cố định 532px nữa + bỏ margin-top */
+  /* wrapper không cố định 532px nữa, bỏ transform translateY âm trên desktop */
   #wrapper {
     width: 100% !important;
     max-width: 480px;
-    margin: 0 auto; /* ✅ bỏ 12px auto 0 để không dính lên trên */
+    margin: 0 auto;
     height: calc(var(--wheel-size) + 40px);
     position: relative;
-
-    /* ✅ hạ xuống một chút cho dễ bấm (tùy chỉnh 20px/30px/40px) */
-    transform: translateY(40px);
+    /* Không translateY trên mobile để tránh bị che */
+    transform: none;
   }
 
   /* Scale cả bánh xe để giữ nguyên hình tam giác .sec */
@@ -628,22 +637,22 @@ body {
   }
 
   .popup-content .result-number {
-    font-size: 60px;
+    font-size: 78px;
   }
 
   .popup-content .result-icon {
-    font-size: 13px;
+    font-size: 17px;
     margin-bottom: 20px;
   }
 
   #close-popup {
     width: 100%;
     padding: 13px 16px;
-    font-size: 13px;
+    font-size: 17px;
   }
 
   #txt {
-    font-size: 18px;
+    font-size: 23.5px;
     margin-top: 16px;
   }
 }
@@ -669,7 +678,7 @@ body::-webkit-scrollbar {
 #spin:after {
   color: #5a6070;
   text-shadow: 0 1px 0 rgba(255,255,255,0.8), 0 -1px 0 rgba(0,0,0,0.15);
-  font-size: 16px;
+  font-size: 21px;
   letter-spacing: 2px;
 }
 
