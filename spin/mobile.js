@@ -82,39 +82,16 @@
     target._lastTap = now;
   }, { passive: false });
 
-  /* ── 7. FIX: Wheel transition lag trên iOS (force GPU layer) ── */
-  var innerWheel = document.getElementById('inner-wheel');
-  if (innerWheel) {
-    // Translate3d(0,0,0) kích hoạt GPU compositing từ đầu
-    innerWheel.style.webkitTransform = 'translate3d(0,0,0)';
-    innerWheel.style.transform       = 'translate3d(0,0,0)';
-  }
+  /* ── 7. NOTE: Không set transform trên #inner-wheel khi load trang.
+     Nếu đặt translate3d(0,0,0) ở đây, lần quay đầu tiên browser phải
+     interpolate giữa translate3d → rotate — 2 hàm khác nhau, không
+     animate được → wheel nhảy ngay đến vị trí, bỏ qua transition 6s.
+     Lần 2 trở đi bình thường vì điểm xuất phát đã là rotate(). ── */
 
-  /* ── 8. FIX: Cập nhật wheel transform khi spin — bổ sung translate3d ── */
-  // Monkey-patch $.fn.css để đảm bảo rotate luôn dùng translate3d
-  // (chỉ chạy sau khi jQuery đã load)
-  function patchJQueryWheelTransform() {
-    if (typeof $ === 'undefined') return;
-    var _innerWheel = document.getElementById('inner-wheel');
-    if (!_innerWheel) return;
-
-    // Override: khi spinv1.js set transform rotate(...) → prepend translate3d
-    var origCss = $.fn.css;
-    $.fn.css = function (prop, val) {
-      if (prop === 'transform' && typeof val === 'string' && val.indexOf('rotate') !== -1) {
-        // Thêm translate3d(0,0,0) để giữ GPU layer
-        val = 'translate3d(0,0,0) ' + val;
-      }
-      return origCss.apply(this, arguments);
-    };
-  }
-
-  // Chờ jQuery load xong mới patch
-  if (typeof $ !== 'undefined') {
-    patchJQueryWheelTransform();
-  } else {
-    document.addEventListener('DOMContentLoaded', patchJQueryWheelTransform);
-  }
+  /* ── 8. NOTE: Monkey-patch $.fn.css để thêm translate3d đã bị xóa.
+     spinv1.js dùng .css({ transform: '...' }) — object syntax — nên
+     không đi qua overridden $.fn.css(prop, val). Patch không có tác dụng
+     và translate3d prefix gây bug như mô tả ở fix #7 ở trên. ── */
 
   /* ── 9. FIX: Prevent iOS elastic bounce gây lệch layout ── */
   document.body.addEventListener('touchmove', function (e) {

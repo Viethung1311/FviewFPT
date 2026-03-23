@@ -1,561 +1,293 @@
 /* ════════════════════════════════════════════════════════════════
-   MOBILE.CSS — Tối ưu hoàn toàn cho iPhone & Android
-   Chỉ cần thêm <link rel="stylesheet" href="mobile.css"> vào cuối
-   <head> trong spinv1.html (sau các file CSS hiện có)
+   MOBILE.CSS v4 — Scale #wrapper (540px) as one unit
+   Chiến lược: scale toàn bộ #wrapper từ top-center.
+   #wheel-border-wrap (540px) + #wheel (500px centered by flex) +
+   #shine, #spin, #border-svg đều scale cùng nhau.
+   spinv1.js vẫn rotate #inner-wheel bình thường — không bị ảnh hưởng.
    ════════════════════════════════════════════════════════════════ */
 
 /* ──────────────────────────────────────────────────────────────
-   1. GLOBAL RESETS / iOS QUIRK FIXES
+   GLOBAL
    ────────────────────────────────────────────────────────────── */
+* { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; -webkit-tap-highlight-color: transparent; }
+html { height: -webkit-fill-available; }
+body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+#wheel, #inner-wheel, #spin, #wrapper { -webkit-user-select: none; user-select: none; touch-action: none; }
+#inner-wheel { -webkit-backface-visibility: hidden; backface-visibility: hidden; will-change: transform; }
+#guide-popup, #history-popup, #daily-popup, #pity-popup { -webkit-overflow-scrolling: touch; overscroll-behavior: contain; }
+#guide-overlay, #history-overlay, #daily-overlay, #pity-overlay, #popup-overlay { -webkit-transform: translateZ(0); transform: translateZ(0); }
+button, a, [onclick] { touch-action: manipulation; }
 
-/* Ngăn iOS tự zoom khi tap vào input / button */
-* { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 
-/* Smooth scroll & rubber-band chỉ ở body */
-html {
-  scroll-behavior: smooth;
-  height: -webkit-fill-available;
-}
+/* ══════════════════════════════════════════════════════════════
+   MOBILE ≤ 768px
+   ══════════════════════════════════════════════════════════════ */
+@media screen and (max-width: 768px) {
 
-/* Remove tap highlight (iOS default màu xanh dương xấu) */
-* { -webkit-tap-highlight-color: transparent; }
+  /* ── Ẩn nút gốc ── */
+  .back, #guide-chip { display: none !important; }
 
-/* Prevent text selection khi swipe/drag trên bánh xe */
-#wheel, #inner-wheel, #spin, #wrapper {
-  -webkit-user-select: none;
-  user-select: none;
-  touch-action: none; /* ngăn scroll trang khi swipe trên wheel */
-}
-
-/* Fix position:fixed bị lệch khi bàn phím iOS xuất hiện */
-#bottom-bar, #guide-chip, #toad-btn-wrap,
-#toad-toast, #toad-panel {
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
-  will-change: transform;
-}
-
-/* ──────────────────────────────────────────────────────────────
-   2. BREAKPOINT CHÍNH: ≤600px (iPhone SE → iPhone 16 Pro Max)
-   ────────────────────────────────────────────────────────────── */
-@media screen and (max-width: 600px) {
-
-  /* ── Body & layout ── */
-  body {
-    /* 100dvh tránh layout shift khi thanh địa chỉ Safari ẩn/hiện */
-    height: 100dvh;
-    min-height: -webkit-fill-available;
-    overflow: hidden;
-    padding: 0;
-    padding-top: env(safe-area-inset-top);
-    padding-bottom: calc(70px + env(safe-area-inset-bottom));
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  /* ── Wrapper & wheel scale ── */
-  :root {
-    /* Wheel gốc 500px, thu nhỏ theo màn hình, tối đa 400px */
-    --wheel-size: min(82vw, 400px);
-    --wheel-scale: calc(var(--wheel-size) / 500px);
-  }
-
-  #wrapper {
-    width: var(--wheel-size) !important;
-    height: calc(var(--wheel-size) + 10px);
-    margin: 0 auto;
-    transform: none !important;
-    position: relative;
-  }
-
-  /* Scale toàn bộ wheel từ top-left */
-  #wheel-border-wrap {
-    width: var(--wheel-size);
-    height: var(--wheel-size);
-  }
-
-  /* SVG border overlay cũng scale theo */
-  #border-svg {
-    width: var(--wheel-size) !important;
-    height: var(--wheel-size) !important;
-  }
-
-  #wheel,
-  #shine {
-    width: 500px;
-    height: 500px;
-    transform-origin: top left !important;
-    transform: scale(var(--wheel-scale)) !important;
-  }
-
-  /* Khi đang quay: inner-wheel vẫn transition + scale wrapper */
-  #inner-wheel {
-    /* transition được giữ từ file gốc, không override */
-    transform-origin: 50% 50%;
-  }
-
-  /* Pointer căn giữa wheel đã scale */
-  #pointer {
-    left: calc(var(--wheel-size) / 2);
-    margin-left: -20px;
-    top: -10px;
-  }
-
-  /* Nút SPIN scale proportional */
-  #spin {
-    /* vị trí absolute bên trong inner-wheel — không cần thay đổi */
-  }
-
-  /* ── Top buttons ── */
-  .back {
-    top: calc(10px + env(safe-area-inset-top));
-    left: 12px;
-    padding: 0.9em 1.8em;
-    font-size: 12px;
-    letter-spacing: 1.5px;
-    z-index: 99999;
-  }
-
-  #guide-chip {
+  /* ────────────────────────────────────────────────────────────
+     HAMBURGER BUTTON
+     ──────────────────────────────────────────────────────────── */
+  #mob-menu-btn {
+    position: fixed;
     top: calc(10px + env(safe-area-inset-top));
     right: 12px;
-    padding: 9px 16px;
-    font-size: 14px;
-    border-radius: 22px;
-    z-index: 99998;
+    z-index: 999999;
+    width: 42px; height: 42px;
+    border-radius: 12px;
+    background: rgba(16,10,3,.92);
+    border: 1px solid rgba(212,175,55,.4);
+    box-shadow: 0 4px 14px rgba(0,0,0,.5);
+    cursor: pointer;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 5px; padding: 0;
+    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    transition: background .2s;
   }
+  .mob-bar {
+    width: 20px; height: 2px; border-radius: 2px;
+    background: linear-gradient(90deg, #c8960c, #ffd700);
+    transition: transform .28s ease, opacity .28s ease;
+    transform-origin: center;
+  }
+  #mob-menu-btn.open .mob-bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  #mob-menu-btn.open .mob-bar:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  #mob-menu-btn.open .mob-bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-  /* ── Bottom bar — merged pill ── */
-  #bottom-bar {
-    /* Đặt cố định ở bottom thay vì dùng top: calc(50% + 294px) */
+  #mob-menu-dropdown {
     position: fixed;
-    top: auto !important;
-    bottom: calc(8px + env(safe-area-inset-bottom));
-    left: 50%;
-    transform: translateX(-50%);
-    width: calc(100vw - 24px);
-    max-width: 520px;
-    z-index: 99998;
-  }
-
-  #merged-pill {
-    width: 100%;
-    /* Chia đều 3 phần: history | pity | daily */
-    justify-content: space-between;
-    border-radius: 22px;
-    padding: 0;
-    overflow: hidden;
-  }
-
-  /* History chip */
-  #history-chip {
-    flex: 1;
-    padding: 0 8px;
-    height: 48px;
-    gap: 5px;
-    justify-content: center;
-  }
-  .hc-label { font-size: 11px; letter-spacing: 0; }
-  .hc-count { font-size: 11px; }
-  .hc-dot   { width: 5px; height: 5px; }
-  .hc-svg   { width: 14px; height: 14px; }
-
-  /* Pity chip */
-  #pity-chip {
-    flex: 1.2;
-    padding: 6px 8px;
-    gap: 5px;
-  }
-  .pc-label { font-size: 10px; }
-  .pc-nums  { font-size: 10px; }
-  #pc-current { font-size: 10px; }
-
-  /* Daily chip */
-  #daily-chip {
-    flex: 1;
-    padding: 0 8px;
-    height: 48px;
-    gap: 5px;
-    justify-content: center;
-  }
-  .dc-chip-label { font-size: 11px; }
-  .dc-chip-sub   { font-size: 10px; }
-  .dc-chip-svg   { width: 18px; height: 18px; }
-  .dc-chip-dot   { width: 7px; height: 7px; }
-
-  /* Separator */
-  .pill-sep { height: 22px; }
-
-  /* ── Toad button (góc dưới phải) ── */
-  #toad-btn-wrap {
-    bottom: calc(66px + env(safe-area-inset-bottom));
+    top: calc(60px + env(safe-area-inset-top));
     right: 10px;
-    width: 60px;
-    height: 60px;
+    z-index: 999998;
+    background: rgba(14,9,2,.97);
+    border: 1px solid rgba(212,175,55,.32);
+    border-radius: 14px; padding: 6px;
+    box-shadow: 0 8px 32px rgba(0,0,0,.75);
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    display: flex; flex-direction: column; gap: 3px;
+    min-width: 190px;
+    opacity: 0; pointer-events: none;
+    transform: translateY(-10px) scale(.95);
+    transform-origin: top right;
+    transition: opacity .22s ease, transform .22s ease;
   }
-  #toad-toggle-btn {
-    width: 60px !important;
-    height: 60px !important;
+  #mob-menu-dropdown.open { opacity: 1; pointer-events: auto; transform: translateY(0) scale(1); }
+
+  .mob-menu-item {
+    display: flex; align-items: center; gap: 10px;
+    width: 100%; padding: 11px 14px;
+    border-radius: 10px; border: none;
+    background: transparent; color: rgba(255,224,130,.9);
+    font-family: "Poppins", sans-serif; font-size: 14px; font-weight: 600;
+    cursor: pointer; text-decoration: none; transition: background .14s; text-align: left;
   }
-  #spin-counter {
-    width: 24px;
-    height: 24px;
-    font-size: 13px;
-    top: -6px;
-    right: -6px;
+  .mob-menu-item:active { background: rgba(212,175,55,.12); }
+  .mob-menu-item-icon { font-size: 18px; flex-shrink: 0; }
+  .mob-menu-sep { height: 1px; background: rgba(212,175,55,.14); margin: 2px 8px; }
+
+  #mob-menu-overlay {
+    display: none; position: fixed; inset: 0;
+    z-index: 999997; background: transparent;
   }
-  #toad-toggle-btn .btn-label {
-    font-size: 9px;
+  #mob-menu-overlay.open { display: block; }
+
+
+  /* ────────────────────────────────────────────────────────────
+     WHEEL SCALE — Scale #wrapper (540×540) làm một khối duy nhất
+     ──────────────────────────────────────────────────────────── */
+  :root {
+    --top-ui-h:  58px;
+    --bot-bar-h: 60px;
+    /* Không gian dọc còn lại cho wheel */
+    --avail-v: calc(
+      100dvh
+      - var(--top-ui-h) - var(--bot-bar-h) - 20px
+      - env(safe-area-inset-top) - env(safe-area-inset-bottom)
+    );
+    /* #wrapper gốc = 540px. Scale sao cho vừa cả ngang lẫn dọc */
+    --wrap-size:  min(92vw, var(--avail-v), 500px);
+    --wrap-scale: calc(var(--wrap-size) / 540px);
   }
 
-  /* ── Toad panel ── */
-  #toad-panel {
-    bottom: calc(134px + env(safe-area-inset-bottom));
-    right: 10px;
-    width: 270px;
+  body {
+    height: 100dvh; min-height: -webkit-fill-available;
+    overflow: hidden; padding: 0;
+    padding-top: calc(var(--top-ui-h) + env(safe-area-inset-top));
+    padding-bottom: calc(var(--bot-bar-h) + 10px + env(safe-area-inset-bottom));
+    box-sizing: border-box;
+    display: flex; align-items: center; justify-content: center;
   }
 
-  /* ── Toast ── */
-  #toad-toast {
-    bottom: calc(126px + env(safe-area-inset-bottom));
-    right: 10px;
-    font-size: 14px;
-    padding: 8px 14px;
-    max-width: calc(100vw - 20px);
-    white-space: normal;
-    text-align: center;
+  /*
+   * #wrapper gốc là 540px width, không có height set (auto).
+   * Ta cần một "slot" có kích thước đúng bằng sau-khi-scale để body flex
+   * căn giữa được chính xác.
+   *
+   * Kỹ thuật: giữ #wrapper ở 540px, scale từ top-center,
+   * đặt nó trong một div slot có kích thước = wrap-size.
+   * Nhưng vì ta không thêm HTML được, dùng trick:
+   * set #wrapper width/height = wrap-size, rồi dùng
+   * transform-origin: center center + scale để nội dung bên trong
+   * vẫn hiển thị đúng 540px nhưng chiếm không gian wrap-size.
+   *
+   * Trick CSS: scale(x) + width/height ĐÃ SET sẽ tạo ra
+   * bounding box = scaled size. Đây là behavior đúng của CSS transform.
+   */
+
+  /* Reset các override của spinv1.css trong @media (max-width: 600px) */
+  #wheel, #shine {
+    transform-origin: unset !important;
+    /* KHÔNG set transform ở đây — để spinv1.js/CSS gốc kiểm soát */
   }
 
-  /* ── Result popup ── */
-  #popup {
-    width: calc(100vw - 28px);
-    max-width: 340px;
-    min-width: auto;
-    padding: 28px 20px 24px;
-    border-radius: 20px;
-  }
-  .popup-content .result-number {
-    font-size: 72px;
-  }
-  .popup-content .result-icon {
-    font-size: 15px;
-    margin-bottom: 16px;
-    letter-spacing: 0.5px;
-  }
-  #close-popup {
-    width: 100%;
-    padding: 13px 16px;
-    font-size: 16px;
-  }
-
-  /* ── Guide popup ── */
-  #guide-overlay {
-    padding: 10px 8px;
-    align-items: flex-start;
-    padding-top: calc(10px + env(safe-area-inset-top));
-  }
-  #guide-popup {
-    width: 100%;
-    height: calc(100dvh - 20px - env(safe-area-inset-top) - env(safe-area-inset-bottom));
-    max-height: none;
-    border-radius: 16px;
-    padding: 12px 14px 10px;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-  /* Stack 2 cột thành 1 cột dọc trên mobile */
-  .gp-cols {
-    grid-template-columns: 1fr !important;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-  .gp-vdiv {
-    display: none;
-  }
-  .gp-col {
-    padding: 0 !important;
-    height: auto !important;
-    overflow: visible !important;
-    gap: 8px;
-  }
-  .gp-col + .gp-col {
-    border-top: 1px solid rgba(212,175,55,0.15);
-    padding-top: 10px !important;
-    margin-top: 4px;
-  }
-  .gp-title  { font-size: 20px; }
-  .gp-sub    { font-size: 13px; }
-  .rw-ico    { font-size: 24px; }
-  .rw-name   { font-size: 13px; }
-  .rw-desc   { font-size: 11px; }
-  .gp-step   { gap: 8px; }
-  .gp-stxt   { font-size: 12px; }
-  .gp-start-btn {
-    font-size: 16px;
-    padding: 12px;
-    margin-top: 10px;
+  /* Scale #wrapper từ center: tất cả children scale cùng nhau */
+  #wrapper {
+    width: 540px !important;
+    /* height tự động theo content (wheel-border-wrap 540px) */
+    transform: scale(var(--wrap-scale)) !important;
+    transform-origin: center center !important;
+    /* Compensate: khi scale(s) một element 540px,
+       nó vẫn chiếm 540px layout space, thừa (540 - 540*s)/2 mỗi bên.
+       Dùng margin âm để collapse không gian thừa */
+    margin-top: calc((540px * (var(--wrap-scale) - 1)) / 2) !important;
+    margin-bottom: calc((540px * (var(--wrap-scale) - 1)) / 2) !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    position: relative !important;
     flex-shrink: 0;
   }
 
-  /* ── History popup ── */
-  #history-overlay {
-    padding: 10px 8px;
-    align-items: flex-start;
-    padding-top: calc(10px + env(safe-area-inset-top));
-  }
-  #history-popup {
-    width: 100%;
-    max-height: calc(100dvh - 20px - env(safe-area-inset-top) - env(safe-area-inset-bottom));
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    border-radius: 16px;
-    padding: 16px 14px;
-  }
-  .hp-title  { font-size: 18px; }
-  .hp-sub    { font-size: 12px; }
-
-  /* ── Pity popup ── */
-  #pity-popup {
-    width: calc(100vw - 28px);
-    max-width: 340px;
-    padding: 22px 16px 18px;
-    border-radius: 18px;
-  }
-  .pp-title       { font-size: 22px; }
-  .pp-sub         { font-size: 13px; }
-  .pp-prize-icon  { font-size: 52px; }
-  .pp-prize-name  { font-size: 16px; }
-  .pp-claim-note  { font-size: 13px; padding: 8px 12px; }
-  .pp-fb-btn      { font-size: 13px; padding: 8px 16px; }
-  .pp-close-btn   { font-size: 15px; padding: 11px; }
-
-  /* ── Daily popup ── */
-  #daily-popup {
-    width: calc(100vw - 24px);
-    max-width: 360px;
-    padding: 20px 16px 18px;
-    border-radius: 18px;
-  }
-  .dc-days {
-    gap: 3px;
-  }
-  .dc-day {
-    padding: 5px 2px;
-    border-radius: 8px;
-  }
-  .dc-day-label { font-size: 9px; }
-  .dc-day-icon  { font-size: 18px; }
-  .dc-day-spin  { font-size: 9px; }
-  .dc-title     { font-size: 18px; }
-  .dc-sub       { font-size: 12px; }
-  .dc-btn       { font-size: 15px; padding: 12px; }
-  .dc-hint      { font-size: 11px; }
-
-  /* ── Toad info popup (nếu có) ── */
-  #toad-info-overlay,
-  #toad-info-popup {
-    max-height: calc(100dvh - 20px);
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-}
-
-/* ──────────────────────────────────────────────────────────────
-   3. BREAKPOINT NHỎ: ≤375px (iPhone SE, iPhone 12 mini)
-   ────────────────────────────────────────────────────────────── */
-@media screen and (max-width: 375px) {
-  :root {
-    --wheel-size: min(78vw, 300px);
-  }
-
-  #guide-chip {
-    font-size: 12px;
-    padding: 7px 12px;
-  }
-  .back {
-    font-size: 10px;
-    padding: 0.7em 1.3em;
-  }
-
-  #bottom-bar {
-    width: calc(100vw - 16px);
-  }
-  .hc-label, .dc-chip-label { font-size: 10px; }
-
-  #toad-btn-wrap {
-    width: 52px;
-    height: 52px;
-    bottom: calc(62px + env(safe-area-inset-bottom));
-    right: 8px;
-  }
-  #toad-toggle-btn {
-    width: 52px !important;
-    height: 52px !important;
-  }
-
-  .pp-title  { font-size: 19px; }
-  .dc-title  { font-size: 16px; }
-}
-
-/* ──────────────────────────────────────────────────────────────
-   4. LANDSCAPE MODE (iPhone nằm ngang)
-   ────────────────────────────────────────────────────────────── */
-@media screen and (max-width: 900px) and (orientation: landscape) and (max-height: 500px) {
-  :root {
-    --wheel-size: min(60vh, 340px);
-  }
-
-  body {
-    padding-top: env(safe-area-inset-top);
-    padding-left: calc(20px + env(safe-area-inset-left));
-    padding-right: calc(20px + env(safe-area-inset-right));
-    padding-bottom: calc(60px + env(safe-area-inset-bottom));
-  }
-
-  #guide-chip {
-    top: calc(8px + env(safe-area-inset-top));
-    right: calc(12px + env(safe-area-inset-right));
-    font-size: 12px;
-    padding: 7px 13px;
-  }
-  .back {
-    top: calc(8px + env(safe-area-inset-top));
-    left: calc(10px + env(safe-area-inset-left));
-  }
-
-  #bottom-bar {
-    bottom: calc(4px + env(safe-area-inset-bottom));
-  }
-
-  #toad-btn-wrap {
-    bottom: calc(56px + env(safe-area-inset-bottom));
-    right: calc(10px + env(safe-area-inset-right));
-    width: 52px;
-    height: 52px;
-  }
-  #toad-toggle-btn {
-    width: 52px !important;
-    height: 52px !important;
-  }
-
-  /* Popup overlay căn giữa landscape */
-  #guide-popup {
-    height: calc(100dvh - 16px);
-    max-height: none;
-    overflow-y: auto;
-  }
-  .gp-cols {
-    grid-template-columns: 1fr !important;
-    overflow-y: auto;
-  }
-  .gp-vdiv { display: none; }
-}
-
-/* ──────────────────────────────────────────────────────────────
-   5. iOS SAFARI SPECIFIC FIXES
-   ────────────────────────────────────────────────────────────── */
-
-/* Fix overflow scroll trên iOS (không dùng momentum scroll ở overlay) */
-#guide-popup,
-#history-popup,
-#daily-popup,
-#pity-popup {
-  -webkit-overflow-scrolling: touch;
-  overscroll-behavior: contain;
-}
-
-/* Fix z-index stacking context cho các overlay trong Safari */
-#guide-overlay,
-#history-overlay,
-#daily-overlay,
-#pity-overlay,
-#popup-overlay {
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
-}
-
-/* Prevent double-tap zoom trên iOS cho tất cả buttons */
-button, a, [onclick] {
-  touch-action: manipulation;
-}
-
-/* Fix font rendering trên iOS — tắt font smoothing thô */
-body {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-/* Fix transition GPU trên iOS cho wheel spin */
-#inner-wheel {
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  -webkit-perspective: 1000px;
-  perspective: 1000px;
-  will-change: transform;
-}
-
-/* Fix conic-gradient trên Safari cũ (dùng prefix) */
-#wheel-border-wrap::before {
-  background: -webkit-conic-gradient(
-    #c8960c 0deg, #ffd700 40deg, #fff8dc 80deg,
-    #c8960c 120deg, #ffd700 160deg, #fff8dc 200deg,
-    #c8960c 240deg, #ffd700 280deg, #fff8dc 320deg, #c8960c 360deg
-  );
-  background: conic-gradient(
-    #c8960c 0deg, #ffd700 40deg, #fff8dc 80deg,
-    #c8960c 120deg, #ffd700 160deg, #fff8dc 200deg,
-    #c8960c 240deg, #ffd700 280deg, #fff8dc 320deg, #c8960c 360deg
-  );
-}
-
-/* ──────────────────────────────────────────────────────────────
-   6. ACTIVE / TOUCH STATES (thay thế :hover vì mobile không có hover)
-   ────────────────────────────────────────────────────────────── */
-@media (hover: none) and (pointer: coarse) {
-  /* Tắt hover transform trên touch device để không bị kẹt */
-  #guide-chip:hover,
-  .back:hover,
-  .dc-btn:hover,
-  #close-popup:hover,
-  .pp-close-btn:hover,
-  .pp-fb-btn:hover,
-  .toad-btn:hover {
+  /* Đảm bảo wheel-border-wrap không bị scale riêng (v3 cũ) */
+  #wheel-border-wrap {
+    width: 540px !important;
+    height: 540px !important;
     transform: none !important;
   }
 
-  /* Thay bằng active state rõ ràng */
-  #guide-chip:active   { transform: scale(0.96) !important; opacity: 0.85; }
-  .back:active         { transform: scale(0.96) !important; }
-  .dc-btn:active       { transform: scale(0.97) !important; }
-  #close-popup:active  { transform: scale(0.97) !important; }
-  .pp-close-btn:active { transform: scale(0.97) !important; }
-  .pp-fb-btn:active    { transform: scale(0.97) !important; }
-  #toad-toggle-btn:active { transform: scale(0.94) !important; }
-  #history-chip:active { background: rgba(212,175,55,0.1) !important; }
-  #daily-chip:active   { background: rgba(212,175,55,0.1) !important; }
-
-  /* Nút SPIN: active feedback rõ hơn */
-  #spin:active {
-    transform: scale(0.93);
-    box-shadow:
-      0 2px 8px rgba(0,0,0,0.3),
-      inset 0 2px 6px rgba(0,0,0,0.25) !important;
+  /*
+   * CRITICAL: spinv1.css @media (max-width:600px) set:
+   *   #wheel, #shine { transform: scale(--wheel-scale); transform-origin: top left; }
+   * Điều này tạo DOUBLE SCALE (wrapper đã scale, wheel lại scale thêm).
+   * Reset về trạng thái bình thường — #wrapper scale sẽ lo phần còn lại.
+   */
+  /* spinv1.css @media(max-width:600px) set: #wheel { transform: scale(X); transform-origin: top left }
+     Điều này tạo double-scale vì #wrapper đã scale. Override hoàn toàn: */
+  #wheel {
+    width: 500px !important;
+    height: 500px !important;
+    transform: none !important;   /* hủy scale của spinv1.css */
+    transform-origin: 50% 50% !important;
   }
+  #shine {
+    width: 500px !important;
+    height: 500px !important;
+    transform: none !important;
+    transform-origin: 50% 50% !important;
+  }
+  /*
+   * Lưu ý: spinv1.js set transform trên #inner-wheel (rotate), KHÔNG phải #wheel.
+   * #wheel { transform: none } không ảnh hưởng đến animation quay.
+   */
+
+
+  /* ── Bottom bar ── */
+  #bottom-bar {
+    position: fixed !important; top: auto !important;
+    bottom: calc(8px + env(safe-area-inset-bottom)) !important;
+    left: 50% !important; transform: translateX(-50%) !important;
+    width: calc(100vw - 20px) !important; max-width: 520px;
+    z-index: 99998; -webkit-transform: translateX(-50%); will-change: transform;
+  }
+  #merged-pill { width: 100%; border-radius: 22px; overflow: hidden; }
+
+  /* History chip */
+  #history-chip { flex: 1; padding: 0 8px; height: 48px; gap: 5px; justify-content: center; }
+  .hc-label { font-size: 11px; } .hc-count { font-size: 10px; }
+  .hc-dot { width: 5px; height: 5px; } .hc-svg { width: 13px; height: 13px; }
+
+  /* Pity chip */
+  #pity-chip { flex: 1.4; padding: 5px 8px; gap: 5px; min-width: 0; }
+  .pc-icon { font-size: 14px; } .pc-label { font-size: 9.5px; } .pc-nums { font-size: 9.5px; }
+  .pc-bar-bg { height: 3px; }
+
+  /* Daily chip */
+  #daily-chip { flex: 1; padding: 0 8px; height: 48px; gap: 5px; justify-content: center; }
+  .dc-chip-label { font-size: 11px; } .dc-chip-sub { font-size: 9px; }
+  .dc-chip-svg { width: 16px; height: 16px; } .dc-chip-dot { width: 6px; height: 6px; }
+  .pill-sep { height: 22px; }
+
+  /* Toad */
+  #toad-btn-wrap { bottom: calc(70px + env(safe-area-inset-bottom)) !important; right: 10px !important; width: 60px !important; height: 60px !important; }
+  #toad-toggle-btn { width: 60px !important; height: 60px !important; }
+  #spin-counter { width: 22px; height: 22px; font-size: 12px; top: -5px; right: -5px; }
+  #toad-toggle-btn .btn-label { font-size: 9px; }
+  #toad-panel { bottom: calc(140px + env(safe-area-inset-bottom)) !important; right: 10px !important; width: min(280px, calc(100vw - 20px)) !important; }
+  #toad-toast { bottom: calc(133px + env(safe-area-inset-bottom)) !important; right: 10px !important; font-size: 13px; padding: 8px 12px; max-width: calc(100vw - 24px); white-space: normal; text-align: center; }
+
+  /* Popups */
+  #guide-overlay, #history-overlay { padding: 8px; padding-top: calc(8px + env(safe-area-inset-top)); align-items: flex-start; }
+  #guide-popup { width: 100%; height: calc(100dvh - 16px - env(safe-area-inset-top) - env(safe-area-inset-bottom)); max-height: none; border-radius: 16px; padding: 12px 12px 10px; overflow-y: auto; }
+  .gp-cols { grid-template-columns: 1fr !important; } .gp-vdiv { display: none !important; }
+  .gp-col { padding: 0 !important; height: auto !important; overflow: visible !important; gap: 6px; }
+  .gp-col + .gp-col { border-top: 1px solid rgba(212,175,55,.15); padding-top: 8px !important; margin-top: 2px; }
+  .gp-title { font-size: 19px; } .gp-sub { font-size: 12px; }
+  .rw-name { font-size: 12px; } .rw-desc { font-size: 11px; }
+  .gp-stxt { font-size: 12px; } .gp-col-title { font-size: 13px; }
+  .gp-start-btn { font-size: 15px; padding: 10px; margin-top: 8px; flex-shrink: 0; }
+  #history-popup { width: 100%; max-height: calc(100dvh - 16px - env(safe-area-inset-top) - env(safe-area-inset-bottom)); overflow-y: auto; border-radius: 16px; padding: 16px 12px; }
+  #popup { width: calc(100vw - 28px); max-width: 340px; padding: 24px 16px 20px; border-radius: 18px; }
+  .popup-content .result-number { font-size: 64px; } #close-popup { width: 100%; padding: 12px; font-size: 15px; }
+  #pity-popup { width: calc(100vw - 28px); max-width: 340px; padding: 22px 14px 18px; border-radius: 18px; }
+  .pp-title { font-size: 21px; } .pp-sub { font-size: 13px; } .pp-prize-icon { font-size: 50px; } .pp-prize-name { font-size: 15px; }
+  #daily-popup { width: calc(100vw - 20px); max-width: 380px; padding: 18px 12px 16px; border-radius: 16px; }
+  .dc-days { gap: 3px; } .dc-day { padding: 5px 2px; border-radius: 7px; }
+  .dc-day-num { font-size: 20px; } .dc-day.dc-today .dc-day-num { font-size: 24px; }
+  .dc-day-name { font-size: 9px; } .dc-day-sub { font-size: 9px; }
+  #toad-info-popup { width: calc(100vw - 20px); max-width: 400px; padding: 18px 14px 16px; border-radius: 16px; max-height: calc(100dvh - 20px); overflow-y: auto; }
 }
 
-/* ──────────────────────────────────────────────────────────────
-   7. PERFORMANCE — tắt animation nặng trên thiết bị yếu
-   ────────────────────────────────────────────────────────────── */
+
+/* ≤ 430px */
+@media screen and (max-width: 430px) {
+  :root { --wrap-size: min(90vw, var(--avail-v), 400px); }
+  #bottom-bar { width: calc(100vw - 14px) !important; }
+  .pc-icon { display: none; }
+  #toad-btn-wrap { width: 54px !important; height: 54px !important; bottom: calc(64px + env(safe-area-inset-bottom)) !important; right: 8px !important; }
+  #toad-toggle-btn { width: 54px !important; height: 54px !important; }
+}
+
+/* ≤ 375px */
+@media screen and (max-width: 375px) {
+  :root { --wrap-size: min(88vw, var(--avail-v), 340px); }
+  #bottom-bar { width: calc(100vw - 12px) !important; }
+  .hc-label, .dc-chip-label { font-size: 9.5px; }
+  #toad-btn-wrap { width: 50px !important; height: 50px !important; }
+  #toad-toggle-btn { width: 50px !important; height: 50px !important; }
+}
+
+/* Landscape */
+@media screen and (max-width: 900px) and (orientation: landscape) and (max-height: 500px) {
+  :root { --top-ui-h: 48px; --bot-bar-h: 44px; --wrap-size: min(56vh, 300px); }
+  body { padding-left: calc(20px + env(safe-area-inset-left)); padding-right: calc(20px + env(safe-area-inset-right)); }
+  #mob-menu-btn { top: calc(8px + env(safe-area-inset-top)); }
+  #bottom-bar { bottom: calc(4px + env(safe-area-inset-bottom)) !important; }
+}
+
+/* Touch active states */
+@media (hover: none) and (pointer: coarse) {
+  #mob-menu-btn:active { opacity: .8; }
+  #toad-toggle-btn:active { transform: scale(.93) !important; }
+  #history-chip:active { background: rgba(212,175,55,.1) !important; }
+  #daily-chip:active { background: rgba(212,175,55,.1) !important; }
+  .dc-btn:active { transform: scale(.97) !important; }
+  .pp-close-btn:active { transform: scale(.97) !important; }
+}
+
+/* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-  /* Ngoại lệ: wheel spin vẫn cần transition để animation quay được */
-  #inner-wheel {
-    transition-duration: 6s !important;
-  }
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+  #inner-wheel { transition-duration: 6s !important; }
 }

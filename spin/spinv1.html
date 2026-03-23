@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="toad.css">
   <link rel="stylesheet" href="daily.css">
   <link rel="stylesheet" href="mobile.css">
+  <link rel="stylesheet" href="mobile.css">
   <title>Spin Wheel</title>
 </head>
 <body>
@@ -17,7 +18,6 @@
 
 <!-- ══ WHEEL ══ -->
 <div id="wrapper">
-  <div id="pointer"></div>
   <div id="wheel-border-wrap">
     <svg id="border-svg" width="540" height="540" viewBox="0 0 540 540" style="position:absolute;top:0;left:0;z-index:10002;pointer-events:none;">
       <circle cx="270" cy="270" r="268" fill="none" stroke="url(#goldGrad)" stroke-width="2" stroke-dasharray="8 6"/>
@@ -40,14 +40,14 @@
     </svg>
     <div id="wheel">
       <div id="inner-wheel">
-        <div class="sec"><span class="number">&#x1FA99;1</span></div>
-        <div class="sec"><span class="number">&#x1FA99;1</span></div>
-        <div class="sec"><span class="number">&#x1FA99;2</span></div>
-        <div class="sec"><span class="number">&#x1FA99;2</span></div>
-        <div class="sec"><span class="number">&#x1FA99;3</span></div>
-        <div class="sec"><span class="number">&#x1FA99;3</span></div>
-        <div class="sec"><span class="number">&#11088;</span></div>
-        <div class="sec"><span class="number">&#11088;&#11088;</span></div>
+        <div class="sec"><span class="number"><span class="sc-chip"><span class="sc-ico">🪙</span><span class="sc-num">×1</span><span class="sc-lbl">COIN</span></span></span></div>
+        <div class="sec"><span class="number"><span class="sc-chip"><span class="sc-ico">🪙</span><span class="sc-num">×1</span><span class="sc-lbl">COIN</span></span></span></div>
+        <div class="sec"><span class="number"><span class="sc-chip"><span class="sc-ico">🪙</span><span class="sc-num">×2</span><span class="sc-lbl">COIN</span></span></span></div>
+        <div class="sec"><span class="number"><span class="sc-chip"><span class="sc-ico">🪙</span><span class="sc-num">×2</span><span class="sc-lbl">COIN</span></span></span></div>
+        <div class="sec"><span class="number"><span class="sc-chip"><span class="sc-ico">🪙</span><span class="sc-num">×3</span><span class="sc-lbl">COIN</span></span></span></div>
+        <div class="sec"><span class="number"><span class="sc-chip"><span class="sc-ico">🪙</span><span class="sc-num">×3</span><span class="sc-lbl">COIN</span></span></span></div>
+        <div class="sec sc-rare1"><span class="number"><span class="sc-chip sc-chip-rare1"><span class="sc-ico sc-ico-rare">⭐</span><span class="sc-num sc-num-rare">HIẾM</span><span class="sc-lbl sc-lbl-rare">SOURCE & APP</span></span></span></div>
+        <div class="sec sc-rare2"><span class="number"><span class="sc-chip sc-chip-rare2"><span class="sc-ico sc-ico-rare2">⭐⭐</span><span class="sc-num sc-num-rare2">JACKPOT</span><span class="sc-lbl sc-lbl-rare2">GPT PLUS</span></span></span></div>
       </div>
       <div id="spin"><div id="inner-spin"></div></div>
       <div id="shine"></div>
@@ -112,7 +112,204 @@
   </div>
 </div>
 
-<!-- ══ GUIDE CHIP — top-right ══ -->
+<!-- ══ PRIZE ADS — left side panels ══ -->
+<div id="prize-ads">
+  <!-- ⭐ 1 sao -->
+  <div class="prize-ad pa-rare1">
+    <div class="pa-shine"></div>
+    <div class="pa-header">
+      <span class="pa-star-ico">⭐</span>
+      <div class="pa-header-text">
+        <div class="pa-tier">SIÊU HIẾM</div>
+        <div class="pa-title">1 Ngôi Sao</div>
+      </div>
+    </div>
+    <div class="pa-divider"></div>
+    <div class="pa-reward">
+      <div class="pa-reward-item">
+        <span class="pa-r-ico">📦</span>
+        <span class="pa-r-txt">Source code <strong>premium</strong></span>
+      </div>
+      <div class="pa-reward-item">
+        <span class="pa-r-ico">💻</span>
+        <span class="pa-r-txt">Phần mềm <strong>bản quyền</strong></span>
+      </div>
+    </div>
+    <div class="pa-cta">Tỷ lệ ~0.5% · Bấm nhận Fanpage</div>
+  </div>
+
+  <!-- ⭐⭐ 2 sao -->
+  <div class="prize-ad pa-rare2">
+    <div class="pa-shine"></div>
+    <div class="pa-neon-border"></div>
+    <div class="pa-header">
+      <span class="pa-star-ico pa-star-jp">⭐⭐</span>
+      <div class="pa-header-text">
+        <div class="pa-tier pa-tier-jp">JACKPOT!!!</div>
+        <div class="pa-title pa-title-jp">2 Ngôi Sao</div>
+      </div>
+    </div>
+    <div class="pa-divider pa-divider-jp"></div>
+    <div class="pa-reward">
+      <div class="pa-reward-item">
+        <span class="pa-r-ico">🤖</span>
+        <span class="pa-r-txt">Tài khoản <strong>ChatGPT Plus</strong></span>
+      </div>
+      <div class="pa-reward-item">
+        <span class="pa-r-ico">📅</span>
+        <span class="pa-r-txt">Sử dụng <strong>1 tháng</strong> đầy đủ</span>
+      </div>
+    </div>
+    <div class="pa-cta pa-cta-jp">Tỷ lệ ~0.2% · Cực kỳ hiếm!</div>
+  </div>
+</div>
+
+<style>
+/* ══ PRIZE ADS ══ */
+#prize-ads {
+  position: fixed;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 9000;
+  width: 190px;
+}
+
+.prize-ad {
+  position: relative;
+  border-radius: 14px;
+  padding: 13px 14px 11px;
+  overflow: hidden;
+  font-family: "Poppins", sans-serif;
+}
+
+/* ── 1 sao: hồng-tím ── */
+.pa-rare1 {
+  background: linear-gradient(140deg, #1a0020 0%, #2d0040 55%, #150018 100%);
+  border: 1px solid rgba(220,80,255,.45);
+  box-shadow: 0 0 0 1px rgba(220,80,255,.1), 0 8px 32px rgba(0,0,0,.6),
+              0 0 20px rgba(180,0,255,.2);
+  animation: ad1Pulse 2.5s ease-in-out infinite;
+}
+@keyframes ad1Pulse {
+  0%,100% { box-shadow: 0 0 0 1px rgba(220,80,255,.1), 0 8px 32px rgba(0,0,0,.6), 0 0 18px rgba(180,0,255,.2); }
+  50%     { box-shadow: 0 0 0 1px rgba(220,80,255,.25), 0 8px 36px rgba(0,0,0,.65), 0 0 32px rgba(200,0,255,.4); }
+}
+
+/* ── 2 sao: vàng-cam jackpot ── */
+.pa-rare2 {
+  background: linear-gradient(140deg, #1a0a00 0%, #2e1500 55%, #0f0800 100%);
+  border: 1px solid rgba(255,180,0,.55);
+  box-shadow: 0 0 0 1px rgba(255,180,0,.12), 0 8px 32px rgba(0,0,0,.65),
+              0 0 24px rgba(255,130,0,.25);
+  animation: ad2Pulse 2s ease-in-out infinite;
+}
+@keyframes ad2Pulse {
+  0%,100% { box-shadow: 0 0 0 1px rgba(255,180,0,.12), 0 8px 32px rgba(0,0,0,.65), 0 0 20px rgba(255,130,0,.22); }
+  50%     { box-shadow: 0 0 0 1.5px rgba(255,200,0,.3), 0 8px 36px rgba(0,0,0,.7), 0 0 40px rgba(255,160,0,.5); }
+}
+
+/* Shimmer sweep */
+.pa-shine {
+  position: absolute; top: 0; left: -100%; width: 55%; height: 100%;
+  background: linear-gradient(105deg, transparent 20%, rgba(255,255,255,.06) 50%, transparent 80%);
+  animation: paShimmer 3s ease infinite;
+  pointer-events: none;
+}
+@keyframes paShimmer { 0%{left:-100%} 60%,100%{left:200%} }
+
+/* Header */
+.pa-header {
+  display: flex; align-items: center; gap: 8px; margin-bottom: 8px;
+}
+.pa-star-ico {
+  font-size: 26px; flex-shrink: 0;
+  filter: drop-shadow(0 0 6px #ff66ee) drop-shadow(0 0 14px #cc00ff);
+  animation: adStarRare1 1.8s ease-in-out infinite;
+}
+@keyframes adStarRare1 {
+  0%,100%{ filter:drop-shadow(0 0 5px #ff66ee) drop-shadow(0 0 12px #cc00ff); }
+  50%    { filter:drop-shadow(0 0 10px #ffaaff) drop-shadow(0 0 22px #dd44ff); }
+}
+.pa-star-jp {
+  font-size: 22px;
+  filter: drop-shadow(0 0 6px #ffcc00) drop-shadow(0 0 14px #ff8800);
+  animation: adStarJP 1.5s ease-in-out infinite;
+}
+@keyframes adStarJP {
+  0%,100%{ filter:drop-shadow(0 0 5px #ffcc00) drop-shadow(0 0 12px #ff8800); }
+  50%    { filter:drop-shadow(0 0 12px #ffee55) drop-shadow(0 0 26px #ffaa00); }
+}
+.pa-header-text { display: flex; flex-direction: column; gap: 1px; }
+.pa-tier {
+  font-size: 9px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase;
+  color: rgba(220,100,255,.75);
+}
+.pa-tier-jp {
+  color: rgba(255,180,0,.85);
+  animation: jpTierFlow 2s linear infinite;
+  background: linear-gradient(90deg,#ff6600,#ffcc00,#ff6600);
+  background-size: 200%;
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+@keyframes jpTierFlow { 0%{background-position:0%} 100%{background-position:200%} }
+.pa-title {
+  font-size: 16px; font-weight: 800;
+  background: linear-gradient(135deg, #ffaaff, #cc66ff, #ffaaff);
+  background-size: 200%;
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  animation: rare1TitleFlow 3s linear infinite;
+}
+@keyframes rare1TitleFlow { 0%{background-position:0%} 100%{background-position:200%} }
+.pa-title-jp {
+  background: linear-gradient(135deg, #ffee66, #ff8800, #ffee66);
+  background-size: 200%;
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  animation: jpTitleFlow 2.5s linear infinite;
+}
+@keyframes jpTitleFlow { 0%{background-position:0%} 100%{background-position:200%} }
+
+/* Divider */
+.pa-divider {
+  height: 1px; margin-bottom: 8px;
+  background: linear-gradient(90deg, transparent, rgba(220,80,255,.35), transparent);
+}
+.pa-divider-jp {
+  background: linear-gradient(90deg, transparent, rgba(255,180,0,.45), transparent);
+}
+
+/* Rewards */
+.pa-reward { display: flex; flex-direction: column; gap: 5px; margin-bottom: 9px; }
+.pa-reward-item {
+  display: flex; align-items: center; gap: 7px;
+  background: rgba(255,255,255,.05); border-radius: 8px;
+  padding: 5px 9px; border: 1px solid rgba(255,255,255,.08);
+}
+.pa-r-ico { font-size: 16px; flex-shrink: 0; }
+.pa-r-txt {
+  font-size: 12px; color: rgba(240,210,255,.72); line-height: 1.3;
+}
+.pa-r-txt strong { color: rgba(255,200,255,.95); font-weight: 700; }
+.pa-rare2 .pa-r-txt { color: rgba(255,230,180,.72); }
+.pa-rare2 .pa-r-txt strong { color: rgba(255,240,180,.95); }
+
+/* CTA */
+.pa-cta {
+  font-size: 10px; font-weight: 700; letter-spacing: .5px; text-align: center;
+  color: rgba(220,100,255,.55); text-transform: uppercase;
+}
+.pa-cta-jp { color: rgba(255,160,0,.65); }
+
+/* ── Responsive: ẩn ads khi màn quá nhỏ ── */
+@media (max-width: 900px) {
+  #prize-ads { display: none; }
+}
+</style>
+
+
 <button id="guide-chip" onclick="openGuidePopup()">📖 Hướng dẫn</button>
 
 <!-- ════════════════════════════════════════════
@@ -1274,6 +1471,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 
 <script src="daily.js"></script>
+<script src="mobile-menu.js"></script>
 <script src="mobile.js"></script>
 
 </body>

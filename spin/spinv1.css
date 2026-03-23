@@ -315,6 +315,13 @@ body {
   to   { opacity: 1; }
 }
 
+/* ══════════════════════════════════════════════
+   KỲ LÂN × HỔ LỬA — Wheel Border System
+   Kỳ lân: mây vàng + đồng tiền + scrollwork
+   Hổ lửa: vằn cam + vuốt + amber gems
+   Kết hợp: viền SVG inject bởi JS, không dùng CSS border
+   ══════════════════════════════════════════════ */
+
 #wheel-border-wrap {
   position: relative;
   width: 540px;
@@ -326,71 +333,104 @@ body {
   margin: 0 auto;
 }
 
-/* Animated conic gradient ring */
+/* ══ Lớp ngoài cùng: LỬAFIRE — cam đỏ rực, rất đậm ══ */
 #wheel-border-wrap::before {
   content: '';
   position: absolute;
-  inset: 0;
+  inset: -4px;
   border-radius: 50%;
   background: conic-gradient(
-    #c8960c 0deg,
-    #ffd700 20deg,
-    #fff8dc 40deg,
-    #c8960c 60deg,
-    #8b5e0a 80deg,
-    #ffd700 100deg,
-    #ffe87c 120deg,
-    #c8960c 140deg,
-    #ffd700 160deg,
-    #fff8dc 180deg,
-    #c8960c 200deg,
-    #8b5e0a 220deg,
-    #ffd700 240deg,
-    #ffe87c 260deg,
-    #c8960c 280deg,
-    #ffd700 300deg,
-    #fff8dc 320deg,
-    #c8960c 340deg,
-    #ffd700 360deg
+    #ff2200 0deg,   #ff6600 8deg,   #ffcc00 16deg,
+    #ff4400 24deg,  #ff8800 32deg,  #ffd700 40deg,
+    #ff2200 48deg,  #ff6600 56deg,  #ffcc00 64deg,
+    #ff4400 72deg,  #ff8800 80deg,  #ffd700 88deg,
+    #ff2200 96deg,  #ff6600 104deg, #ffcc00 112deg,
+    #ff4400 120deg, #ff8800 128deg, #ffd700 136deg,
+    #ff2200 144deg, #ff6600 152deg, #ffcc00 160deg,
+    #ff4400 168deg, #ff8800 176deg, #ffd700 184deg,
+    #ff2200 192deg, #ff6600 200deg, #ffcc00 208deg,
+    #ff4400 216deg, #ff8800 224deg, #ffd700 232deg,
+    #ff2200 240deg, #ff6600 248deg, #ffcc00 256deg,
+    #ff4400 264deg, #ff8800 272deg, #ffd700 280deg,
+    #ff2200 288deg, #ff6600 296deg, #ffcc00 304deg,
+    #ff4400 312deg, #ff8800 320deg, #ffd700 328deg,
+    #ff2200 336deg, #ff6600 344deg, #ffcc00 352deg,
+    #ff2200 360deg
   );
-  animation: spinBorder 4s linear infinite;
+  animation: spinBorderKT 4s linear infinite, firePulse 1.4s ease-in-out infinite;
   z-index: -1;
+  /* Glow mạnh ra ngoài */
+  filter: blur(0px);
+  box-shadow:
+    0 0 0 3px #ff4400,
+    0 0 20px #ff6600,
+    0 0 40px rgba(255,100,0,0.8),
+    0 0 70px rgba(255,60,0,0.5);
 }
 
-/* SVG lotus/traditional pattern overlay on the border */
+/* ══ Lớp trong: VÀNG KIM loại, xoay ngược, cực sáng ══ */
 #wheel-border-wrap::after {
   content: '';
   position: absolute;
   inset: 6px;
   border-radius: 50%;
-  background:
-    radial-gradient(circle at 50% 0%, rgba(255,215,0,0.6) 0%, transparent 30%),
-    radial-gradient(circle at 100% 50%, rgba(255,215,0,0.6) 0%, transparent 30%),
-    radial-gradient(circle at 50% 100%, rgba(255,215,0,0.6) 0%, transparent 30%),
-    radial-gradient(circle at 0% 50%, rgba(255,215,0,0.6) 0%, transparent 30%),
-    radial-gradient(circle at 85% 15%, rgba(255,200,0,0.4) 0%, transparent 20%),
-    radial-gradient(circle at 15% 85%, rgba(255,200,0,0.4) 0%, transparent 20%),
-    radial-gradient(circle at 85% 85%, rgba(255,200,0,0.4) 0%, transparent 20%),
-    radial-gradient(circle at 15% 15%, rgba(255,200,0,0.4) 0%, transparent 20%);
-  pointer-events: none;
-  z-index: 9999;
+  background: conic-gradient(
+    #fffde0 0deg,  #ffd700 10deg, #ffaa00 20deg,
+    #c8800a 30deg, #ffd700 40deg, #fff8a0 50deg,
+    #ffcc00 60deg, #c8960c 70deg, #ffd700 80deg,
+    #fffde0 90deg, #ffd700 100deg,#ffaa00 110deg,
+    #c8800a 120deg,#ffd700 130deg,#fff8a0 140deg,
+    #ffcc00 150deg,#c8960c 160deg,#ffd700 170deg,
+    #fffde0 180deg,#ffd700 190deg,#ffaa00 200deg,
+    #c8800a 210deg,#ffd700 220deg,#fff8a0 230deg,
+    #ffcc00 240deg,#c8960c 250deg,#ffd700 260deg,
+    #fffde0 270deg,#ffd700 280deg,#ffaa00 290deg,
+    #c8800a 300deg,#ffd700 310deg,#fff8a0 320deg,
+    #ffcc00 330deg,#c8960c 340deg,#ffd700 350deg,
+    #fffde0 360deg
+  );
+  animation: spinBorderKT 4s linear infinite reverse;
+  z-index: -1;
 }
 
-@keyframes spinBorder {
+@keyframes spinBorderKT {
   from { transform: rotate(0deg); }
   to   { transform: rotate(360deg); }
 }
 
-/* Decorative dots around the border */
-.border-dot {
-  position: absolute;
-  width: 12px;
-  height: 12px;
-  background: radial-gradient(circle, #fff8dc, #c8960c);
-  border-radius: 50%;
-  box-shadow: 0 0 6px rgba(200, 150, 12, 0.8);
-  z-index: 10001;
+/* ══ SVG BORDER — inject bởi JS ══ */
+#border-svg {
+  position: absolute; top: 0; left: 0;
+  z-index: 10002; pointer-events: none;
 }
+
+/* ══ BORDER DOT — legacy, ẩn đi (dùng SVG thay) ══ */
+.border-dot { display: none; }
+
+/* ══ WHEEL — viền sáng chói + glow vàng cam ══ */
+#wheel {
+  box-shadow:
+    0 0 0 2px #ff2200,
+    0 0 0 5px #ffd700,
+    0 0 0 8px #ff6600,
+    0 0 0 11px rgba(255,215,0,0.5),
+    0 0 30px rgba(255,150,0,0.9),
+    0 0 60px rgba(255,215,0,0.6),
+    0 0 100px rgba(255,100,0,0.35),
+    rgba(0,0,0,0.5) 0px 12px 35px;
+}
+
+/* ══ HOVER GLOW trên toàn viền khi không quay ══ */
+#wheel-border-wrap:hover #border-svg {
+  filter: drop-shadow(0 0 8px rgba(255,180,0,0.6));
+}
+
+/* ══ FIRE PULSE animation trên viền ngoài ══ */
+@keyframes firePulse {
+  0%,100% { opacity: 1;    filter: blur(0px); }
+  50%      { opacity: 0.88; filter: blur(0.5px); }
+}
+/* Không override ở đây nữa — đã set trong ::before block ở trên */
 
 #wheel {
   width: 500px;
@@ -424,6 +464,9 @@ body {
   width: 100%;
   height: 100%;
   transition: all 6s cubic-bezier(0, .99, .44, .99);
+  /* Tạo stacking context riêng để z-index:-1 của canvas
+     không thoát ra ngoài wheel */
+  isolation: isolate;
 }
 #wheel .sec {
   position: absolute;
@@ -437,50 +480,148 @@ body {
   top: -4px;
   opacity: 1;
 }
-#wheel .sec:nth-child(1) {
-  transform: rotate(45deg);
-  border-color: #16a085 transparent;
+#wheel .sec:nth-child(1) { transform: rotate(45deg);  border-color: #006090 transparent; }
+#wheel .sec:nth-child(2) { transform: rotate(90deg);  border-color: #0030cc transparent; }
+#wheel .sec:nth-child(3) { transform: rotate(135deg); border-color: #660099 transparent; }
+#wheel .sec:nth-child(4) { transform: rotate(180deg); border-color: #995500 transparent; }
+#wheel .sec:nth-child(5) { transform: rotate(225deg); border-color: #990000 transparent; }
+#wheel .sec:nth-child(6) { transform: rotate(270deg); border-color: #aa0066 transparent; }
+#wheel .sec:nth-child(7) { transform: rotate(315deg); border-color: #006622 transparent; }
+#wheel .sec:nth-child(8) { transform: rotate(360deg); border-color: #883300 transparent; }
+
+/* ══ CANVAS OVERLAYS (JS inject) ══ */
+/* Gradient canvas nằm DƯỚI .sec (z-index:-1) để không che .number */
+#wheel-gradient-canvas {
+  position: absolute; top: 0; left: 0;
+  width: 500px; height: 500px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: -1;   /* dưới các .sec triangle */
+  opacity: 1;
 }
-#wheel .sec:nth-child(2) {
-  transform: rotate(90deg);
-  border-color: #2980b9 transparent;
-}
-#wheel .sec:nth-child(3) {
-  transform: rotate(135deg);
-  border-color: #34495e transparent;
-}
-#wheel .sec:nth-child(4) {
-  transform: rotate(180deg);
-  border-color: #f39c12 transparent;
-}
-#wheel .sec:nth-child(5) {
-  transform: rotate(225deg);
-  border-color: #d35400 transparent;
-}
-#wheel .sec:nth-child(6) {
-  transform: rotate(270deg);
-  border-color: #c0392b transparent;
-}
-#wheel .sec:nth-child(7) {
-  transform: rotate(315deg);
-  border-color: #8e44ad transparent;
-}
-#wheel .sec:nth-child(8) {
-  transform: rotate(360deg);
-  border-color: #27ae60 transparent;
+/* Sparkle canvas nằm TRÊN .sec nhưng DƯỚI #spin button */
+#wheel-sparkle-canvas {
+  position: absolute; top: 0; left: 0;
+  width: 500px; height: 500px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 999;   /* trên .sec, dưới #spin (z-index:1000) */
+  opacity: 0.75;  /* nhẹ hơn để không làm mờ số */
 }
 #wheel .sec .number {
   position: absolute;
-  top: -140px;
+  top: -210px;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 36.5px;
-  font-weight: bold;
-  color: rgba(255, 255, 255, 0.9);
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   z-index: 1000001;
   white-space: nowrap;
-  letter-spacing: -1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Dark chip (phương án C) ── */
+.sc-chip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  background: rgba(0,0,0,0.38);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 10px;
+  padding: 5px 9px 4px;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+.sc-ico {
+  font-size: 22px;
+  line-height: 1;
+  filter: drop-shadow(0 1px 3px rgba(0,0,0,.4));
+}
+.sc-num {
+  font-size: 15px;
+  font-weight: 900;
+  color: #FFD700;
+  text-shadow: 0 0 8px rgba(255,215,0,.7), 0 1px 2px rgba(0,0,0,.6);
+  letter-spacing: 0.5px;
+  line-height: 1;
+  font-family: "Poppins", "Exo 2", sans-serif;
+}
+.sc-lbl {
+  font-size: 8px;
+  font-weight: 700;
+  color: rgba(255,215,0,0.65);
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+/* ── ⭐ 1 sao — hồng-tím rực ── */
+.sc-chip-rare1 {
+  background: rgba(20,0,30,0.55);
+  border: 1.5px solid rgba(255,120,200,0.6);
+  box-shadow: 0 0 12px rgba(255,80,180,.5), 0 0 24px rgba(200,0,255,.3);
+  animation: chipRare1Pulse 1.8s ease-in-out infinite;
+}
+@keyframes chipRare1Pulse {
+  0%,100% { box-shadow: 0 0 10px rgba(255,80,180,.5), 0 0 22px rgba(200,0,255,.25); }
+  50%     { box-shadow: 0 0 18px rgba(255,80,180,.85), 0 0 36px rgba(220,0,255,.55); }
+}
+.sc-ico-rare {
+  font-size: 24px;
+  filter: drop-shadow(0 0 6px #ff66dd) drop-shadow(0 0 14px #cc00ff);
+  animation: starRare1 1.6s ease-in-out infinite;
+}
+@keyframes starRare1 {
+  0%,100% { filter: drop-shadow(0 0 5px #ff66dd) drop-shadow(0 0 12px #cc00ff); }
+  50%     { filter: drop-shadow(0 0 10px #ff99ee) drop-shadow(0 0 22px #dd44ff); }
+}
+.sc-num-rare {
+  font-size: 13px;
+  color: #ff99ee;
+  text-shadow: 0 0 10px #ff66dd, 0 0 20px #cc00ff;
+}
+.sc-lbl-rare {
+  color: rgba(255,160,230,0.8);
+  font-size: 7.5px;
+}
+
+/* ── ⭐⭐ 2 sao — vàng-cam neon Jackpot ── */
+.sc-chip-rare2 {
+  background: rgba(20,10,0,0.6);
+  border: 1.5px solid rgba(255,200,0,0.7);
+  box-shadow: 0 0 14px rgba(255,180,0,.6), 0 0 28px rgba(255,100,0,.35);
+  animation: chipRare2Pulse 1.5s ease-in-out infinite;
+}
+@keyframes chipRare2Pulse {
+  0%,100% { box-shadow: 0 0 12px rgba(255,180,0,.6), 0 0 24px rgba(255,100,0,.3); }
+  50%     { box-shadow: 0 0 22px rgba(255,220,0,.95), 0 0 42px rgba(255,120,0,.6); }
+}
+.sc-ico-rare2 {
+  font-size: 20px;
+  filter: drop-shadow(0 0 6px #ffcc00) drop-shadow(0 0 14px #ff8800);
+  animation: starRare2 1.4s ease-in-out infinite;
+}
+@keyframes starRare2 {
+  0%,100% { filter: drop-shadow(0 0 5px #ffcc00) drop-shadow(0 0 12px #ff8800); }
+  50%     { filter: drop-shadow(0 0 12px #ffee44) drop-shadow(0 0 26px #ffaa00); }
+}
+.sc-num-rare2 {
+  font-size: 11px;
+  color: #FFE566;
+  text-shadow: 0 0 10px #ffcc00, 0 0 22px #ff8800;
+  background: linear-gradient(90deg, #ff6600, #ffcc00, #ff6600);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: jpTextFlow 2s linear infinite;
+}
+@keyframes jpTextFlow { 0%{background-position:0%} 100%{background-position:200%} }
+.sc-lbl-rare2 {
+  color: rgba(255,220,80,0.85);
+  font-size: 7.5px;
+  text-shadow: 0 0 6px rgba(255,180,0,.6);
 }
 #spin {
   width: 100px;
@@ -620,12 +761,8 @@ body {
     transform: scale(var(--wheel-scale));
   }
 
-  /* Pointer đi theo tâm wheel */
-  #pointer {
-    left: calc(var(--wheel-size) / 2);
-    margin-left: -20px;
-    top: -10px;
-  }
+  /* Pointer mobile — không cần override, pointer nằm trong wheel-border-wrap
+     và được scale cùng wrapper */
 
   /* Popup fit màn hình */
   #popup {
@@ -660,10 +797,9 @@ body {
 body::-webkit-scrollbar {
     display: none;
 }
-/* Ẩn mũi tên pointer */
-#pointer {
-  display: none;
-}
+/* ══ POINTER — ẩn hoàn toàn, dùng mũi tên trên #spin thay thế ══ */
+#pointer { display: none !important; }
+
 /* ===== NÚT SPIN - Bạc metallic nâng cấp ===== */
 #spin {
   background: radial-gradient(ellipse at 35% 35%, #ffffff 0%, #d8dde6 40%, #b0b8c8 100%);
@@ -690,63 +826,58 @@ body::-webkit-scrollbar {
     0 0 8px rgba(0,0,0,0.15);
 }
 
-/* ===== MŨI TÊN → NGỌN LỬA CSS ===== */
-#spin:before {
-  /* Xóa tam giác cũ */
-  border: none;
-  width: 0;
-  height: 0;
-
-  /* Reset về 0 trước */
-  background: none;
-}
-
-/* Ngọn lửa dùng pseudo element riêng — thêm vào wrapper */
+/* ===== MŨI TÊN TRÊN NÚT SPIN — đẹp, nổi bật ===== */
 #spin {
   overflow: visible;
 }
 
-/* Tạo ngọn lửa bằng box-shadow + border-radius trick */
 #spin:before {
   content: '';
   position: absolute;
-  bottom: 100%;
+  /* Đặt ngay phía trên nút SPIN, chạm vào mép trên */
+  bottom: calc(100% - 2px);
   left: 50%;
   transform: translateX(-50%);
-  margin-bottom: 2px;
 
-  width: 20px;
-  height: 20px;
+  /* Tam giác nhọn lớn hơn, rõ hơn */
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 18px 30px 18px;
+  border-color: transparent transparent #e63946 transparent;
 
-  background: conic-gradient(
-    #ff0000, #ff7700, #ffff00, #00cc00, #0099ff, #8800ff, #ff0000
-  );
-
-  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-
+  background: none;
+  clip-path: none;
   border-radius: 0;
-  box-shadow: 0 0 8px rgba(255,255,255,0.4);
-  animation: rainbowSpin 2s linear infinite;
+  box-shadow: none;
   z-index: 100002;
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+
+  /* Viền trắng giả bằng filter drop-shadow */
+  filter:
+    drop-shadow(0 -1px 0px #fff)
+    drop-shadow(-1px 0 0px #fff)
+    drop-shadow(1px 0 0px #fff)
+    drop-shadow(0 3px 8px rgba(230,57,70,.9))
+    drop-shadow(0 0 16px rgba(230,57,70,.6));
+
+  animation: arrowGlow 1.4s ease-in-out infinite;
 }
 
-@keyframes rainbowSpin {
-  from { filter: hue-rotate(0deg) drop-shadow(0 2px 4px rgba(0,0,0,0.3)); }
-  to   { filter: hue-rotate(360deg) drop-shadow(0 2px 4px rgba(0,0,0,0.3)); }
-}
-
-@keyframes flameDance {
-  0% {
-    transform: translateX(-50%) scaleX(1) scaleY(1) rotate(-2deg);
-    opacity: 0.95;
+@keyframes arrowGlow {
+  0%,100% {
+    filter:
+      drop-shadow(0 -1px 0px #fff)
+      drop-shadow(-1px 0 0px #fff)
+      drop-shadow(1px 0 0px #fff)
+      drop-shadow(0 3px 8px rgba(230,57,70,.9))
+      drop-shadow(0 0 16px rgba(230,57,70,.6));
   }
   50% {
-    transform: translateX(-50%) scaleX(0.88) scaleY(1.08) rotate(1deg);
-    opacity: 1;
-  }
-  100% {
-    transform: translateX(-50%) scaleX(1.08) scaleY(0.95) rotate(2deg);
-    opacity: 0.9;
+    filter:
+      drop-shadow(0 -1px 0px #fff)
+      drop-shadow(-1px 0 0px #fff)
+      drop-shadow(1px 0 0px #fff)
+      drop-shadow(0 3px 14px rgba(255,80,90,1))
+      drop-shadow(0 0 28px rgba(230,57,70,.9));
   }
 }
